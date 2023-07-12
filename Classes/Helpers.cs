@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Management.Automation;
 using System.Diagnostics;
 using System.Collections.Concurrent;
+using System.Windows.Forms;
 
 [AttributeUsage(AttributeTargets.Assembly)]
 internal class BuildDateAttribute : Attribute
@@ -70,6 +71,25 @@ namespace MobaXtermKG
             String default_path86 = @"C:\Program Files (x86)\Mobatek\MobaXterm\";
 
             /*
+                this code looks in the base directory of the keygen folder to see if the mobaxterm (portable) exe file exists
+                and opens the folder in explorer.exe
+            */
+
+            string[] drives = System.IO.Directory.GetFiles(app_base_path, "*mobaxterm*.exe");
+            var i_filesFound = drives.Count();
+
+            if (i_filesFound > 0)
+            {
+                string found = drives[0];
+                string folder = Path.GetDirectoryName(found);
+
+                if (Directory.Exists(folder))
+                {
+                    return folder;
+                }
+            }
+
+            /*
                 Windows env variables
             */
 
@@ -112,26 +132,6 @@ namespace MobaXtermKG
             }
 
             /*
-                this code looks in the base directory of the keygen folder to see if the mobaxterm (portable) exe file exists
-                and opens the folder in explorer.exe
-            */
-
-            string[] drives = System.IO.Directory.GetFiles(app_base_path, "*mobaxterm*.exe");
-            var i_filesFound = drives.Count();
-
-            if (i_filesFound > 0)
-            {
-                string found = drives[0];
-                string folder = Path.GetDirectoryName(found);
-
-                if (Directory.Exists(folder))
-                {
-                    return folder;
-                }
-            }
-
-            /*
-                last resort
                 Utilize powershell get-command to see if mobaxterm is installed
             */
 
@@ -152,7 +152,27 @@ namespace MobaXtermKG
             }
 
             /*
+                Give the user one last change to manually define where the program executable is at.
+                If this doesnt work, something has gone wrong or the program is not installed at all.
+            */
+
+            SaveFileDialog dlg = new SaveFileDialog();
+
+            dlg.FileName = "Custom";
+            dlg.Title = "Save License File";
+            dlg.CheckPathExists = true;
+            dlg.InitialDirectory = app_base_path;
+            dlg.DefaultExt = "mxtpro";
+            dlg.Filter = @"MobaXterm License (*.mxtpro)|*.mxtpro|All files (*.*)|*.*";
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                return Path.GetDirectoryName(dlg.FileName);
+            }
+
+            /*
                 folder not found
+                If this happens, something has gone wrong and theres really no recovery.
             */
 
             return String.Empty;

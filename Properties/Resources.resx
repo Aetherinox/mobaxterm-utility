@@ -169,8 +169,14 @@
   <data name="msgbox_err_libmissing_title" xml:space="preserve">
     <value>Fatal Error</value>
   </data>
+  <data name="msgbox_err_locate_msg" xml:space="preserve">
+    <value>Could not find a valid location to place the license. Try placing the keygen exe in the same folder as the MobaXterm program executable.{0}{1}Did you install MobaXterm on your computer?</value>
+  </data>
+  <data name="msgbox_err_locate_title" xml:space="preserve">
+    <value>No valid Path to MobaXterm</value>
+  </data>
   <data name="msgbox_ok_generate_finished_msg" xml:space="preserve">
-    <value>License key has been successfully generated to:{0}{1}</value>
+    <value>License key has been successfully generated in:{0}{1}{2}</value>
   </data>
   <data name="msgbox_ok_generate_finished_title" xml:space="preserve">
     <value>License Key Generated</value>

@@ -356,7 +356,7 @@ namespace MobaXtermKG.Msgbox
 
                 case MessageBoxIcon.None:
                     this.pictureBoxIcon.Image = Properties.Resources.chat;
-                    PrimaryColor = Color.FromArgb(45, 45, 45);
+                    PrimaryColor = Color.FromArgb(70, 70, 70);
                     this.btnClose.FlatAppearance.MouseOverBackColor = Color.Transparent;
                     break;
             }

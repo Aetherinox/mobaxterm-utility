@@ -221,7 +221,25 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to License key has been successfully generated to:{0}{1}.
+        ///   Looks up a localized string similar to Could not find a valid location to place the license. Try placing the keygen exe in the same folder as the MobaXterm program executable.{0}{1}Did you install MobaXterm on your computer?.
+        /// </summary>
+        internal static string msgbox_err_locate_msg {
+            get {
+                return ResourceManager.GetString("msgbox_err_locate_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No valid Path to MobaXterm.
+        /// </summary>
+        internal static string msgbox_err_locate_title {
+            get {
+                return ResourceManager.GetString("msgbox_err_locate_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License key has been successfully generated in:{0}{1}{2}.
         /// </summary>
         internal static string msgbox_ok_generate_finished_msg {
             get {

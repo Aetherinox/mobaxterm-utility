@@ -34,12 +34,12 @@ namespace MobaXtermKG.Msgbox
             this.labelCaption = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.panelButtons = new System.Windows.Forms.Panel();
-            this.button3 = new MobaXtermKG.AetherxButton();
-            this.button2 = new MobaXtermKG.AetherxButton();
-            this.button1 = new MobaXtermKG.AetherxButton();
             this.panelBody = new System.Windows.Forms.Panel();
             this.labelMessage = new System.Windows.Forms.Label();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
+            this.button3 = new MobaXtermKG.AetherxButton();
+            this.button2 = new MobaXtermKG.AetherxButton();
+            this.button1 = new MobaXtermKG.AetherxButton();
             this.panelTitleBar.SuspendLayout();
             this.panelButtons.SuspendLayout();
             this.panelBody.SuspendLayout();
@@ -100,6 +100,48 @@ namespace MobaXtermKG.Msgbox
             this.panelButtons.TabIndex = 1;
             this.panelButtons.Paint += new System.Windows.Forms.PaintEventHandler(this.panelButtons_Paint_1);
             // 
+            // panelBody
+            // 
+            this.panelBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.panelBody.Controls.Add(this.labelMessage);
+            this.panelBody.Controls.Add(this.pictureBoxIcon);
+            this.panelBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.panelBody.Location = new System.Drawing.Point(2, 27);
+            this.panelBody.Name = "panelBody";
+            this.panelBody.Padding = new System.Windows.Forms.Padding(18, 13, 5, 0);
+            this.panelBody.Size = new System.Drawing.Size(346, 61);
+            this.panelBody.TabIndex = 2;
+            // 
+            // labelMessage
+            // 
+            this.labelMessage.AutoSize = true;
+            this.labelMessage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelMessage.ForeColor = System.Drawing.Color.White;
+            this.labelMessage.Location = new System.Drawing.Point(58, 13);
+            this.labelMessage.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
+            this.labelMessage.MaximumSize = new System.Drawing.Size(600, 0);
+            this.labelMessage.Name = "labelMessage";
+            this.labelMessage.Padding = new System.Windows.Forms.Padding(5, 5, 22, 15);
+            this.labelMessage.Size = new System.Drawing.Size(122, 37);
+            this.labelMessage.TabIndex = 1;
+            this.labelMessage.Text = "labelMessage";
+            this.labelMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelMessage.Click += new System.EventHandler(this.lblMessage_Click);
+            // 
+            // pictureBoxIcon
+            // 
+            this.pictureBoxIcon.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureBoxIcon.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxIcon.Image")));
+            this.pictureBoxIcon.Location = new System.Drawing.Point(18, 13);
+            this.pictureBoxIcon.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.pictureBoxIcon.Name = "pictureBoxIcon";
+            this.pictureBoxIcon.Padding = new System.Windows.Forms.Padding(0, 7, 0, 0);
+            this.pictureBoxIcon.Size = new System.Drawing.Size(40, 48);
+            this.pictureBoxIcon.TabIndex = 0;
+            this.pictureBoxIcon.TabStop = false;
+            // 
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.SeaGreen;
@@ -144,48 +186,6 @@ namespace MobaXtermKG.Msgbox
             this.button1.TabIndex = 0;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = false;
-            // 
-            // panelBody
-            // 
-            this.panelBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
-            this.panelBody.Controls.Add(this.labelMessage);
-            this.panelBody.Controls.Add(this.pictureBoxIcon);
-            this.panelBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.panelBody.Location = new System.Drawing.Point(2, 27);
-            this.panelBody.Name = "panelBody";
-            this.panelBody.Padding = new System.Windows.Forms.Padding(18, 13, 5, 0);
-            this.panelBody.Size = new System.Drawing.Size(346, 61);
-            this.panelBody.TabIndex = 2;
-            // 
-            // labelMessage
-            // 
-            this.labelMessage.AutoSize = true;
-            this.labelMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMessage.ForeColor = System.Drawing.Color.White;
-            this.labelMessage.Location = new System.Drawing.Point(58, 13);
-            this.labelMessage.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
-            this.labelMessage.MaximumSize = new System.Drawing.Size(600, 0);
-            this.labelMessage.Name = "labelMessage";
-            this.labelMessage.Padding = new System.Windows.Forms.Padding(5, 5, 22, 15);
-            this.labelMessage.Size = new System.Drawing.Size(122, 37);
-            this.labelMessage.TabIndex = 1;
-            this.labelMessage.Text = "labelMessage";
-            this.labelMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelMessage.Click += new System.EventHandler(this.lblMessage_Click);
-            // 
-            // pictureBoxIcon
-            // 
-            this.pictureBoxIcon.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBoxIcon.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxIcon.Image")));
-            this.pictureBoxIcon.Location = new System.Drawing.Point(18, 13);
-            this.pictureBoxIcon.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.pictureBoxIcon.Name = "pictureBoxIcon";
-            this.pictureBoxIcon.Padding = new System.Windows.Forms.Padding(0, 7, 0, 0);
-            this.pictureBoxIcon.Size = new System.Drawing.Size(40, 48);
-            this.pictureBoxIcon.TabIndex = 0;
-            this.pictureBoxIcon.TabStop = false;
             // 
             // FormMessageBox
             // 

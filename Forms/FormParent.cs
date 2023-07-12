@@ -481,12 +481,12 @@ namespace MobaXtermKG
                             - Move that new license key to the installed path for moba
                     */
 
-                    if ( Directory.Exists( target_exe_where ) )
+                    if (Directory.Exists(target_exe_where))
                     {
 
-                        string a1           = target_exe_where + @"\" + Cfg.Default.app_def_mxtpro;
-                        string a2           = Cfg.Default.app_def_mxtpro;
-                        string b1           = target_exe_where + @"\" + Cfg.Default.app_def_mxtpro + ".bak";
+                        string a1 = target_exe_where + @"\" + Cfg.Default.app_def_mxtpro;
+                        string a2 = Cfg.Default.app_def_mxtpro;
+                        string b1 = target_exe_where + @"\" + Cfg.Default.app_def_mxtpro + ".bak";
 
                         /*
                             Look for existing mxtpro file
@@ -497,7 +497,7 @@ namespace MobaXtermKG
                                 -> MobaXterm Portable
                         */
 
-                        if ( File.Exists( a1 ) )
+                        if (File.Exists(a1))
                         {
                             // delete extra .bak otherwise we will error out
                             if (File.Exists(b1))
@@ -541,12 +541,21 @@ namespace MobaXtermKG
                         if (File.Exists(a1))
                         {
                             MessageBox.Show(
-                                string.Format( Lng.msgbox_ok_generate_finished_msg, Environment.NewLine, a1 ),
+                                string.Format(Lng.msgbox_ok_generate_finished_msg, Environment.NewLine, Environment.NewLine, a1),
                                 Lng.msgbox_ok_generate_finished_title,
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.None
                             );
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show(
+                            string.Format(Lng.msgbox_err_locate_msg, Environment.NewLine, Environment.NewLine),
+                            Lng.msgbox_err_locate_title,
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                        );
                     }
 
                 }
