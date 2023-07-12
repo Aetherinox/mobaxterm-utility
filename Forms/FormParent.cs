@@ -239,6 +239,18 @@ namespace MobaXtermKG
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            /*
+                delete the cli exe as we no longer need it
+            */
+
+            if (File.Exists(app_cli_exe))
+                File.Delete(app_cli_exe);
+
+            /*
+                kill app
+            */
+
             Application.Exit();
         }
 
