@@ -44,9 +44,9 @@ namespace MobaXtermKG.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("mobaxtgen_cli.exe")]
-        public string app_def_exe {
+        public string app_cli_exe {
             get {
-                return ((string)(this["app_def_exe"]));
+                return ((string)(this["app_cli_exe"]));
             }
         }
         

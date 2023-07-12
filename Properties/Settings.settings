@@ -8,7 +8,7 @@
     <Setting Name="app_def_users" Type="System.String" Scope="Application">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="app_def_exe" Type="System.String" Scope="Application">
+    <Setting Name="app_cli_exe" Type="System.String" Scope="Application">
       <Value Profile="(Default)">mobaxtgen_cli.exe</Value>
     </Setting>
     <Setting Name="app_def_mxtpro" Type="System.String" Scope="Application">

@@ -15,6 +15,7 @@ using System.Threading;
 using Microsoft.VisualBasic.Logging;
 using Lng = MobaXtermKG.Properties.Resources;
 using Cfg = MobaXtermKG.Properties.Settings;
+using System.ComponentModel;
 
 namespace MobaXtermKG
 {
@@ -30,27 +31,33 @@ namespace MobaXtermKG
         readonly Helpers Helpers = new Helpers();
 
         /*
+            variables > current keygen path / folder
+        */
+
+        static private string app_base_path = AppDomain.CurrentDomain.BaseDirectory;
+
+        /*
             variables > resource (cli exe)
+
+            [x] app_cli_exe         mobaxtgen_cli.exe
+            [x] app_cli_path        keygen current path\mobaxtgen_cli.exe
         */
 
-        static private string app_exe = Cfg.Default.app_def_exe;
-        static private string app_loc = AppDomain.CurrentDomain.BaseDirectory + "\\" + app_exe;
-        readonly private string app_cli = "& \"" + app_loc + "\"";
+        static private string app_cli_exe           = Cfg.Default.app_cli_exe;
+        static private string app_cli_path          = app_base_path + "\\" + app_cli_exe;
+
+        /*
+            variables > default form values
+        */
+
+        readonly private string cfg_def_version     = Cfg.Default.app_def_version;
+        readonly string cfg_def_users               = Cfg.Default.app_def_users;
 
         /*
             variables > default values
         */
 
-        readonly private string cfg_def_mxtpro = AppDomain.CurrentDomain.BaseDirectory + @"\" + Cfg.Default.app_def_mxtpro;
-        readonly private string cfg_def_version = Properties.Settings.Default.app_def_version;
-        readonly string cfg_def_users = Properties.Settings.Default.app_def_users;
-
-        /*
-            variables > default values
-        */
-
-        private string app_base_path = AppDomain.CurrentDomain.BaseDirectory;
-        readonly string src_target_exe = Properties.Settings.Default.src_res_moba_exe;
+        readonly string target_exe_name = Cfg.Default.src_res_moba_exe;
 
         /*
             Frame > Parent
@@ -61,7 +68,7 @@ namespace MobaXtermKG
 
             InitializeComponent();
 
-            this.statusStrip.Renderer   = new StatusBar_Renderer();
+            this.statusStrip.Renderer = new StatusBar_Renderer();
 
             /*
                 Richtext box at top of interface
@@ -92,23 +99,23 @@ namespace MobaXtermKG
             string ver = AppInfo.ProductVersionCore.ToString();
             string product = AppInfo.Title;
             string tm = AppInfo.Trademark;
-  
+
             lblTitle.Text = product;
 
             // Export patched resource file
-            File.WriteAllBytes(app_exe, MobaXtermKG.Properties.Resources.mobaxtgen_cli);
+            File.WriteAllBytes(app_cli_exe, MobaXtermKG.Properties.Resources.mobaxtgen_cli);
 
-            if (!File.Exists(app_exe))
+            if (!File.Exists(app_cli_exe))
             {
 
                 MessageBox.Show(
-                    string.Format(Lng.msgbox_err_libmissing_msg, Environment.NewLine, app_exe, Environment.NewLine, Environment.NewLine),
+                    string.Format(Lng.msgbox_err_libmissing_msg, Environment.NewLine, app_cli_exe, Environment.NewLine, Environment.NewLine),
                     Lng.msgbox_err_libmissing_title,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 );
 
-                toolStripStatusLabel1.Text = string.Format(Lng.statusbar_libmissing, app_exe);
+                toolStripStatusLabel1.Text = string.Format(Lng.statusbar_libmissing, app_cli_exe);
                 statusStrip.Refresh();
             }
         }
@@ -398,11 +405,16 @@ namespace MobaXtermKG
             }
 
             /*
-                 proceed to patch
+                 no errors > proceed to patch
             */
 
             else
             {
+
+                /*
+                     Do you wish to generate a new license key for MobaXterm?
+                */
+
                 var result = MessageBox.Show(
                      Lng.msgbox_ok_generate_msg,
                      Lng.msgbox_ok_generate_title,
@@ -412,7 +424,10 @@ namespace MobaXtermKG
 
                 string answer = result.ToString();
 
-                // proceed with patch
+                /*
+                     MessageBox Confirmation > yes
+                */
+
                 if (answer == "Yes")
                 {
 
@@ -421,7 +436,7 @@ namespace MobaXtermKG
                     string fval_users = txtUsers.Value;
 
                     /*
-                         default version
+                         default version textbox value
                     */
 
                     if (String.IsNullOrEmpty(fval_ver) || fval_ver == "0")
@@ -432,7 +447,7 @@ namespace MobaXtermKG
                     }
 
                     /*
-                         default user
+                         default user textbox value
                     */
 
                     if (String.IsNullOrEmpty(fval_users) || fval_users == "0")
@@ -443,67 +458,78 @@ namespace MobaXtermKG
                     }
 
                     /*
-                         python execution
-
-                         grabs all entered values and communicates with the python script
-                         to generate a license key + license key file.
-
-                         license key file will be placed in whatever folder the keygen is in.
+                         find out where the mobaxterm.exe is located
+                         Will either be in Program Files, or in the portable directory.
                     */
 
-                    string app_qry = Serial.Generate(app_cli + " -s " + fval_name + " " + fval_ver + " " + fval_users );
-
-                    txtLicense.isPlaceholder = false;
-                    txtLicense.Value = app_qry;
+                    string target_exe_where = Helpers.FindApp(target_exe_name);
 
                     /*
-                         move generated license key file
-                    */
+                        [x] target_exe_where
+                            C:\Program Files (x86)\Mobatek\MobaXterm
 
-                    string path_installed_app = Helpers.FindApp(src_target_exe);
+                        [x] cfg_def_mxtpro
+                            X:\Apps\MobaXterm\source\bin\Release\Custom.mxtpro
+                    */
 
                     /*
-                        path_installed_app
-                        C:\Program Files (x86)\Mobatek\MobaXterm
-
-                        cfg_def_mxtpro
-                        X:\Apps\MobaXterm\source\bin\Release\Custom.mxtpro
+                        license key generator creates mxpro file in same directory as keygen exe.
+                        Need to do the following:
+                            - First check the install folder for MobaXterm and see if an existing mxpro file exists.
+                            - Rename that mxpro file to mxpro.bak
+                            - Generate the new license key
+                            - Move that new license key to the installed path for moba
                     */
 
-                    //  if FILE exists
-                    //      X:\Apps\MobaXterm\source\bin\Release\Custom.mxtpro
-                    if (File.Exists(cfg_def_mxtpro))
+                    if ( Directory.Exists( target_exe_where ) )
                     {
 
-                        //  if directory exists
-                        //      C:\Program Files (x86)\Mobatek\MobaXterm
-                        if (Directory.Exists(path_installed_app))
+                        string a1           = target_exe_where + @"\" + Cfg.Default.app_def_mxtpro;
+                        string a2           = Cfg.Default.app_def_mxtpro;
+                        string b1           = target_exe_where + @"\" + Cfg.Default.app_def_mxtpro + ".bak";
+                        string b2           = target_exe_where + @"\" + Cfg.Default.app_def_mxtpro;
+
+                        /*
+                            Look for existing mxtpro file
+                            can either be in:
+
+                                -> C:\Program Files (x86)\Mobatek\MobaXterm
+                                OR
+                                -> MobaXterm Portable
+                        */
+
+                        if ( File.Exists( a1 ) )
                         {
-                            string file_mtx = Properties.Settings.Default.app_def_mxtpro;
-
-                            // an extra check if a license key already exists
-                            // move C:\Program Files (x86)\Mobatek\MobaXterm\Custom.mxtpro -> C:\Program Files (x86)\Mobatek\MobaXterm\Custom.mxtpro.bak
-
-                            string a1 = @path_installed_app + @"\" + file_mtx;
-                            string b1 = @path_installed_app + @"\" + file_mtx + ".bak";
-
                             // delete extra .bak otherwise we will error out
                             if (File.Exists(b1))
                                 File.Delete(b1);
 
                             if (File.Exists(a1))
                                 File.Move(a1, b1);
-
-                            // move new Custom.mxtpro to C:\Program Files (x86)\Mobatek\MobaXterm
-                            string a2 = file_mtx;
-                            string b2 = @path_installed_app + @"\" + file_mtx;
-
-                            if (File.Exists(a2))
-                                File.Move(a2, b2);
-
                         }
 
+                        /*
+                            Generate new license
+                        */
+
+                        string app_cli_result = Serial.Generate("& \"" + app_cli_path + "\"" + " -s " + fval_name + " " + fval_ver + " " + fval_users);
+
+                        /*
+                            Move new Custom.mxtpro from keygen folder to C:\Program Files (x86)\Mobatek\MobaXterm
+                        */
+
+                        if (File.Exists(a2))
+                            File.Move(a2, a1);
+
+                        /*
+                            Update textbox with new license
+                        */
+
+                        txtLicense.isPlaceholder = false;
+                        txtLicense.Value = app_cli_result;
+
                     }
+
                 }
             }
         }
@@ -512,7 +538,7 @@ namespace MobaXtermKG
             button > hover
         */
 
-        private void btnOpenFolder_MouseEnter( object sender, EventArgs e )
+        private void btnOpenFolder_MouseEnter(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = string.Format(Lng.statusbar_btn_openfolder);
             statusStrip.Refresh();
@@ -524,16 +550,14 @@ namespace MobaXtermKG
 
         private void btnOpenFolder_Click(object sender, EventArgs e)
         {
-            string path_mirc = Helpers.FindApp(src_target_exe);
+            string src_target_where = Helpers.FindApp(target_exe_name);
 
             /*
                 mirc found
             */
 
-            if (Directory.Exists(path_mirc))
-            {
-                Process.Start("explorer.exe", @path_mirc);
-            }
+            if (Directory.Exists(src_target_where))
+                Process.Start("explorer.exe", src_target_where);
 
             /*
                 cannot locate mobaxterm program. Open dialog in Program Files(86)
