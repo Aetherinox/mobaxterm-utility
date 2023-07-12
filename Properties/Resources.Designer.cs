@@ -221,6 +221,24 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to License key has been successfully generated to:{0}{1}.
+        /// </summary>
+        internal static string msgbox_ok_generate_finished_msg {
+            get {
+                return ResourceManager.GetString("msgbox_ok_generate_finished_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License Key Generated.
+        /// </summary>
+        internal static string msgbox_ok_generate_finished_title {
+            get {
+                return ResourceManager.GetString("msgbox_ok_generate_finished_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you wish to generate a new license key for MobaXterm?.
         /// </summary>
         internal static string msgbox_ok_generate_msg {

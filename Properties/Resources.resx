@@ -169,6 +169,12 @@
   <data name="msgbox_err_libmissing_title" xml:space="preserve">
     <value>Fatal Error</value>
   </data>
+  <data name="msgbox_ok_generate_finished_msg" xml:space="preserve">
+    <value>License key has been successfully generated to:{0}{1}</value>
+  </data>
+  <data name="msgbox_ok_generate_finished_title" xml:space="preserve">
+    <value>License Key Generated</value>
+  </data>
   <data name="msgbox_ok_generate_msg" xml:space="preserve">
     <value>Do you wish to generate a new license key for MobaXterm?</value>
   </data>

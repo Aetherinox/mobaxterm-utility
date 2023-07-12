@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3E556D54-1E9E-42CA-947E-3FBD17532BCB}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>MobaXtermKG</RootNamespace>
     <AssemblyName>MobaXtermKG</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>

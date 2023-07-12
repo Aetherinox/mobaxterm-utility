@@ -487,7 +487,6 @@ namespace MobaXtermKG
                         string a1           = target_exe_where + @"\" + Cfg.Default.app_def_mxtpro;
                         string a2           = Cfg.Default.app_def_mxtpro;
                         string b1           = target_exe_where + @"\" + Cfg.Default.app_def_mxtpro + ".bak";
-                        string b2           = target_exe_where + @"\" + Cfg.Default.app_def_mxtpro;
 
                         /*
                             Look for existing mxtpro file
@@ -528,6 +527,26 @@ namespace MobaXtermKG
                         txtLicense.isPlaceholder = false;
                         txtLicense.Value = app_cli_result;
 
+                        /*
+                            delete the cli exe as we no longer need it
+                        */
+
+                        if (File.Exists(app_cli_exe))
+                            File.Delete(app_cli_exe);
+
+                        /*
+                            confirmation
+                        */
+
+                        if (File.Exists(a1))
+                        {
+                            MessageBox.Show(
+                                string.Format( Lng.msgbox_ok_generate_finished_msg, Environment.NewLine, a1 ),
+                                Lng.msgbox_ok_generate_finished_title,
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.None
+                            );
+                        }
                     }
 
                 }
