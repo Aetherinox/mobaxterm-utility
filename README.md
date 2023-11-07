@@ -1,4 +1,15 @@
-# MobaXterm License Generator
+<p align="center"><img src="Docs/images/banner.png" width="860"></p>
+<h1 align="center"><b>MobaXterm License Generator</b></h1>
+
+<div align="center">
+
+![Version](https://img.shields.io/github/v/tag/Aetherinox/MobaXtermKeygen?logo=GitHub&label=version&color=ba5225) ![Downloads](https://img.shields.io/github/downloads/Aetherinox/MobaXtermKeygen/total) ![Repo Size](https://img.shields.io/github/repo-size/Aetherinox/MobaXtermKeygen?label=size&color=59702a) ![Last Commit)](https://img.shields.io/github/last-commit/Aetherinox/MobaXtermKeygen?color=b43bcc)
+
+</div>
+
+---
+
+<br />
 
 Allows you to generate and activate a copy of [MobaXterm](https://mobaxterm.mobatek.net/).
 
@@ -13,9 +24,14 @@ Allows you to generate and activate a copy of [MobaXterm](https://mobaxterm.moba
 Developer holds no responsibility with what people decide to do with this app. It was developed strictly for demonstration purposes only.
 Developed under the following conditions:
 
-- Visual Studio 2022 (17.6.4)
+- Visual Studio 2022 (17.6.5)
 - v4.8.0 .NET Framework
 - C# language
+
+<br />
+
+This generator has been developed to work on the following versions:
+- MobaXterm v23.x
 
 <br />
 
@@ -25,7 +41,7 @@ Developed under the following conditions:
 
 # Usage
 
-If you wish to simply use the keygen, head over to the [Releases](https://github.com/Aetherinox/MobaXtermKeygen/releases) section and download the latest binary as a `zip` or `rar`. The binary release only includes one file:
+If you wish to simply use the keygen, head over to the [Releases](https://github.com/Aetherinox/MobaXtermKeygen/releases) section and download the latest binary as a `zip` or `rar`. The download is a single `exe`.
 
 - `MobaXtermKG.exe`
 
@@ -39,9 +55,7 @@ If you wish to simply use the keygen, head over to the [Releases](https://github
 
 Download the source files and launch the `.csproj` project file in Visual Studio.
 
-If you decide to modify or re-build my code, you are to not re-distribute. Unlike a lot of keygens, my files are free of malware, and I do not want people taking advantage of a quick solution that you can dump your non-sense malware into and re-distribute.
-
-If you're looking to do a quick credits swap and re-distribute just so you can make a name for yourself; I'd highly recommend you actually learn C# and make something yourself.
+If you decide to modify or re-build my code, you are to not re-distribute. These sources are for learning purposes and should not be used in order to take advantage of others.
 
 <br />
 
@@ -57,9 +71,7 @@ As of `v1.0.0.0` and onwards, binaries are GPG signed with the key `CB5C4C30CD0D
 - [keyserver.ubuntu.com](keyserver.ubuntu.com)
 - [keys.openpgp.org](https://keys.openpgp.org)
 
-Binaries are also signed with a certificate which has the thumbprint `70575bdfb02b3f1b45a37431bef9a8c9933a4ace`. If you downloaded this elsewhere on the internet and the binary is not signed with that certificate thumbprint; **IT IS NOT MINE**. You should delete it.
-
-Don't modify these unless you know what you're doing, improperly configured, the Activation and Response will not generate into a valid serial key.
+Binaries are also signed with a certificate which has the Thumbprint `70575bdfb02b3f1b45a37431bef9a8c9933a4ace`. If you downloaded this elsewhere on the internet and the binary is not signed with that certificate serial number; **IT IS NOT MINE**. You should delete it.
 
 <br />
 
@@ -73,12 +85,11 @@ Unfortunately, virus scanners such as VirusTotal can report false positives. The
 
 The only option I'd have is to contact these websites and tell them that it's a false positive, but I'm writing a keygen; I highly doubt they're going to be happy with doing anything.
 
-I scanned this keygen with Windows Defender and it reported that the files are clean. The other scan reports are listed below:
+I scanned with Windows Defender and it reported that the files are clean.
 
-- [VirusTotal](https://www.virustotal.com/gui/file/b3c95fed6aef299753119ac80d16b1036a5b2516605bf76677bde85fd817d44b)
-- [Jotti](https://virusscan.jotti.org/en-US/filescanjob/xa0wccihfs)
-- [Dr. Web](https://online76.drweb.com/cache/?i=8c7659223b46f7653cbe87da244c8db3)
-- [MetaDefender](https://metadefender.opswat.com/results/file/bzIzMDcxMlhKNzVxdGpHTTNvbkVXSWRvU3I/regular/overview)
+- [VirusTotal](https://www.virustotal.com/gui/file/9f109e58c2b3258b5975db8ebf38ecab24f74a1b32230ceaa2943125982b57c0?nocache=1)
+- [Jotti](https://virusscan.jotti.org/en-US/filescanjob/9hrf01e99p,zwk81r6nzn)
+- [MetaDefender](https://metadefender.opswat.com/results/file/bzIzMTEwNzEwQi1HVXI5UkdMa2RBV2pJcUU0/regular/overview)
 
 <br />
 
