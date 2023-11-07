@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Reflection;
 using System.Globalization;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
-using System.Diagnostics;
-using System.Collections.Concurrent;
 using System.Windows.Forms;
 
 [AttributeUsage(AttributeTargets.Assembly)]
@@ -57,7 +53,7 @@ namespace MobaXtermKG
         /*
             Find App
 
-            find WinRAR application to make it easier on the user when saving
+            find MobaXterm application to make it easier on the user when saving
             the generated key file.
 
             First we check Windows Environment Variables;

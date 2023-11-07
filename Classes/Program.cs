@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Security.Principal;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MobaXtermKG
@@ -20,7 +17,7 @@ namespace MobaXtermKG
             /*
                  Elevate to admin so we can modify the windows host file.
 
-                 @note      Not needed for the WinRAR keygen. No need to write to any host file.
+                 @note      Not needed for the MobaXterm keygen. No need to write to any host file.
             */
 
             WindowsPrincipal principal = new WindowsPrincipal(WindowsIdentity.GetCurrent());

@@ -25,7 +25,7 @@ namespace MobaXtermKG.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("23.2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("23.4")]
         public string app_def_version {
             get {
                 return ((string)(this["app_def_version"]));

@@ -1,21 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.IO.Compression;
 using System.IO;
 using System.Drawing;
-using System.Configuration;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
-using System.Globalization;
-using System.Threading;
-using Microsoft.VisualBasic.Logging;
 using Lng = MobaXtermKG.Properties.Resources;
 using Cfg = MobaXtermKG.Properties.Settings;
-using System.ComponentModel;
 
 namespace MobaXtermKG
 {
@@ -101,23 +90,6 @@ namespace MobaXtermKG
             string tm = AppInfo.Trademark;
 
             lblTitle.Text = product;
-
-            // Export patched resource file
-            File.WriteAllBytes(app_cli_exe, MobaXtermKG.Properties.Resources.mobaxtgen_cli);
-
-            if (!File.Exists(app_cli_exe))
-            {
-
-                MessageBox.Show(
-                    string.Format(Lng.msgbox_err_libmissing_msg, Environment.NewLine, app_cli_exe, Environment.NewLine, Environment.NewLine),
-                    Lng.msgbox_err_libmissing_title,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-
-                toolStripStatusLabel1.Text = string.Format(Lng.statusbar_libmissing, app_cli_exe);
-                statusStrip.Refresh();
-            }
         }
 
         /*
