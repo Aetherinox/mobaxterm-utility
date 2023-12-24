@@ -35,8 +35,8 @@
     <TargetCulture>en</TargetCulture>
     <ProductName>MobaXterm</ProductName>
     <PublisherName>Aetherx</PublisherName>
-    <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>1.1.1.4</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -193,6 +193,7 @@
       <LastGenOutput>resources.en1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="aetherx_piv_9a.pfx" />
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
