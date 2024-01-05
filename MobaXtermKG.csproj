@@ -116,6 +116,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Perms.cs" />
     <Compile Include="Classes\AppInfo.cs" />
     <Compile Include="Classes\Receiver.cs" />
     <Compile Include="Classes\Helpers.cs" />

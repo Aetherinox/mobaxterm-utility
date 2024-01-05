@@ -733,13 +733,20 @@ namespace MobaXtermKG
 
                         /*
                             Could not find MobaXterm.exe
+
+                            patch_launch_fullpath       : Full path to exe
+                            patch_launch_dir            : Directory only
+                            patch_launch_exe            : Patcher exe filename only
                         */
 
-                        string app_patcher_exe   =  System.IO.Path.GetFileName( GetType( ).Assembly.Location );
+                        string patch_launch_fullpath    = Process.GetCurrentProcess( ).MainModule.FileName;
+                        string patch_launch_dir         = Path.GetDirectoryName( patch_launch_fullpath );
+                        string patch_launch_exe         = Path.GetFileName( patch_launch_fullpath );
+                        string app_target_exe           = Cfg.Default.app_mobaxterm_exe;
 
                         MessageBox.Show
                         (
-                            string.Format( Lng.msgbox_err_locate_msg, Cfg.Default.app_mobaxterm_exe, app_patcher_exe, Cfg.Default.app_def_mxtpro ),
+                            string.Format( Lng.msgbox_err_locate_msg, Cfg.Default.app_mobaxterm_exe, patch_launch_exe, Cfg.Default.app_def_mxtpro ),
                             Lng.msgbox_err_locate_title,
                             MessageBoxButtons.OK, MessageBoxIcon.Error
                         );
@@ -781,7 +788,7 @@ namespace MobaXtermKG
             private void btn_OpenFolder_Click( object sender, EventArgs e )
             {
                 string src_file_path        = Helper.FindApp( );
-                string src_list             = Helper.FindAppSearchList( );
+                string src_list             = Helper.GetAppFindList( );
 
                 if ( String.IsNullOrEmpty( src_file_path ) )
                 {

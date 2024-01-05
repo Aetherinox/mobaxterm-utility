@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Management.Automation.Runspaces;
 using Lng = MobaXtermKG.Properties.Resources;
 using Cfg = MobaXtermKG.Properties.Settings;
+using System.Diagnostics;
 
 [AttributeUsage(AttributeTargets.Assembly)]
 internal class BuildDateAttribute : Attribute
@@ -32,9 +33,14 @@ namespace MobaXtermKG
     class Helpers
     {
 
-        readonly string app_base_path           = AppDomain.CurrentDomain.BaseDirectory;
-        private static string patch_launch_dir  = System.IO.Path.GetDirectoryName( System.Reflection.Assembly.GetEntryAssembly( ).Location );
-        private static string app_target_exe    = Cfg.Default.app_mobaxterm_exe;
+        /*
+            Get filename / paths to currently running patcher
+        */
+
+        private static string patch_launch_fullpath     = Process.GetCurrentProcess( ).MainModule.FileName;
+        private static string patch_launch_dir          = Path.GetDirectoryName( patch_launch_fullpath );
+        private static string patch_launch_exe          = Path.GetFileName( patch_launch_fullpath );
+        private static string app_target_exe            = Cfg.Default.app_mobaxterm_exe;
 
         /*
              StartIsBack Search Locations
@@ -63,7 +69,11 @@ namespace MobaXtermKG
                                                     app_target_exe
                                                 );
 
-        public string FindAppSearchList()
+        /*
+            Get App Search List
+        */
+
+        public string GetAppFindList()
         {
 
             /*
@@ -232,135 +242,6 @@ namespace MobaXtermKG
 
             return String.Empty;
         }
-
-        # region "FindApp: Deprecated"
-
-        /*
-            Find App
-
-            find MobaXterm application to make it easier on the user when saving
-            the generated key file.
-
-            First we check Windows Environment Variables;
-            then check where we "think" it may be.
-        */
-
-        public string __FindApp_Deprecated( String filename )
-        {
-
-            String default_path64   = @"C:\Program Files\Mobatek\MobaXterm\";
-            String default_path86   = @"C:\Program Files (x86)\Mobatek\MobaXterm\";
-
-            /*
-                this code looks in the base directory of the keygen folder to see if the mobaxterm (portable) exe file exists
-                and opens the folder in explorer.exe
-            */
-
-            string[] drives         = System.IO.Directory.GetFiles(app_base_path, "*mobaxterm*.exe");
-            var i_filesFound        = drives.Count();
-
-            if (i_filesFound > 0)
-            {
-                string found    = drives[ 0 ];
-                string folder   = Path.GetDirectoryName(found);
-
-                if (Directory.Exists(folder))
-                {
-                    return folder;
-                }
-            }
-
-            /*
-                Windows env variables
-            */
-
-            String path         = Environment.GetEnvironmentVariable("path");
-            String[] folders    = path.Split(';');
-
-            foreach (String folder in folders)
-            {
-                if (File.Exists(folder + filename))
-                {
-                    return folder;
-                }
-                else if (File.Exists(folder + @"\" + filename))
-                {
-                    return folder + @"\";
-                }
-            }
-
-            /*
-                Program files 64
-            */
-
-            if (Directory.Exists(default_path64))
-            {
-                if (File.Exists(default_path64 + filename))
-                {
-                    return default_path64;
-                }
-            }
-
-            /*
-                Program files 86
-            */
-
-            if (Directory.Exists(default_path86))
-            {
-                if (File.Exists(default_path86 + filename))
-                {
-                    return default_path86;
-                }
-            }
-
-            /*
-                Utilize powershell get-command to see if mobaxterm is installed
-            */
-
-            string src_targ_exe     = Cfg.Default.app_mobaxterm_exe;
-            string ps_query         = "(get-command " + src_targ_exe + ").Path";
-            string ps_result        = PowershellQ(ps_query);
-            ps_result               = ps_result.Replace(@"\", @"\\").Replace(@"""", @"\""");
-            string where_app        = null;
-
-            using (var reader = new StringReader(ps_result))
-            {
-                where_app = @reader.ReadLine();
-            }
-
-            if (File.Exists(where_app))
-            {
-                return Path.GetDirectoryName(where_app);
-            }
-
-            /*
-                Give the user one last chance to manually define where the program executable is at.
-                If this doesnt work, something has gone wrong or the program is not installed at all.
-            */
-
-            SaveFileDialog dlg      = new SaveFileDialog();
-
-            dlg.FileName            = "Custom";
-            dlg.Title               = "Save License File";
-            dlg.CheckPathExists     = true;
-            dlg.InitialDirectory    = app_base_path;
-            dlg.DefaultExt          = "mxtpro";
-            dlg.Filter              = @"MobaXterm License (*.mxtpro)|*.mxtpro|All files (*.*)|*.*";
-
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                return Path.GetDirectoryName(dlg.FileName);
-            }
-
-            /*
-                folder not found
-                If this happens, something has gone wrong and theres really no recovery.
-            */
-
-            return String.Empty;
-        }
-
-        #endregion
 
         /*
             ProgramFiles directory
