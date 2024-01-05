@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+    @app        : MobaXterm Keygen
+    @repo       : https://github.com/Aetherinox/MobaXtermKeygen
+    @author     : Aetherinox
+*/
+
+using System;
 using System.Linq;
 using System.Text;
 using System.IO;
@@ -8,9 +14,9 @@ using System.Collections.ObjectModel;
 using System.Management.Automation;
 using System.Windows.Forms;
 using System.Management.Automation.Runspaces;
+using System.Diagnostics;
 using Lng = MobaXtermKG.Properties.Resources;
 using Cfg = MobaXtermKG.Properties.Settings;
-using System.Diagnostics;
 
 [AttributeUsage(AttributeTargets.Assembly)]
 internal class BuildDateAttribute : Attribute

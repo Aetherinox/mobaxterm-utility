@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+    @app        : MobaXterm Keygen
+    @repo       : https://github.com/Aetherinox/MobaXtermKeygen
+    @author     : Aetherinox
+*/
+
+using System;
 using System.Diagnostics;
 using System.Security.Principal;
 using System.Windows.Forms;

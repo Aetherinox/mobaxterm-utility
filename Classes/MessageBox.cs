@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+    @app        : MobaXterm Keygen
+    @repo       : https://github.com/Aetherinox/MobaXtermKeygen
+    @author     : Aetherinox
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
