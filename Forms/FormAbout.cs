@@ -1,10 +1,7 @@
 ﻿using MobaXtermKG;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Configuration;
-using System.Reflection;
 using Lng = MobaXtermKG.Properties.Resources;
 using Cfg = MobaXtermKG.Properties.Settings;
 
@@ -38,6 +35,14 @@ namespace MobaXtermKG
 
             private bool mouseDown;
             private Point lastLocation;
+
+            /*
+                Version info
+            */
+
+            private string ver                  = AppInfo.ProductVersionCore.ToString( );
+            private string product              = AppInfo.Title;
+            private string tm                   = AppInfo.Trademark;
 
         #endregion
 
@@ -98,7 +103,7 @@ This key is used to sign the releases on Github.com, all commits are also signed
 
         #region "Main Window: Initialize"
 
-        public FormAbout()
+            public FormAbout()
             {
                 InitializeComponent();
 
@@ -129,16 +134,27 @@ This key is used to sign the releases on Github.com, all commits are also signed
                 lbl_HeaderSub.BackColor         = Color.Transparent;
                 lbl_HeaderSub.Text              = Lng.about_hdr_desc;
 
-                lbl_Version.Parent              = imgHeader;
-                lbl_Version.BackColor           = Color.Transparent;
-                lbl_Version.Text                = "v" + ver + " by " + tm;
-
                 /*
                     Button Links
                 */
 
-                lnk_TPBLink.Text                = Lng.about_lnk_tpb;
-                lnk_Github.Text                 = Lng.about_lnk_github;
+                lnk_TPBLink.Text                = "⠀⠀⠀⠀⠀⠀  ⠀";
+                lnk_Github.Text                 = "⠀⠀⠀⠀⠀⠀     ⠀";
+
+                lnk_TPBLink.Parent              = imgHeader;
+                lnk_TPBLink.BackColor           = Color.Transparent;
+
+                lnk_Github.Parent               = imgHeader;
+                lnk_Github.BackColor            = Color.Transparent;
+
+                lbl_Version.Parent              = imgHeader;
+                lbl_Version.BackColor           = Color.Transparent;
+                lbl_Version.ForeColor           = Color.Transparent;
+                lbl_Version.Text                = "⠀⠀⠀⠀⠀⠀ ⠀⠀ ⠀⠀⠀⠀";
+
+
+                pnl_HeaderBtm.Parent            = imgHeader;
+                pnl_HeaderBtm.BackColor         = Color.Transparent;
 
                 /*
                     About Readme
@@ -156,6 +172,12 @@ This key is used to sign the releases on Github.com, all commits are also signed
 
                 txt_Dev_PIV_Thumbprint.Value    = Cfg.Default.app_dev_piv_thumbprint;
                 txt_Dev_GPG_KeyID.Value         = Cfg.Default.app_dev_gpg_keyid;
+
+            }
+
+            private void FormAbout_Load(object sender, EventArgs e)
+            {
+
             }
 
             /*
@@ -171,11 +193,6 @@ This key is used to sign the releases on Github.com, all commits are also signed
                     return cp;
                 }
             } 
-
-            private void FormAbout_Load(object sender, EventArgs e)
-            {
-
-            }
 
         #endregion
 
@@ -335,13 +352,135 @@ This key is used to sign the releases on Github.com, all commits are also signed
                 }
             }
 
+        /*
+            Header > Bottom Panel
+                Holds the links and version label
+        */
+
+            private void pnl_HeaderBtm_MouseDown( object sender, MouseEventArgs e )
+            {
+                mouseDown = true;
+                lastLocation = e.Location;
+            }
+
+            private void pnl_HeaderBtm_MouseUp( object sender, MouseEventArgs e )
+            {
+                mouseDown = false;
+            }
+
+            private void pnl_HeaderBtm_MouseMove( object sender, MouseEventArgs e )
+            {
+                if ( mouseDown )
+                {
+                    this.Location = new Point(
+                        ( this.Location.X - lastLocation.X ) + e.X,
+                        ( this.Location.Y - lastLocation.Y ) + e.Y
+                    );
+
+                    this.Update( );
+                }
+            }
+
         #endregion
 
-        #region "Header: External Links"
+        #region "Header Links"
 
             /*
-                The Pirate Bay
+                The header contains three levels. Two are links, and one is the version number.
+                The header also includes a semi-transparent panel to dim the background. In order to do this
+                and have the labels appear properly, we need to do some hacky stuff.
+
+                    - Set the original link labels to have blank text
+                    - Add a Paint hook to each link label and draw the semi-transparent box
+                    - Manually draw the text on top of the transparent background
+                    - Track when the mouse enters / leaves the button so that text will be highlighted
             */
+
+            /*
+                Header Bottom Panel
+            */
+
+            private void pnl_HeaderBtm_Paint( object sender, PaintEventArgs e )
+            {
+                Graphics g                  = e.Graphics;
+                Color clr_Border            = Color.FromArgb( 35, 255, 255, 255 );
+                Color clr_Filler            = Color.FromArgb( 125, 0, 0, 0 );
+                var imgSize                 = pnl_HeaderBtm.ClientSize;
+                e.Graphics.FillRectangle    ( new SolidBrush( clr_Border ), 1, 1, imgSize.Width - 1, 1 );
+                e.Graphics.FillRectangle    ( new SolidBrush( clr_Filler ), 2, 2, imgSize.Width - 4, imgSize.Height - 4 );
+            }
+
+            /*
+                Label > Version
+            */
+
+            private void lbl_Version_Paint( object sender, PaintEventArgs e )
+            {
+                Graphics g                  = e.Graphics;
+                Color clr_Filler            = Color.FromArgb( 125, 0, 0, 0 );
+                var imgSize                 = lbl_Version.ClientSize;
+                e.Graphics.FillRectangle    ( new SolidBrush( clr_Filler ), 0, 0, imgSize.Width - 0, imgSize.Height - 0 );
+
+                var format                  = new StringFormat() { Alignment = StringAlignment.Far };
+                var rect                    = new RectangleF( 0, 0, imgSize.Width, imgSize.Height );
+
+                string teaxt = "v" + ver + " by " + tm;
+                using ( Font font1 = new Font( "Segoe UI", 10, FontStyle.Regular, GraphicsUnit.Point ) )
+                {
+                    e.Graphics.DrawString( teaxt, font1, Brushes.White, rect, format );
+                }
+            }
+
+            /*
+                Links > Track Hovering
+            */
+
+            private bool _bTPB_Hover            = false;
+            private bool _bGithub_Hover         = false;
+            private string lnk_TPB_label        = " " + Lng.about_lnk_tpb;
+            private string lnk_Github_Label     = " " + Lng.about_lnk_github;
+
+            /*
+                Link > The Pirate Bay
+            */
+
+
+            private void lnk_TPBLink_Paint( object sender, PaintEventArgs e )
+            {
+                Graphics g                  = e.Graphics;
+                Color clr_Filler            = Color.FromArgb( 125, 0, 0, 0 );
+                Color clr_Text              = Color.FromArgb( 255, 255, 128 );
+                SolidBrush bru_Text         = new SolidBrush( clr_Text );
+                var imgSize                 = lnk_Github.ClientSize;
+                e.Graphics.FillRectangle    ( new SolidBrush( clr_Filler ), 0, 0, imgSize.Width - 0, imgSize.Height - 0 );
+
+                var format                  = new StringFormat() { Alignment = StringAlignment.Near };
+                var rect                    = new RectangleF( 0, 0, imgSize.Width - 6, imgSize.Height );
+
+                FontStyle action            = FontStyle.Regular;
+
+                if ( _bTPB_Hover )
+                {
+                    action = FontStyle.Underline;
+                }
+
+                using ( Font font1 = new Font( "Segoe UI", 10, action, GraphicsUnit.Point ) )
+                {
+                    e.Graphics.DrawString( lnk_TPB_label, font1, bru_Text, rect, format );
+                }
+            }
+
+            private void lnk_TPBLink_MouseEnter( object sender, EventArgs e )
+            {
+                _bTPB_Hover = true;
+                lnk_TPBLink.Refresh( );
+            }
+
+            private void lnk_TPBLink_MouseLeave( object sender, EventArgs e )
+            {
+                _bTPB_Hover = false;
+                lnk_TPBLink.Refresh( );
+            }
 
             private void lnk_TPB_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
             {
@@ -349,8 +488,45 @@ This key is used to sign the releases on Github.com, all commits are also signed
             }
 
             /*
-                Github
+                Link > Github
             */
+
+            private void lnk_Github_Paint( object sender, PaintEventArgs e )
+            {
+                Graphics g                  = e.Graphics;
+                Color clr_Filler            = Color.FromArgb( 125, 0, 0, 0 );
+                Color clr_Text              = Color.FromArgb( 255, 255, 128 );
+                SolidBrush bru_Text         = new SolidBrush( clr_Text );
+                var imgSize                 = lnk_Github.ClientSize;
+                e.Graphics.FillRectangle    ( new SolidBrush( clr_Filler ), 0, 0, imgSize.Width - 0, imgSize.Height - 0 );
+
+                var format                  = new StringFormat() { Alignment = StringAlignment.Near };
+                var rect                    = new RectangleF( 0, 0, imgSize.Width - 3, imgSize.Height );
+
+                FontStyle action            = FontStyle.Regular;
+
+                if ( _bGithub_Hover )
+                {
+                    action = FontStyle.Underline;
+                }
+
+                using ( Font font1 = new Font( "Segoe UI", 10, action, GraphicsUnit.Point ) )
+                {
+                    e.Graphics.DrawString( lnk_Github_Label, font1, bru_Text, rect, format );
+                }
+            }
+
+            private void lnk_Github_MouseEnter( object sender, EventArgs e )
+            {
+                _bGithub_Hover = true;
+                lnk_Github.Refresh( );
+            }
+
+            private void lnk_Github_MouseLeave( object sender, EventArgs e )
+            {
+                _bGithub_Hover = false;
+                lnk_Github.Refresh( );
+            }
 
             private void lnk_Github_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
             {
