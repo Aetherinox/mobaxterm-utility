@@ -31,14 +31,14 @@ namespace MobaXtermKG.Msgbox
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMessageBox));
             this.pnl_Titlebar = new System.Windows.Forms.Panel();
-            this.labelCaption = new System.Windows.Forms.Label();
+            this.lbl_Caption = new System.Windows.Forms.Label();
             this.btn_Close = new System.Windows.Forms.Button();
             this.pnl_Buttons = new System.Windows.Forms.Panel();
             this.btn_3 = new MobaXtermKG.AetherxButton();
             this.btn_2 = new MobaXtermKG.AetherxButton();
             this.btn_1 = new MobaXtermKG.AetherxButton();
             this.pnl_Body = new System.Windows.Forms.Panel();
-            this.labelMessage = new System.Windows.Forms.Label();
+            this.lbl_Message = new System.Windows.Forms.Label();
             this.img_Icon = new System.Windows.Forms.PictureBox();
             this.pnl_Titlebar.SuspendLayout();
             this.pnl_Buttons.SuspendLayout();
@@ -49,25 +49,25 @@ namespace MobaXtermKG.Msgbox
             // pnl_Titlebar
             // 
             this.pnl_Titlebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.pnl_Titlebar.Controls.Add(this.labelCaption);
+            this.pnl_Titlebar.Controls.Add(this.lbl_Caption);
             this.pnl_Titlebar.Controls.Add(this.btn_Close);
             this.pnl_Titlebar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_Titlebar.Location = new System.Drawing.Point(2, 2);
             this.pnl_Titlebar.Name = "pnl_Titlebar";
             this.pnl_Titlebar.Size = new System.Drawing.Size(376, 28);
             this.pnl_Titlebar.TabIndex = 0;
-            this.pnl_Titlebar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnl_TitleBar_MouseDown);
+            this.pnl_Titlebar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnl_Titlebar_MouseDown);
             // 
-            // labelCaption
+            // lbl_Caption
             // 
-            this.labelCaption.AutoSize = true;
-            this.labelCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCaption.ForeColor = System.Drawing.Color.White;
-            this.labelCaption.Location = new System.Drawing.Point(9, 5);
-            this.labelCaption.Name = "labelCaption";
-            this.labelCaption.Size = new System.Drawing.Size(86, 17);
-            this.labelCaption.TabIndex = 4;
-            this.labelCaption.Text = "labelCaption";
+            this.lbl_Caption.AutoSize = true;
+            this.lbl_Caption.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Caption.ForeColor = System.Drawing.Color.White;
+            this.lbl_Caption.Location = new System.Drawing.Point(9, 5);
+            this.lbl_Caption.Name = "lbl_Caption";
+            this.lbl_Caption.Size = new System.Drawing.Size(96, 17);
+            this.lbl_Caption.TabIndex = 4;
+            this.lbl_Caption.Text = "Message Title";
             // 
             // btn_Close
             // 
@@ -86,6 +86,8 @@ namespace MobaXtermKG.Msgbox
             this.btn_Close.Text = "";
             this.btn_Close.UseVisualStyleBackColor = false;
             this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
+            this.btn_Close.MouseEnter += new System.EventHandler(this.btn_Close_MouseEnter);
+            this.btn_Close.MouseLeave += new System.EventHandler(this.btn_Close_MouseLeave);
             // 
             // pnl_Buttons
             // 
@@ -149,7 +151,7 @@ namespace MobaXtermKG.Msgbox
             // pnl_Body
             // 
             this.pnl_Body.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.pnl_Body.Controls.Add(this.labelMessage);
+            this.pnl_Body.Controls.Add(this.lbl_Message);
             this.pnl_Body.Controls.Add(this.img_Icon);
             this.pnl_Body.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_Body.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
@@ -160,22 +162,22 @@ namespace MobaXtermKG.Msgbox
             this.pnl_Body.TabIndex = 2;
             this.pnl_Body.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnl_Body_MouseDown);
             // 
-            // labelMessage
+            // lbl_Message
             // 
-            this.labelMessage.AutoSize = true;
-            this.labelMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.labelMessage.ForeColor = System.Drawing.Color.White;
-            this.labelMessage.Location = new System.Drawing.Point(58, 13);
-            this.labelMessage.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
-            this.labelMessage.MaximumSize = new System.Drawing.Size(700, 0);
-            this.labelMessage.Name = "labelMessage";
-            this.labelMessage.Padding = new System.Windows.Forms.Padding(5, 5, 22, 15);
-            this.labelMessage.Size = new System.Drawing.Size(112, 35);
-            this.labelMessage.TabIndex = 1;
-            this.labelMessage.Text = "labelMessage";
-            this.labelMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelMessage.Click += new System.EventHandler(this.lbl_Msg_Click);
+            this.lbl_Message.AutoSize = true;
+            this.lbl_Message.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_Message.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.lbl_Message.ForeColor = System.Drawing.Color.White;
+            this.lbl_Message.Location = new System.Drawing.Point(58, 13);
+            this.lbl_Message.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
+            this.lbl_Message.MaximumSize = new System.Drawing.Size(700, 0);
+            this.lbl_Message.Name = "lbl_Message";
+            this.lbl_Message.Padding = new System.Windows.Forms.Padding(5, 5, 22, 15);
+            this.lbl_Message.Size = new System.Drawing.Size(195, 35);
+            this.lbl_Message.TabIndex = 1;
+            this.lbl_Message.Text = "This is a notification message";
+            this.lbl_Message.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbl_Message.Click += new System.EventHandler(this.lbl_Message_Click);
             // 
             // img_Icon
             // 
@@ -222,9 +224,9 @@ namespace MobaXtermKG.Msgbox
         private AetherxButton btn_1;
         private System.Windows.Forms.Button btn_Close;
         private System.Windows.Forms.Panel pnl_Body;
-        private System.Windows.Forms.Label labelMessage;
+        private System.Windows.Forms.Label lbl_Message;
         private System.Windows.Forms.PictureBox img_Icon;
-        private System.Windows.Forms.Label labelCaption;
+        private System.Windows.Forms.Label lbl_Caption;
     }
 }
 

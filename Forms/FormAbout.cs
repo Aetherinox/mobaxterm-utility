@@ -108,14 +108,6 @@ This key is used to sign the releases on Github.com, all commits are also signed
                 InitializeComponent();
 
                 /*
-                    Product, trademark, etc.
-                */
-
-                string ver                      = AppInfo.ProductVersionCore.ToString( );
-                string product                  = AppInfo.Title;
-                string tm                       = AppInfo.Trademark;
-
-                /*
                     Form Control Buttons
                 */
 
@@ -138,11 +130,11 @@ This key is used to sign the releases on Github.com, all commits are also signed
                     Button Links
                 */
 
-                lnk_TPBLink.Text                = "⠀⠀⠀⠀⠀⠀  ⠀";
+                lnk_TPB.Text                = "⠀⠀⠀⠀⠀⠀  ⠀";
                 lnk_Github.Text                 = "⠀⠀⠀⠀⠀⠀     ⠀";
 
-                lnk_TPBLink.Parent              = imgHeader;
-                lnk_TPBLink.BackColor           = Color.Transparent;
+                lnk_TPB.Parent              = imgHeader;
+                lnk_TPB.BackColor           = Color.Transparent;
 
                 lnk_Github.Parent               = imgHeader;
                 lnk_Github.BackColor            = Color.Transparent;
@@ -397,6 +389,17 @@ This key is used to sign the releases on Github.com, all commits are also signed
             */
 
             /*
+                Links & label settings
+            */
+
+            private bool _bTPB_Hover            = false;
+            private bool _bGithub_Hover         = false;
+            private string lnk_TPB_label        = " " + Lng.about_lnk_tpb;
+            private string lnk_Github_Label     = " " + Lng.about_lnk_github;
+            private Color clr_Filler            = Color.FromArgb( 125, 0, 0, 0 );
+            private Color clr_Text              = Color.FromArgb( 255, 255, 128 );
+
+            /*
                 Header Bottom Panel
             */
 
@@ -432,37 +435,24 @@ This key is used to sign the releases on Github.com, all commits are also signed
             }
 
             /*
-                Links > Track Hovering
-            */
-
-            private bool _bTPB_Hover            = false;
-            private bool _bGithub_Hover         = false;
-            private string lnk_TPB_label        = " " + Lng.about_lnk_tpb;
-            private string lnk_Github_Label     = " " + Lng.about_lnk_github;
-
-            /*
                 Link > The Pirate Bay
             */
 
 
-            private void lnk_TPBLink_Paint( object sender, PaintEventArgs e )
+            private void lnk_TPB_Paint( object sender, PaintEventArgs e )
             {
                 Graphics g                  = e.Graphics;
-                Color clr_Filler            = Color.FromArgb( 125, 0, 0, 0 );
-                Color clr_Text              = Color.FromArgb( 255, 255, 128 );
                 SolidBrush bru_Text         = new SolidBrush( clr_Text );
                 var imgSize                 = lnk_Github.ClientSize;
                 e.Graphics.FillRectangle    ( new SolidBrush( clr_Filler ), 0, 0, imgSize.Width - 0, imgSize.Height - 0 );
 
-                var format                  = new StringFormat() { Alignment = StringAlignment.Near };
+                var format                  = new StringFormat( ) { Alignment = StringAlignment.Near };
                 var rect                    = new RectangleF( 0, 0, imgSize.Width - 6, imgSize.Height );
 
                 FontStyle action            = FontStyle.Regular;
 
                 if ( _bTPB_Hover )
-                {
                     action = FontStyle.Underline;
-                }
 
                 using ( Font font1 = new Font( "Segoe UI", 10, action, GraphicsUnit.Point ) )
                 {
@@ -470,21 +460,21 @@ This key is used to sign the releases on Github.com, all commits are also signed
                 }
             }
 
-            private void lnk_TPBLink_MouseEnter( object sender, EventArgs e )
+            private void lnk_TPB_MouseEnter( object sender, EventArgs e )
             {
                 _bTPB_Hover = true;
-                lnk_TPBLink.Refresh( );
+                lnk_TPB.Refresh( );
             }
 
-            private void lnk_TPBLink_MouseLeave( object sender, EventArgs e )
+            private void lnk_TPB_MouseLeave( object sender, EventArgs e )
             {
                 _bTPB_Hover = false;
-                lnk_TPBLink.Refresh( );
+                lnk_TPB.Refresh( );
             }
 
-            private void lnk_TPB_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+            private void lnk_TPB_LinkClicked( object sender, LinkLabelLinkClickedEventArgs e )
             {
-                System.Diagnostics.Process.Start(Cfg.Default.app_url_tpb);
+                System.Diagnostics.Process.Start( Cfg.Default.app_url_tpb );
             }
 
             /*
@@ -494,8 +484,6 @@ This key is used to sign the releases on Github.com, all commits are also signed
             private void lnk_Github_Paint( object sender, PaintEventArgs e )
             {
                 Graphics g                  = e.Graphics;
-                Color clr_Filler            = Color.FromArgb( 125, 0, 0, 0 );
-                Color clr_Text              = Color.FromArgb( 255, 255, 128 );
                 SolidBrush bru_Text         = new SolidBrush( clr_Text );
                 var imgSize                 = lnk_Github.ClientSize;
                 e.Graphics.FillRectangle    ( new SolidBrush( clr_Filler ), 0, 0, imgSize.Width - 0, imgSize.Height - 0 );
@@ -506,9 +494,7 @@ This key is used to sign the releases on Github.com, all commits are also signed
                 FontStyle action            = FontStyle.Regular;
 
                 if ( _bGithub_Hover )
-                {
                     action = FontStyle.Underline;
-                }
 
                 using ( Font font1 = new Font( "Segoe UI", 10, action, GraphicsUnit.Point ) )
                 {
@@ -528,9 +514,9 @@ This key is used to sign the releases on Github.com, all commits are also signed
                 lnk_Github.Refresh( );
             }
 
-            private void lnk_Github_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+            private void lnk_Github_LinkClicked( object sender, LinkLabelLinkClickedEventArgs e )
             {
-                System.Diagnostics.Process.Start(Cfg.Default.app_url_github);
+                System.Diagnostics.Process.Start( Cfg.Default.app_url_github );
             }
 
         #endregion

@@ -114,13 +114,15 @@
             this.btn_Close.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Close.Font = new System.Drawing.Font("Segoe MDL2 Assets", 14.25F, System.Drawing.FontStyle.Bold);
             this.btn_Close.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.btn_Close.Location = new System.Drawing.Point(492, 7);
+            this.btn_Close.Location = new System.Drawing.Point(490, 7);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(24, 32);
             this.btn_Close.TabIndex = 4;
             this.btn_Close.Text = "";
             this.btn_Close.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btn_Close.Click += new System.EventHandler(this.btn_Window_Close_Click);
+            this.btn_Close.MouseEnter += new System.EventHandler(this.btn_Window_Close_MouseEnter);
+            this.btn_Close.MouseLeave += new System.EventHandler(this.btn_Window_Close_MouseLeave);
             // 
             // txt_ETH
             // 

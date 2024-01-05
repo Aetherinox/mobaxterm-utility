@@ -37,7 +37,7 @@ namespace MobaXtermKG
         /// </summary>
         private void InitializeComponent()
         {
-            this.lnk_TPBLink = new System.Windows.Forms.LinkLabel();
+            this.lnk_TPB = new System.Windows.Forms.LinkLabel();
             this.lnk_Github = new System.Windows.Forms.LinkLabel();
             this.lbl_Dev_PIV_Thumbprint = new System.Windows.Forms.Label();
             this.lbl_Dev_GPG_KeyID = new System.Windows.Forms.Label();
@@ -54,22 +54,22 @@ namespace MobaXtermKG
             ((System.ComponentModel.ISupportInitialize)(this.pnl_HeaderBtm)).BeginInit();
             this.SuspendLayout();
             // 
-            // lnk_TPBLink
+            // lnk_TPB
             // 
-            this.lnk_TPBLink.AutoSize = true;
-            this.lnk_TPBLink.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lnk_TPBLink.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.lnk_TPBLink.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.lnk_TPBLink.Location = new System.Drawing.Point(25, 104);
-            this.lnk_TPBLink.Name = "lnk_TPBLink";
-            this.lnk_TPBLink.Size = new System.Drawing.Size(74, 19);
-            this.lnk_TPBLink.TabIndex = 1;
-            this.lnk_TPBLink.TabStop = true;
-            this.lnk_TPBLink.Text = "TPB Profile";
-            this.lnk_TPBLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_TPB_LinkClicked);
-            this.lnk_TPBLink.Paint += new System.Windows.Forms.PaintEventHandler(this.lnk_TPBLink_Paint);
-            this.lnk_TPBLink.MouseEnter += new System.EventHandler(this.lnk_TPBLink_MouseEnter);
-            this.lnk_TPBLink.MouseLeave += new System.EventHandler(this.lnk_TPBLink_MouseLeave);
+            this.lnk_TPB.AutoSize = true;
+            this.lnk_TPB.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lnk_TPB.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lnk_TPB.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.lnk_TPB.Location = new System.Drawing.Point(25, 104);
+            this.lnk_TPB.Name = "lnk_TPB";
+            this.lnk_TPB.Size = new System.Drawing.Size(74, 19);
+            this.lnk_TPB.TabIndex = 1;
+            this.lnk_TPB.TabStop = true;
+            this.lnk_TPB.Text = "TPB Profile";
+            this.lnk_TPB.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_TPB_LinkClicked);
+            this.lnk_TPB.Paint += new System.Windows.Forms.PaintEventHandler(this.lnk_TPB_Paint);
+            this.lnk_TPB.MouseEnter += new System.EventHandler(this.lnk_TPB_MouseEnter);
+            this.lnk_TPB.MouseLeave += new System.EventHandler(this.lnk_TPB_MouseLeave);
             // 
             // lnk_Github
             // 
@@ -165,6 +165,8 @@ namespace MobaXtermKG
             this.btn_Close.Text = "";
             this.btn_Close.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btn_Close.Click += new System.EventHandler(this.btn_Window_Close_Click);
+            this.btn_Close.MouseEnter += new System.EventHandler(this.btn_Window_Close_MouseEnter);
+            this.btn_Close.MouseLeave += new System.EventHandler(this.btn_Window_Close_MouseLeave);
             // 
             // lbl_Version
             // 
@@ -278,7 +280,7 @@ namespace MobaXtermKG
             this.ClientSize = new System.Drawing.Size(530, 481);
             this.ControlBox = false;
             this.Controls.Add(this.lbl_Version);
-            this.Controls.Add(this.lnk_TPBLink);
+            this.Controls.Add(this.lnk_TPB);
             this.Controls.Add(this.lnk_Github);
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.lbl_HeaderSub);
@@ -308,7 +310,7 @@ namespace MobaXtermKG
         }
 
         #endregion
-        private LinkLabel lnk_TPBLink;
+        private LinkLabel lnk_TPB;
         private LinkLabel lnk_Github;
         private AetherxTextBox txt_Terms;
         private AetherxTextBox txt_Dev_PIV_Thumbprint;
