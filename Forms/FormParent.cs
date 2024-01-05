@@ -40,16 +40,27 @@ namespace MobaXtermKG
             private Point lastLocation;
 
             /*
+                Could not find MobaXterm.exe
+
+                patch_launch_fullpath       : Full path to exe
+                patch_launch_dir            : Directory only
+                patch_launch_exe            : Patcher exe filename only
+            */
+
+            static private string patch_launch_fullpath = Process.GetCurrentProcess( ).MainModule.FileName;
+            static private string patch_launch_dir      = Path.GetDirectoryName( patch_launch_fullpath );
+            static private string patch_launch_exe      = Path.GetFileName( patch_launch_fullpath );
+            static private string app_target_exe        = Cfg.Default.app_mobaxterm_exe;
+
+            /*
                 variables > current keygen path / folder
             */
 
-            static private string app_base_path         = AppDomain.CurrentDomain.BaseDirectory;
-
             static private string app_cli_exe           = Cfg.Default.app_cli_exe;
-            static private string app_cli_path          = Path.Combine( app_base_path, app_cli_exe );
+            static private string app_cli_path          = Path.Combine( patch_launch_dir, app_cli_exe );
 
-            readonly private string cfg_def_version     = Cfg.Default.app_def_version;
-            readonly private string cfg_def_users       = Cfg.Default.app_def_users;
+            static private string cfg_def_version       = Cfg.Default.app_def_version;
+            static private string cfg_def_users         = Cfg.Default.app_def_users;
 
         #endregion
 
@@ -720,7 +731,7 @@ namespace MobaXtermKG
                             txt_LicenseKey.Value            = app_cli_result;
 
                             MessageBox.Show(
-                                string.Format( Lng.msgbox_ok_generate_finished_msg, Environment.NewLine, Environment.NewLine, mxtpro_target_to ),
+                                string.Format( Lng.msgbox_ok_generate_finished_msg, mxtpro_target_to ),
                                 Lng.msgbox_ok_generate_finished_title,
                                 MessageBoxButtons.OK, MessageBoxIcon.None
                             );
@@ -728,19 +739,6 @@ namespace MobaXtermKG
                     }
                     else
                     {
-
-                        /*
-                            Could not find MobaXterm.exe
-
-                            patch_launch_fullpath       : Full path to exe
-                            patch_launch_dir            : Directory only
-                            patch_launch_exe            : Patcher exe filename only
-                        */
-
-                        string patch_launch_fullpath    = Process.GetCurrentProcess( ).MainModule.FileName;
-                        string patch_launch_dir         = Path.GetDirectoryName( patch_launch_fullpath );
-                        string patch_launch_exe         = Path.GetFileName( patch_launch_fullpath );
-                        string app_target_exe           = Cfg.Default.app_mobaxterm_exe;
 
                         MessageBox.Show
                         (
@@ -775,7 +773,7 @@ namespace MobaXtermKG
 
             private void btn_OpenFolder_MouseEnter( object sender, EventArgs e )
             {
-                StatusBar.Update( Lng.status_btn_openfolder );
+                StatusBar.Update( string.Format( "{0} {1}", Lng.status_btn_openfolder, app_target_exe ) );
             }
 
             /*
@@ -890,10 +888,6 @@ namespace MobaXtermKG
                         base.OnRenderToolStripBorder( e );
                 }
             }
-
-            /*
-                Statusbar > Paint
-            */
 
             private void status_Strip_Paint( object sender, PaintEventArgs e )
             {

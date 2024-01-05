@@ -288,9 +288,11 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not locate file {0}. Try placing the keygen file {1} in the same folder as the {0} program executable.
+        ///   Looks up a localized string similar to Could not locate {0}. Try placing the keygen file {1} in the same folder as the {0} program executable.
         ///
-        ///The next dialog will allow you to simply save the license file {2}, however, you&apos;ll have to copy/paste the file and manually place it in the MobaXterm installation folder..
+        ///The next dialog will allow you to simply save the license file {2}
+        ///
+        ///You&apos;ll need to copy/paste the saved {2} file into the MobaXterm installation folder..
         /// </summary>
         internal static string msgbox_err_locate_msg {
             get {
@@ -343,7 +345,9 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to License key has been successfully generated in:{0}{1}{2}.
+        ///   Looks up a localized string similar to License key has been successfully generated in:
+        ///
+        ///{0}.
         /// </summary>
         internal static string msgbox_ok_generate_finished_msg {
             get {

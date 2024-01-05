@@ -335,7 +335,7 @@ namespace MobaXtermKG
             this.aetherxRTextBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.aetherxRTextBox1.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.aetherxRTextBox1.ForeColor = System.Drawing.Color.White;
-            this.aetherxRTextBox1.Location = new System.Drawing.Point(19, 305);
+            this.aetherxRTextBox1.Location = new System.Drawing.Point(19, 278);
             this.aetherxRTextBox1.Name = "aetherxRTextBox1";
             this.aetherxRTextBox1.ReadOnly = true;
             this.aetherxRTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
@@ -355,7 +355,7 @@ namespace MobaXtermKG
             this.txt_LicenseKey.Enabled = false;
             this.txt_LicenseKey.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txt_LicenseKey.ForeColor = System.Drawing.Color.White;
-            this.txt_LicenseKey.Location = new System.Drawing.Point(19, 339);
+            this.txt_LicenseKey.Location = new System.Drawing.Point(19, 312);
             this.txt_LicenseKey.Margin = new System.Windows.Forms.Padding(4);
             this.txt_LicenseKey.Multiline = false;
             this.txt_LicenseKey.MultilineScrollbars = true;
@@ -381,7 +381,7 @@ namespace MobaXtermKG
             this.txt_Version.BorderSize = 1;
             this.txt_Version.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txt_Version.ForeColor = System.Drawing.Color.White;
-            this.txt_Version.Location = new System.Drawing.Point(341, 241);
+            this.txt_Version.Location = new System.Drawing.Point(341, 214);
             this.txt_Version.Margin = new System.Windows.Forms.Padding(4);
             this.txt_Version.Multiline = false;
             this.txt_Version.MultilineScrollbars = true;
@@ -408,7 +408,7 @@ namespace MobaXtermKG
             this.txt_Users.BorderSize = 1;
             this.txt_Users.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txt_Users.ForeColor = System.Drawing.Color.White;
-            this.txt_Users.Location = new System.Drawing.Point(426, 241);
+            this.txt_Users.Location = new System.Drawing.Point(426, 214);
             this.txt_Users.Margin = new System.Windows.Forms.Padding(4);
             this.txt_Users.Multiline = false;
             this.txt_Users.MultilineScrollbars = true;
@@ -435,7 +435,7 @@ namespace MobaXtermKG
             this.txt_Name.BorderSize = 1;
             this.txt_Name.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txt_Name.ForeColor = System.Drawing.Color.White;
-            this.txt_Name.Location = new System.Drawing.Point(19, 241);
+            this.txt_Name.Location = new System.Drawing.Point(19, 214);
             this.txt_Name.Margin = new System.Windows.Forms.Padding(4);
             this.txt_Name.Multiline = false;
             this.txt_Name.MultilineScrollbars = true;
@@ -458,7 +458,7 @@ namespace MobaXtermKG
             this.rtxt_Desc.Cursor = System.Windows.Forms.Cursors.Default;
             this.rtxt_Desc.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.rtxt_Desc.ForeColor = System.Drawing.Color.White;
-            this.rtxt_Desc.Location = new System.Drawing.Point(19, 189);
+            this.rtxt_Desc.Location = new System.Drawing.Point(19, 162);
             this.rtxt_Desc.Name = "rtxt_Desc";
             this.rtxt_Desc.ReadOnly = true;
             this.rtxt_Desc.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
@@ -476,7 +476,7 @@ namespace MobaXtermKG
             this.btn_OpenFolder.FlatAppearance.BorderSize = 0;
             this.btn_OpenFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_OpenFolder.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_OpenFolder.Location = new System.Drawing.Point(249, 394);
+            this.btn_OpenFolder.Location = new System.Drawing.Point(249, 386);
             this.btn_OpenFolder.Name = "btn_OpenFolder";
             this.btn_OpenFolder.Size = new System.Drawing.Size(156, 29);
             this.btn_OpenFolder.TabIndex = 6;
@@ -493,7 +493,7 @@ namespace MobaXtermKG
             this.btn_Generate.FlatAppearance.BorderSize = 0;
             this.btn_Generate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Generate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Generate.Location = new System.Drawing.Point(129, 394);
+            this.btn_Generate.Location = new System.Drawing.Point(129, 386);
             this.btn_Generate.Name = "btn_Generate";
             this.btn_Generate.Size = new System.Drawing.Size(111, 29);
             this.btn_Generate.TabIndex = 5;

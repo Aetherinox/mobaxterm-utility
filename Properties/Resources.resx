@@ -194,9 +194,11 @@
     <value>Fatal Error</value>
   </data>
   <data name="msgbox_err_locate_msg" xml:space="preserve">
-    <value>Could not locate file {0}. Try placing the keygen file {1} in the same folder as the {0} program executable.
+    <value>Could not locate {0}. Try placing the keygen file {1} in the same folder as the {0} program executable.
 
-The next dialog will allow you to simply save the license file {2}, however, you'll have to copy/paste the file and manually place it in the MobaXterm installation folder.</value>
+The next dialog will allow you to simply save the license file {2}
+
+You'll need to copy/paste the saved {2} file into the MobaXterm installation folder.</value>
   </data>
   <data name="msgbox_err_locate_title" xml:space="preserve">
     <value>No valid Path to MobaXterm</value>
@@ -219,7 +221,9 @@ Tried looking in {0}
 You will be prompted to manually locate MobaXterm.exe. Ensure that MobaXterm is installed on your system.</value>
   </data>
   <data name="msgbox_ok_generate_finished_msg" xml:space="preserve">
-    <value>License key has been successfully generated in:{0}{1}{2}</value>
+    <value>License key has been successfully generated in:
+
+{0}</value>
   </data>
   <data name="msgbox_ok_generate_finished_title" xml:space="preserve">
     <value>License Key Generated</value>

@@ -123,7 +123,7 @@ namespace MobaXtermKG
                 if ( File.Exists( path_saveto_full ) )
                 {
                     MessageBox.Show(
-                        string.Format( Lng.msgbox_ok_generate_finished_msg, Environment.NewLine, Environment.NewLine, path_saveto_full ),
+                        string.Format( Lng.msgbox_ok_generate_finished_msg, path_saveto_full ),
                         Lng.msgbox_ok_generate_finished_title,
                         MessageBoxButtons.OK, MessageBoxIcon.None
                     );
