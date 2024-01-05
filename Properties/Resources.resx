@@ -182,7 +182,7 @@
     <value>..\Resources\mobaxtgen_cli.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="msgbox_err_generate_noname_msg" xml:space="preserve">
-    <value>Must provide a name for license key</value>
+    <value>Must specify a name for the license key to be generated for.</value>
   </data>
   <data name="msgbox_err_generate_noname_title" xml:space="preserve">
     <value>No Name Specified</value>
@@ -236,26 +236,26 @@ You will be prompted to manually locate MobaXterm.exe. Ensure that MobaXterm is 
   <data name="question" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Materials\question.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="statusbar_btn_openfolder" xml:space="preserve">
-    <value>Opens the folder where Mobaxterm is installed</value>
-  </data>
-  <data name="statusbar_genlicense" xml:space="preserve">
-    <value>Press Generate to create license key ...</value>
-  </data>
-  <data name="statusbar_libmissing" xml:space="preserve">
-    <value>Fatal Error: Can't find {0}</value>
-  </data>
-  <data name="statusbar_txt_name_mouseover" xml:space="preserve">
-    <value>Enter name to appear on license (required)</value>
-  </data>
-  <data name="statusbar_txt_users_mouseover" xml:space="preserve">
-    <value>Enter number of users license is good for. Default:</value>
-  </data>
-  <data name="statusbar_txt_version_mouseover" xml:space="preserve">
-    <value>Enter version you are running. Default:</value>
+  <data name="status_btn_openfolder" xml:space="preserve">
+    <value>Opens the folder where {0} is installed</value>
   </data>
   <data name="status_diag_cancelled" xml:space="preserve">
     <value>Key generation cancelled by user</value>
+  </data>
+  <data name="status_genlicense" xml:space="preserve">
+    <value>Press Generate to create license key ...</value>
+  </data>
+  <data name="status_libmissing" xml:space="preserve">
+    <value>Fatal Error: Can't find {0}</value>
+  </data>
+  <data name="status_txt_name_mouseover" xml:space="preserve">
+    <value>Enter name to appear on license (required)</value>
+  </data>
+  <data name="status_txt_users_mouseover" xml:space="preserve">
+    <value>Enter number of users license is good for. Default:</value>
+  </data>
+  <data name="status_txt_version_mouseover" xml:space="preserve">
+    <value>Enter version you are running. Default:</value>
   </data>
   <data name="txt_contrib_intro" xml:space="preserve">
     <value>I do this because I enjoy giving back, and I'm not looking to make a profit off my work. However, donations would help immensely for one purpose -- purchasing libraries and other commercial products which have insane licensing systems. These types of products would make life much easier and get releases pumped out on a more regular basis. Don't feel obligated, this is just "if you can". My main goal is better tools.</value>

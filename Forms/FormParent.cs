@@ -131,8 +131,7 @@ namespace MobaXtermKG
             private void FormParent_Load( object sender, EventArgs e )
             {
                 mnu_Main.Renderer       = new ToolStripProfessionalRenderer( new mnu_Main_ColorTable( ) );
-                lbl_StatusOutput.Text   = string.Format( Lng.statusbar_genlicense );
-                status_Strip.Refresh    ( );
+                StatusBar.Update( Lng.status_genlicense );
             }
 
             /*
@@ -609,8 +608,7 @@ namespace MobaXtermKG
 
             private void btn_Generate_MouseEnter( object sender, EventArgs e )
             {
-                lbl_StatusOutput.Text = string.Format(Lng.statusbar_genlicense);
-                status_Strip.Refresh();
+                StatusBar.Update( Lng.status_genlicense );
             }
 
             /*
@@ -777,8 +775,7 @@ namespace MobaXtermKG
 
             private void btn_OpenFolder_MouseEnter( object sender, EventArgs e )
             {
-                lbl_StatusOutput.Text = string.Format( Lng.statusbar_btn_openfolder );
-                status_Strip.Refresh( );
+                StatusBar.Update( Lng.status_btn_openfolder );
             }
 
             /*
@@ -837,8 +834,7 @@ namespace MobaXtermKG
 
             private void txt_Name_MouseEnter( object sender, EventArgs e )
             {
-                lbl_StatusOutput.Text = string.Format( Lng.statusbar_txt_name_mouseover );
-                status_Strip.Refresh( );
+                StatusBar.Update( Lng.status_txt_name_mouseover );
             }
 
             /*
@@ -847,8 +843,7 @@ namespace MobaXtermKG
 
             private void txt_Users_MouseEnter( object sender, EventArgs e )
             {
-                lbl_StatusOutput.Text = string.Format( Lng.statusbar_txt_users_mouseover + " " + Cfg.Default.app_def_users );
-                status_Strip.Refresh();
+                StatusBar.Update( string.Format( "{0} {1}", Lng.status_txt_users_mouseover, Cfg.Default.app_def_users ) );
             }
 
             /*
@@ -857,8 +852,7 @@ namespace MobaXtermKG
 
             private void txt_Version_MouseEnter( object sender, EventArgs e )
             {
-                lbl_StatusOutput.Text = string.Format( Lng.statusbar_txt_version_mouseover + " " + Cfg.Default.app_def_version );
-                status_Strip.Refresh();
+                StatusBar.Update( string.Format( "{0} {1}", Lng.status_txt_version_mouseover, Cfg.Default.app_def_version ) );
             }
 
         #endregion
@@ -940,6 +934,7 @@ namespace MobaXtermKG
             public void Status( string message )
             {
                 lbl_StatusOutput.Text = message;
+                status_Strip.Refresh( );
             }
 
         #endregion

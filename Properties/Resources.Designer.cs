@@ -252,7 +252,7 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Must provide a name for license key.
+        ///   Looks up a localized string similar to Must specify a name for the license key to be generated for..
         /// </summary>
         internal static string msgbox_err_generate_noname_msg {
             get {
@@ -398,6 +398,15 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Opens the folder where {0} is installed.
+        /// </summary>
+        internal static string status_btn_openfolder {
+            get {
+                return ResourceManager.GetString("status_btn_openfolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Key generation cancelled by user.
         /// </summary>
         internal static string status_diag_cancelled {
@@ -407,56 +416,47 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opens the folder where Mobaxterm is installed.
-        /// </summary>
-        internal static string statusbar_btn_openfolder {
-            get {
-                return ResourceManager.GetString("statusbar_btn_openfolder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Press Generate to create license key ....
         /// </summary>
-        internal static string statusbar_genlicense {
+        internal static string status_genlicense {
             get {
-                return ResourceManager.GetString("statusbar_genlicense", resourceCulture);
+                return ResourceManager.GetString("status_genlicense", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Fatal Error: Can&apos;t find {0}.
         /// </summary>
-        internal static string statusbar_libmissing {
+        internal static string status_libmissing {
             get {
-                return ResourceManager.GetString("statusbar_libmissing", resourceCulture);
+                return ResourceManager.GetString("status_libmissing", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Enter name to appear on license (required).
         /// </summary>
-        internal static string statusbar_txt_name_mouseover {
+        internal static string status_txt_name_mouseover {
             get {
-                return ResourceManager.GetString("statusbar_txt_name_mouseover", resourceCulture);
+                return ResourceManager.GetString("status_txt_name_mouseover", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Enter number of users license is good for. Default:.
         /// </summary>
-        internal static string statusbar_txt_users_mouseover {
+        internal static string status_txt_users_mouseover {
             get {
-                return ResourceManager.GetString("statusbar_txt_users_mouseover", resourceCulture);
+                return ResourceManager.GetString("status_txt_users_mouseover", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Enter version you are running. Default:.
         /// </summary>
-        internal static string statusbar_txt_version_mouseover {
+        internal static string status_txt_version_mouseover {
             get {
-                return ResourceManager.GetString("statusbar_txt_version_mouseover", resourceCulture);
+                return ResourceManager.GetString("status_txt_version_mouseover", resourceCulture);
             }
         }
         
