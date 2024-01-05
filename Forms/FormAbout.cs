@@ -67,21 +67,29 @@ If you wish to view the source code, click the Github link above.
 The keygen is free for anyone to use. I try to make stuff that isn't like the typical keygens out there. No loud annoying ass music, no ads, no weird color schemes that question if you're under the influence of shrooms.
 
 INSTRUCTIONS
-   - Provide a name and company or license name.
-   - Click Generate and a new key will be created.
-   - Copy generated key and paste into a rarreg.key file
-     OR
-     Click the save button and save the generated key file
-     to your WinRAR installation directory.
-   - Restart WinRAR if running.
+    -   On the keygen main window, for field 'NAME', type whatever
+    -   'VERSION' field: The version you are registering - (default 23.6).
+            If no value entered, it will default to version included with this patch.
+    -   'USERS' field: Number of users the license is good for - (default 1)
+    -   Press 'GENERATE' button to generate a Custom.mxtpro license file.
+
+            PORTABLE USERS:     Put MobaXtermKG.exe in the same folder as
+                                MobaXterm_Personal_23.6.exe.
+
+            Keygen will attempt to automatically find where you installed MobaXterm.
+            If it cannot be found, you'll be asked to manually find it.
+    -   Once you generate a license key file, a Custom.mxtpro file will be saved
+    -   Close the keygen & re-launch MobaXterm.exe
+
+
 
 CERTIFICATE THUMBPRINT
 These are specifically associated to the developer of this program.
 
 To verify that this program is safe and unmodified by others,
 right-click on the EXE file: 
-    -> Click PROPERTIES menu item
-    -> DIGITAL SIGNATURES tab
+    ->  Click PROPERTIES menu item
+    ->  DIGITAL SIGNATURES tab
     -> DETAILS button
     -> VIEW CERTIFICATE button
     -> DETAILS tab
