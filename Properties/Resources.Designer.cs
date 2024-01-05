@@ -261,6 +261,46 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Located {0} with Windows Env Var in:
+        ///
+        ///{1}.
+        /// </summary>
+        internal static string msgbox_debug_findpath_env_c1_msg {
+            get {
+                return ResourceManager.GetString("msgbox_debug_findpath_env_c1_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debug: 1000C-1.
+        /// </summary>
+        internal static string msgbox_debug_findpath_env_c1_title {
+            get {
+                return ResourceManager.GetString("msgbox_debug_findpath_env_c1_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Located {0} with Windows Env Var in:
+        ///
+        ///{1}.
+        /// </summary>
+        internal static string msgbox_debug_findpath_env_c2_msg {
+            get {
+                return ResourceManager.GetString("msgbox_debug_findpath_env_c2_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debug: 1000C-2.
+        /// </summary>
+        internal static string msgbox_debug_findpath_env_c2_title {
+            get {
+                return ResourceManager.GetString("msgbox_debug_findpath_env_c2_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Located {0} In:
         ///
         ///{1}.

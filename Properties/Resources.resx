@@ -184,6 +184,22 @@
   <data name="msgbox_debug_callfunc_title" xml:space="preserve">
     <value>Function Called</value>
   </data>
+  <data name="msgbox_debug_findpath_env_c1_msg" xml:space="preserve">
+    <value>Located {0} with Windows Env Var in:
+
+{1}</value>
+  </data>
+  <data name="msgbox_debug_findpath_env_c1_title" xml:space="preserve">
+    <value>Debug: 1000C-1</value>
+  </data>
+  <data name="msgbox_debug_findpath_env_c2_msg" xml:space="preserve">
+    <value>Located {0} with Windows Env Var in:
+
+{1}</value>
+  </data>
+  <data name="msgbox_debug_findpath_env_c2_title" xml:space="preserve">
+    <value>Debug: 1000C-2</value>
+  </data>
   <data name="msgbox_debug_findpath_msg" xml:space="preserve">
     <value>Located {0} In:
 

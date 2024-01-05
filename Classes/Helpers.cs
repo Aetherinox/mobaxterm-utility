@@ -116,13 +116,13 @@ namespace MobaXtermKG
 
         }
 
-
         /*
             Find App
 
             find target application
 
             A file will be checked in the following order:
+                -   portable exe (keygen in same folder as portable exe)
                 -   Windows Environment Variable PATH
                 -   C:\Program Files
                 -   C:\Program Files (x86)
@@ -137,6 +137,33 @@ namespace MobaXtermKG
         {
 
             /*
+                looks for the portable app, this takes priority in case the user wants to activate the portable version
+            */
+
+            string[] drives         = System.IO.Directory.GetFiles( patch_launch_dir, "*MobaXterm_Personal_*.exe");
+            var i_filesFound        = drives.Count( );
+
+            if ( i_filesFound > 0 )
+            {
+                string found    = drives[0];
+                string folder   = Path.GetDirectoryName( found );
+
+                if ( Directory.Exists( folder ) )
+                {
+
+                    #if DEBUG
+                        MessageBox.Show(
+                            string.Format( Lng.msgbox_debug_findpath_msg, app_target_exe, folder ),
+                            string.Format( Lng.msgbox_debug_findpath_title ),
+                            MessageBoxButtons.OK, MessageBoxIcon.None
+                        );
+                    #endif
+
+                    return folder;
+                }
+            }
+
+            /*
                 Check for path inside Windows Environment Variables
             */
 
@@ -146,8 +173,26 @@ namespace MobaXtermKG
             foreach ( String folder in folders )
             {
                 if ( File.Exists( folder + app_target_exe ) )
+
+                    #if DEBUG
+                        MessageBox.Show(
+                            string.Format( Lng.msgbox_debug_findpath_env_c1_msg, app_target_exe, folder ),
+                            string.Format( Lng.msgbox_debug_findpath_env_c1_title ),
+                            MessageBoxButtons.OK, MessageBoxIcon.None
+                        );
+                    #endif
+
                     return folder;
                 else if ( File.Exists( folder + "\\" + app_target_exe ) )
+
+                    #if DEBUG
+                        MessageBox.Show(
+                            string.Format( Lng.msgbox_debug_findpath_env_c2_msg, app_target_exe, folder ),
+                            string.Format( Lng.msgbox_debug_findpath_env_c2_title ),
+                            MessageBoxButtons.OK, MessageBoxIcon.None
+                        );
+                    #endif
+
                     return folder + "\\";
             }
 
@@ -224,34 +269,6 @@ namespace MobaXtermKG
                 #endif
 
                 return Path.GetDirectoryName( find_InAppHome );
-            }
-
-
-            /*
-                looks for the portable app
-            */
-
-            string[] drives         = System.IO.Directory.GetFiles( patch_launch_dir, "*MobaXterm_Personal_*.exe");
-            var i_filesFound        = drives.Count( );
-
-            if ( i_filesFound > 0 )
-            {
-                string found    = drives[0];
-                string folder   = Path.GetDirectoryName( found );
-
-                if ( Directory.Exists( folder ) )
-                {
-
-                    #if DEBUG
-                        MessageBox.Show(
-                            string.Format( Lng.msgbox_debug_findpath_msg, app_target_exe, folder ),
-                            string.Format( Lng.msgbox_debug_findpath_title ),
-                            MessageBoxButtons.OK, MessageBoxIcon.None
-                        );
-                    #endif
-
-                    return folder;
-                }
             }
 
             /*
