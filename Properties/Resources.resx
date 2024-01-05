@@ -169,9 +169,6 @@
     <value>ETH</value>
     <comment>Etherium</comment>
   </data>
-  <data name="license_file_inside_mobaxterm" xml:space="preserve">
-    <value>license file which will be placed inside the install path of MobaXterm.</value>
-  </data>
   <data name="mobaxterm_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Materials\mobaxterm_128.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -181,17 +178,39 @@
   <data name="mobaxtgen_cli" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mobaxtgen_cli.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="msgbox_err_generate_noname_msg" xml:space="preserve">
+  <data name="msgbox_debug_callfunc_msg" xml:space="preserve">
+    <value>   {0}</value>
+  </data>
+  <data name="msgbox_debug_callfunc_title" xml:space="preserve">
+    <value>Function Called</value>
+  </data>
+  <data name="msgbox_debug_findpath_msg" xml:space="preserve">
+    <value>Located {0} In:
+
+{1}</value>
+  </data>
+  <data name="msgbox_debug_findpath_ps_msg" xml:space="preserve">
+    <value>Located {0} with Powershell in:
+
+{1}</value>
+  </data>
+  <data name="msgbox_debug_findpath_ps_title" xml:space="preserve">
+    <value>Debug: 1000B</value>
+  </data>
+  <data name="msgbox_debug_findpath_title" xml:space="preserve">
+    <value>Debug: 1000A</value>
+  </data>
+  <data name="msgbox_debug_ps_output_msg" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="msgbox_debug_ps_output_title" xml:space="preserve">
+    <value>Debug: PowerShell Output</value>
+  </data>
+  <data name="msgbox_err_gen_missname_msg" xml:space="preserve">
     <value>Must specify a name for the license key to be generated for.</value>
   </data>
-  <data name="msgbox_err_generate_noname_title" xml:space="preserve">
+  <data name="msgbox_err_gen_missname_title" xml:space="preserve">
     <value>No Name Specified</value>
-  </data>
-  <data name="msgbox_err_libmissing_msg" xml:space="preserve">
-    <value>Cannot locate a required library file:{0}{1}{2}{3}Add the missing library file and restart the program.</value>
-  </data>
-  <data name="msgbox_err_libmissing_title" xml:space="preserve">
-    <value>Fatal Error</value>
   </data>
   <data name="msgbox_err_locate_msg" xml:space="preserve">
     <value>Could not locate {0}. Try placing the keygen file {1} in the same folder as the {0} program executable.
@@ -202,6 +221,21 @@ You'll need to copy/paste the saved {2} file into the MobaXterm installation fol
   </data>
   <data name="msgbox_err_locate_title" xml:space="preserve">
     <value>No valid Path to MobaXterm</value>
+  </data>
+  <data name="msgbox_err_misslib_msg" xml:space="preserve">
+    <value>Cannot locate a required library file:
+   {0}
+
+Add the missing library file and restart the program.</value>
+  </data>
+  <data name="msgbox_err_misslib_title" xml:space="preserve">
+    <value>Fatal Error</value>
+  </data>
+  <data name="msgbox_generate_cancel_msg" xml:space="preserve">
+    <value>License generation has been cancelled.</value>
+  </data>
+  <data name="msgbox_generate_cancel_title" xml:space="preserve">
+    <value>Operation Cancelled</value>
   </data>
   <data name="msgbox_nolocopen_msg" xml:space="preserve">
     <value>Could not find {0}, so I can't open the folder.
@@ -234,11 +268,17 @@ You will be prompted to manually locate MobaXterm.exe. Ensure that MobaXterm is 
   <data name="msgbox_ok_generate_title" xml:space="preserve">
     <value>Generate License File?</value>
   </data>
-  <data name="program_will_generate" xml:space="preserve">
+  <data name="parent_intro_1" xml:space="preserve">
     <value>This program will generate a</value>
+  </data>
+  <data name="parent_intro_3" xml:space="preserve">
+    <value>license file which will be placed inside the install path of MobaXterm.</value>
   </data>
   <data name="question" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Materials\question.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="status_action_generated" xml:space="preserve">
+    <value>License generated.</value>
   </data>
   <data name="status_btn_openfolder" xml:space="preserve">
     <value>Opens the folder where {0} is installed</value>
@@ -251,6 +291,9 @@ You will be prompted to manually locate MobaXterm.exe. Ensure that MobaXterm is 
   </data>
   <data name="status_libmissing" xml:space="preserve">
     <value>Fatal Error: Can't find {0}</value>
+  </data>
+  <data name="status_misslib_critical_fail" xml:space="preserve">
+    <value>Critical error -- restart keygen</value>
   </data>
   <data name="status_txt_name_mouseover" xml:space="preserve">
     <value>Enter name to appear on license (required)</value>

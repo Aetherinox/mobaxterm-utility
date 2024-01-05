@@ -213,15 +213,6 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to license file which will be placed inside the install path of MobaXterm..
-        /// </summary>
-        internal static string license_file_inside_mobaxterm {
-            get {
-                return ResourceManager.GetString("license_file_inside_mobaxterm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon mobaxterm_128 {
@@ -252,38 +243,96 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to    {0}.
+        /// </summary>
+        internal static string msgbox_debug_callfunc_msg {
+            get {
+                return ResourceManager.GetString("msgbox_debug_callfunc_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Function Called.
+        /// </summary>
+        internal static string msgbox_debug_callfunc_title {
+            get {
+                return ResourceManager.GetString("msgbox_debug_callfunc_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Located {0} In:
+        ///
+        ///{1}.
+        /// </summary>
+        internal static string msgbox_debug_findpath_msg {
+            get {
+                return ResourceManager.GetString("msgbox_debug_findpath_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Located {0} with Powershell in:
+        ///
+        ///{1}.
+        /// </summary>
+        internal static string msgbox_debug_findpath_ps_msg {
+            get {
+                return ResourceManager.GetString("msgbox_debug_findpath_ps_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debug: 1000B.
+        /// </summary>
+        internal static string msgbox_debug_findpath_ps_title {
+            get {
+                return ResourceManager.GetString("msgbox_debug_findpath_ps_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debug: 1000A.
+        /// </summary>
+        internal static string msgbox_debug_findpath_title {
+            get {
+                return ResourceManager.GetString("msgbox_debug_findpath_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}.
+        /// </summary>
+        internal static string msgbox_debug_ps_output_msg {
+            get {
+                return ResourceManager.GetString("msgbox_debug_ps_output_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debug: PowerShell Output.
+        /// </summary>
+        internal static string msgbox_debug_ps_output_title {
+            get {
+                return ResourceManager.GetString("msgbox_debug_ps_output_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Must specify a name for the license key to be generated for..
         /// </summary>
-        internal static string msgbox_err_generate_noname_msg {
+        internal static string msgbox_err_gen_missname_msg {
             get {
-                return ResourceManager.GetString("msgbox_err_generate_noname_msg", resourceCulture);
+                return ResourceManager.GetString("msgbox_err_gen_missname_msg", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to No Name Specified.
         /// </summary>
-        internal static string msgbox_err_generate_noname_title {
+        internal static string msgbox_err_gen_missname_title {
             get {
-                return ResourceManager.GetString("msgbox_err_generate_noname_title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cannot locate a required library file:{0}{1}{2}{3}Add the missing library file and restart the program..
-        /// </summary>
-        internal static string msgbox_err_libmissing_msg {
-            get {
-                return ResourceManager.GetString("msgbox_err_libmissing_msg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Fatal Error.
-        /// </summary>
-        internal static string msgbox_err_libmissing_title {
-            get {
-                return ResourceManager.GetString("msgbox_err_libmissing_title", resourceCulture);
+                return ResourceManager.GetString("msgbox_err_gen_missname_title", resourceCulture);
             }
         }
         
@@ -306,6 +355,45 @@ namespace MobaXtermKG.Properties {
         internal static string msgbox_err_locate_title {
             get {
                 return ResourceManager.GetString("msgbox_err_locate_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot locate a required library file:
+        ///   {0}
+        ///
+        ///Add the missing library file and restart the program..
+        /// </summary>
+        internal static string msgbox_err_misslib_msg {
+            get {
+                return ResourceManager.GetString("msgbox_err_misslib_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fatal Error.
+        /// </summary>
+        internal static string msgbox_err_misslib_title {
+            get {
+                return ResourceManager.GetString("msgbox_err_misslib_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License generation has been cancelled..
+        /// </summary>
+        internal static string msgbox_generate_cancel_msg {
+            get {
+                return ResourceManager.GetString("msgbox_generate_cancel_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operation Cancelled.
+        /// </summary>
+        internal static string msgbox_generate_cancel_title {
+            get {
+                return ResourceManager.GetString("msgbox_generate_cancel_title", resourceCulture);
             }
         }
         
@@ -385,9 +473,18 @@ namespace MobaXtermKG.Properties {
         /// <summary>
         ///   Looks up a localized string similar to This program will generate a.
         /// </summary>
-        internal static string program_will_generate {
+        internal static string parent_intro_1 {
             get {
-                return ResourceManager.GetString("program_will_generate", resourceCulture);
+                return ResourceManager.GetString("parent_intro_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to license file which will be placed inside the install path of MobaXterm..
+        /// </summary>
+        internal static string parent_intro_3 {
+            get {
+                return ResourceManager.GetString("parent_intro_3", resourceCulture);
             }
         }
         
@@ -398,6 +495,15 @@ namespace MobaXtermKG.Properties {
             get {
                 object obj = ResourceManager.GetObject("question", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License generated..
+        /// </summary>
+        internal static string status_action_generated {
+            get {
+                return ResourceManager.GetString("status_action_generated", resourceCulture);
             }
         }
         
@@ -434,6 +540,15 @@ namespace MobaXtermKG.Properties {
         internal static string status_libmissing {
             get {
                 return ResourceManager.GetString("status_libmissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Critical error -- restart keygen.
+        /// </summary>
+        internal static string status_misslib_critical_fail {
+            get {
+                return ResourceManager.GetString("status_misslib_critical_fail", resourceCulture);
             }
         }
         

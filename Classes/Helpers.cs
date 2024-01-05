@@ -159,11 +159,13 @@ namespace MobaXtermKG
             if ( File.Exists( find_InProg64 ) )
             {
 
-                MessageBox.Show(
-                    string.Format( "Found match: {0}\n   {1}", "find_InProg64", find_InProg64 ),
-                    Lng.msgbox_ok_generate_finished_title,
-                    MessageBoxButtons.OK, MessageBoxIcon.None
-                );
+                #if DEBUG
+                    MessageBox.Show(
+                        string.Format( Lng.msgbox_debug_findpath_msg, app_target_exe, find_InProg64 ),
+                        string.Format( Lng.msgbox_debug_findpath_title ),
+                        MessageBoxButtons.OK, MessageBoxIcon.None
+                    );
+                #endif
 
                 return Path.GetDirectoryName( find_InProg64 );
             }
@@ -175,11 +177,13 @@ namespace MobaXtermKG
 
             if ( File.Exists( find_InProg86 ) )
             {
-                MessageBox.Show(
-                    string.Format( "Found match: {0}\n   {1}", "find_InProg86", find_InProg86 ),
-                    Lng.msgbox_ok_generate_finished_title,
-                    MessageBoxButtons.OK, MessageBoxIcon.None
-                );
+                #if DEBUG
+                    MessageBox.Show(
+                        string.Format( Lng.msgbox_debug_findpath_msg, app_target_exe, find_InProg86 ),
+                        string.Format( Lng.msgbox_debug_findpath_title ),
+                        MessageBoxButtons.OK, MessageBoxIcon.None
+                    );
+                #endif
 
                 return Path.GetDirectoryName( find_InProg86 );
             }
@@ -192,11 +196,13 @@ namespace MobaXtermKG
             if ( File.Exists( find_InAppData ) )
             {
 
-                MessageBox.Show(
-                    string.Format( "Found match: {0}\n   {1}", "find_InAppData", find_InAppData ),
-                    Lng.msgbox_ok_generate_finished_title,
-                    MessageBoxButtons.OK, MessageBoxIcon.None
-                );
+                #if DEBUG
+                    MessageBox.Show(
+                        string.Format( Lng.msgbox_debug_findpath_msg, app_target_exe, find_InAppData ),
+                        string.Format( Lng.msgbox_debug_findpath_title ),
+                        MessageBoxButtons.OK, MessageBoxIcon.None
+                    );
+                #endif
 
                 return Path.GetDirectoryName( find_InAppData );
             }
@@ -209,13 +215,43 @@ namespace MobaXtermKG
             if ( File.Exists( find_InAppHome ) )
             {
 
-                MessageBox.Show(
-                    string.Format( "Found match: {0}\n   {1}", "find_InAppHome", find_InAppHome ),
-                    Lng.msgbox_ok_generate_finished_title,
-                    MessageBoxButtons.OK, MessageBoxIcon.None
-                );
+                #if DEBUG
+                    MessageBox.Show(
+                        string.Format( Lng.msgbox_debug_findpath_msg, app_target_exe, find_InAppHome ),
+                        string.Format( Lng.msgbox_debug_findpath_title ),
+                        MessageBoxButtons.OK, MessageBoxIcon.None
+                    );
+                #endif
 
                 return Path.GetDirectoryName( find_InAppHome );
+            }
+
+
+            /*
+                looks for the portable app
+            */
+
+            string[] drives         = System.IO.Directory.GetFiles( patch_launch_dir, "*MobaXterm_Personal_*.exe");
+            var i_filesFound        = drives.Count( );
+
+            if ( i_filesFound > 0 )
+            {
+                string found    = drives[0];
+                string folder   = Path.GetDirectoryName( found );
+
+                if ( Directory.Exists( folder ) )
+                {
+
+                    #if DEBUG
+                        MessageBox.Show(
+                            string.Format( Lng.msgbox_debug_findpath_msg, app_target_exe, folder ),
+                            string.Format( Lng.msgbox_debug_findpath_title ),
+                            MessageBoxButtons.OK, MessageBoxIcon.None
+                        );
+                    #endif
+
+                    return folder;
+                }
             }
 
             /*
@@ -237,6 +273,15 @@ namespace MobaXtermKG
 
             if ( File.Exists( target_where ) )
             {
+
+                #if DEBUG
+                    MessageBox.Show(
+                        string.Format( Lng.msgbox_debug_findpath_ps_msg, app_target_exe, target_where ),
+                        string.Format( Lng.msgbox_debug_findpath_ps_title ),
+                        MessageBoxButtons.OK, MessageBoxIcon.None
+                    );
+                #endif
+
                 return Path.GetDirectoryName( target_where );
             }
 
