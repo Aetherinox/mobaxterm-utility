@@ -1,5 +1,5 @@
 <p align="center"><img src="Docs/images/banner.png" width="860"></p>
-<h1 align="center"><b>MobaXterm License Generator</b></h1>
+<h1 align="center"><b>MobaXterm Manager</b></h1>
 
 <div align="center">
 
@@ -7,13 +7,6 @@
 
 </div>
 
----
-
-<br />
-
-Allows you to generate and activate a copy of [MobaXterm](https://mobaxterm.mobatek.net/).
-
-<br />
 
 ---
 
@@ -21,17 +14,30 @@ Allows you to generate and activate a copy of [MobaXterm](https://mobaxterm.moba
 
 # About
 
-Developer holds no responsibility with what people decide to do with this app. It was developed strictly for demonstration purposes only.
+MobaXterm is your ultimate toolbox for remote computing. In a single Windows application, it provides loads of functions that are tailored for programmers, webmasters, IT administrators and pretty much all users who need to handle their remote jobs in a more simple fashion.
+
+MobaXterm provides all the important remote network tools (SSH, X11, RDP, VNC, FTP, MOSH, ...) and Unix commands (bash, ls, cat, sed, grep, awk, rsync, ...) to Windows desktop, in a single portable exe file which works out of the box. More info on supported network protocols
+
+<br />
+
+This utility has been developed to work on the following versions:
+- MobaXterm v23.x
+
+<br />
+
+---
+
+<br />
+
+# Notice
+
+
+Developer holds no responsibility with what people decide to do with this app. It was developed strictly for demonstration purposes only related to software securit and used as an example for presentations.
 Developed under the following conditions:
 
 - Visual Studio 2022 (17.6.5)
 - v4.8.0 .NET Framework
 - C# language
-
-<br />
-
-This generator has been developed to work on the following versions:
-- MobaXterm v23.x
 
 <br />
 
@@ -41,7 +47,7 @@ This generator has been developed to work on the following versions:
 
 # Usage
 
-If you wish to simply use the keygen, head over to the [Releases](https://github.com/Aetherinox/MobaXtermKeygen/releases) section and download the latest binary as a `zip` or `rar`. The download is a single `exe`.
+If you wish to simply use this utility, head over to the [Releases](https://github.com/Aetherinox/MobaXtermKeygen/releases) section and download the latest binary as a `zip` or `rar`. The download is a single `exe`.
 
 - `MobaXtermKG.exe`
 
@@ -99,7 +105,8 @@ I scanned with Windows Defender and it reported that the files are clean.
 
 # Previews
 
-![Main Screen](https://i.imgur.com/GrQETPN.png)
-![Program Unregistered](https://i.imgur.com/IwHfGsO.png)
-![Program Registered](https://i.imgur.com/sSLXAIJ.png)
-![Registered + White theme](https://i.imgur.com/F8NTfb5.png)
+<p align="center"><img style="width: 85%;text-align: center;border: 1px solid #353535;" src="https://i.imgur.com/Tn4OQke.png"></p>
+
+<p align="center"><img style="width: 85%;text-align: center;border: 1px solid #353535;" src="https://i.imgur.com/ypsPzyd.png"></p>
+
+<p align="center"><img style="width: 85%;text-align: center;border: 1px solid #353535;" src="https://i.imgur.com/ufCu3S8.png"></p>
