@@ -200,7 +200,7 @@ namespace MobaXtermKG
             this.txt_Dev_GPG_KeyID.AutoScroll = true;
             this.txt_Dev_GPG_KeyID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.txt_Dev_GPG_KeyID.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(41)))), ((int)(((byte)(99)))));
-            this.txt_Dev_GPG_KeyID.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.txt_Dev_GPG_KeyID.BorderFocusColor = System.Drawing.Color.White;
             this.txt_Dev_GPG_KeyID.BorderSize = 1;
             this.txt_Dev_GPG_KeyID.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txt_Dev_GPG_KeyID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
@@ -226,7 +226,7 @@ namespace MobaXtermKG
             this.txt_Dev_PIV_Thumbprint.AutoScroll = true;
             this.txt_Dev_PIV_Thumbprint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.txt_Dev_PIV_Thumbprint.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(41)))), ((int)(((byte)(99)))));
-            this.txt_Dev_PIV_Thumbprint.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.txt_Dev_PIV_Thumbprint.BorderFocusColor = System.Drawing.Color.White;
             this.txt_Dev_PIV_Thumbprint.BorderSize = 1;
             this.txt_Dev_PIV_Thumbprint.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txt_Dev_PIV_Thumbprint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));

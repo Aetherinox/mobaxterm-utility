@@ -100,7 +100,6 @@ namespace MobaXtermKG.Msgbox
             this.pnl_Buttons.Name = "pnl_Buttons";
             this.pnl_Buttons.Size = new System.Drawing.Size(376, 60);
             this.pnl_Buttons.TabIndex = 1;
-            this.pnl_Buttons.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_Buttons_Paint);
             this.pnl_Buttons.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnl_Buttons_MouseDown);
             // 
             // btn_3
@@ -177,7 +176,7 @@ namespace MobaXtermKG.Msgbox
             this.lbl_Message.TabIndex = 1;
             this.lbl_Message.Text = "This is a notification message";
             this.lbl_Message.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lbl_Message.Click += new System.EventHandler(this.lbl_Message_Click);
+            this.lbl_Message.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lbl_Message_MouseDown);
             // 
             // img_Icon
             // 

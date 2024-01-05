@@ -453,19 +453,10 @@ namespace MobaXtermKG.Msgbox
                 SendMessage( this.Handle, 0x112, 0xf012, 0 );
             }
 
-        #endregion
-
-        #region "Element: Message"
-
-            private void lbl_Message_Click(object sender, EventArgs e) { }
-
-        #endregion
-
-        #region "Panel: Buttons"
-
-            private void pnl_Buttons_Paint(object sender, PaintEventArgs e)
+            private void lbl_Message_MouseDown( object sender, MouseEventArgs e )
             {
-
+                ReleaseCapture( );
+                SendMessage( this.Handle, 0x112, 0xf012, 0 );
             }
 
         #endregion

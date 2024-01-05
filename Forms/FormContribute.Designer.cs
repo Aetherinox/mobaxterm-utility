@@ -88,7 +88,7 @@
             this.txt_BTC.AutoScroll = true;
             this.txt_BTC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
             this.txt_BTC.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(41)))), ((int)(((byte)(99)))));
-            this.txt_BTC.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.txt_BTC.BorderFocusColor = System.Drawing.Color.White;
             this.txt_BTC.BorderSize = 1;
             this.txt_BTC.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txt_BTC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
@@ -97,7 +97,7 @@
             this.txt_BTC.Multiline = false;
             this.txt_BTC.MultilineScrollbars = false;
             this.txt_BTC.Name = "txt_BTC";
-            this.txt_BTC.Padding = new System.Windows.Forms.Padding(36, 6, 6, 6);
+            this.txt_BTC.Padding = new System.Windows.Forms.Padding(40, 6, 6, 6);
             this.txt_BTC.PasswordChar = false;
             this.txt_BTC.PlaceholderColor = System.Drawing.Color.DarkGray;
             this.txt_BTC.PlaceholderText = "";
@@ -130,7 +130,7 @@
             this.txt_ETH.AutoScroll = true;
             this.txt_ETH.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
             this.txt_ETH.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(41)))), ((int)(((byte)(99)))));
-            this.txt_ETH.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.txt_ETH.BorderFocusColor = System.Drawing.Color.White;
             this.txt_ETH.BorderSize = 1;
             this.txt_ETH.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txt_ETH.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
@@ -139,7 +139,7 @@
             this.txt_ETH.Multiline = false;
             this.txt_ETH.MultilineScrollbars = false;
             this.txt_ETH.Name = "txt_ETH";
-            this.txt_ETH.Padding = new System.Windows.Forms.Padding(36, 6, 6, 6);
+            this.txt_ETH.Padding = new System.Windows.Forms.Padding(40, 6, 6, 6);
             this.txt_ETH.PasswordChar = false;
             this.txt_ETH.PlaceholderColor = System.Drawing.Color.DarkGray;
             this.txt_ETH.PlaceholderText = "";
@@ -156,7 +156,7 @@
             this.txt_BCH.AutoScroll = true;
             this.txt_BCH.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
             this.txt_BCH.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(41)))), ((int)(((byte)(99)))));
-            this.txt_BCH.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.txt_BCH.BorderFocusColor = System.Drawing.Color.White;
             this.txt_BCH.BorderSize = 1;
             this.txt_BCH.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txt_BCH.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
@@ -165,7 +165,7 @@
             this.txt_BCH.Multiline = false;
             this.txt_BCH.MultilineScrollbars = false;
             this.txt_BCH.Name = "txt_BCH";
-            this.txt_BCH.Padding = new System.Windows.Forms.Padding(36, 6, 6, 6);
+            this.txt_BCH.Padding = new System.Windows.Forms.Padding(40, 6, 6, 6);
             this.txt_BCH.PasswordChar = false;
             this.txt_BCH.PlaceholderColor = System.Drawing.Color.DarkGray;
             this.txt_BCH.PlaceholderText = "";
