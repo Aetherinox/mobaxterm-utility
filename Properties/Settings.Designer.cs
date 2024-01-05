@@ -25,7 +25,7 @@ namespace MobaXtermKG.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("23.5")]
+        [global::System.Configuration.DefaultSettingValueAttribute("23.6")]
         public string app_def_version {
             get {
                 return ((string)(this["app_def_version"]));
@@ -80,9 +80,9 @@ namespace MobaXtermKG.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("MobaXterm.exe")]
-        public string src_res_moba_exe {
+        public string app_mobaxterm_exe {
             get {
-                return ((string)(this["src_res_moba_exe"]));
+                return ((string)(this["app_mobaxterm_exe"]));
             }
         }
         

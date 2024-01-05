@@ -57,7 +57,7 @@ namespace MobaXtermKG.Controls
         }
 
         //Properties
-        [Category("Aetherx UI")]
+        [ Category( "Aetherx UI" ) ]
         public Color ChannelColor
         {
             get { return channelColor; }
@@ -68,7 +68,7 @@ namespace MobaXtermKG.Controls
             }
         }
 
-        [Category("Aetherx UI")]
+        [ Category( "Aetherx UI" ) ]
         public Color SliderColor
         {
             get { return sliderColor; }
@@ -79,7 +79,7 @@ namespace MobaXtermKG.Controls
             }
         }
 
-        [Category("Aetherx UI")]
+        [ Category( "Aetherx UI" ) ]
         public Color TabBackColor
         {
             get { return tabBackColor; }
@@ -90,7 +90,7 @@ namespace MobaXtermKG.Controls
             }
         }
 
-        [Category("Aetherx UI")]
+        [ Category( "Aetherx UI" ) ]
         public int ChannelHeight
         {
             get { return channelHeight; }
@@ -101,7 +101,7 @@ namespace MobaXtermKG.Controls
             }
         }
 
-        [Category("Aetherx UI")]
+        [ Category( "Aetherx UI" ) ]
         public int SliderHeight
         {
             get { return sliderHeight; }
@@ -112,7 +112,7 @@ namespace MobaXtermKG.Controls
             }
         }
 
-        [Category("Aetherx UI")]
+        [ Category( "Aetherx UI" ) ]
         public TextPosition ShowValue
         {
             get { return showValue; }
@@ -123,7 +123,7 @@ namespace MobaXtermKG.Controls
             }
         }
 
-        [Category("Aetherx UI")]
+        [ Category( "Aetherx UI" ) ]
         public string SymbolBefore
         {
             get { return symbolBefore; }
@@ -134,7 +134,7 @@ namespace MobaXtermKG.Controls
             }
         }
 
-        [Category("Aetherx UI")]
+        [ Category( "Aetherx UI" ) ]
         public string SymbolAfter
         {
             get { return symbolAfter; }
@@ -145,7 +145,7 @@ namespace MobaXtermKG.Controls
             }
         }
 
-        [Category("Aetherx UI")]
+        [ Category( "Aetherx UI" ) ]
         public bool ShowMaximun
         {
             get { return showMaximun; }
@@ -156,7 +156,7 @@ namespace MobaXtermKG.Controls
             }
         }
 
-        [Category("Aetherx UI")]
+        [ Category( "Aetherx UI" ) ]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         public override Font Font
@@ -168,7 +168,7 @@ namespace MobaXtermKG.Controls
             }
         }
 
-        [Category("Aetherx UI")]
+        [ Category( "Aetherx UI" ) ]
         public override Color ForeColor
         {
             get { return base.ForeColor; }

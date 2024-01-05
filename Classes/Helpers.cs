@@ -7,6 +7,9 @@ using System.Globalization;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
 using System.Windows.Forms;
+using System.Management.Automation.Runspaces;
+using Lng = MobaXtermKG.Properties.Resources;
+using Cfg = MobaXtermKG.Properties.Settings;
 
 [AttributeUsage(AttributeTargets.Assembly)]
 internal class BuildDateAttribute : Attribute
@@ -29,26 +32,208 @@ namespace MobaXtermKG
     class Helpers
     {
 
-        readonly string app_base_path = AppDomain.CurrentDomain.BaseDirectory;
+        readonly string app_base_path           = AppDomain.CurrentDomain.BaseDirectory;
+        private static string patch_launch_dir  = System.IO.Path.GetDirectoryName( System.Reflection.Assembly.GetEntryAssembly( ).Location );
+        private static string app_target_exe    = Cfg.Default.app_mobaxterm_exe;
 
-        public delegate void ExceutionHandler(int value);
-        public class UpdateDataProgress
+        /*
+             StartIsBack Search Locations
+        */
+
+        private static string find_InAppData    = Path.Combine(
+                                                    Environment.GetFolderPath( Environment.SpecialFolder.LocalApplicationData ),
+                                                    "Mobatek\\MobaXterm",
+                                                    app_target_exe
+                                                );
+
+        private static string find_InProg64     = Path.Combine(
+                                                    Environment.GetFolderPath( Environment.SpecialFolder.ProgramFiles ),
+                                                    "Mobatek\\MobaXterm",
+                                                    app_target_exe
+                                                );
+
+        private static string find_InProg86     = Path.Combine(
+                                                    Environment.GetFolderPath( Environment.SpecialFolder.ProgramFilesX86 ),
+                                                    "Mobatek\\MobaXterm",
+                                                    app_target_exe
+                                                );
+
+        private static string find_InAppHome    = Path.Combine(
+                                                    patch_launch_dir,
+                                                    app_target_exe
+                                                );
+
+        public string FindAppSearchList()
         {
-            public event ExceutionHandler ExecutionDone;
-            public void ExecuteFucntion()
+
+            /*
+                define arrays
+            */
+
+            string[] paths_lst      = new string[] { };
+
+        /*
+            populate path list array
+        */
+
+            Array.Resize( ref paths_lst, paths_lst.Length + 1 );
+            paths_lst [ paths_lst.Length - 1 ] = find_InAppData;
+
+            Array.Resize( ref paths_lst, paths_lst.Length + 1 );
+            paths_lst [ paths_lst.Length - 1 ] = find_InProg64;
+
+            Array.Resize( ref paths_lst, paths_lst.Length + 1 );
+            paths_lst [ paths_lst.Length - 1 ] = find_InProg86;
+
+            Array.Resize( ref paths_lst, paths_lst.Length + 1 );
+            paths_lst [ paths_lst.Length - 1 ] = find_InAppHome;
+
+            string path_compiled    = "";
+            StringBuilder sb        = new StringBuilder( );
+
+            sb.Append( Environment.NewLine );
+
+            foreach ( string file in paths_lst )
             {
-                for (int i = 0; i < 100; i++)
-                {
-                    //  raise an event which will have current i 
-                    //  to indicate current state of execution
-                    //  use this event to update progress bar 
+                sb.Append( file );
+                sb.Append( Environment.NewLine );
+                sb.Append( Environment.NewLine );
 
-                    if (ExecutionDone != null)
-                        ExecutionDone(i);
-                }
-
+                path_compiled = sb.ToString( );
             }
+
+            return path_compiled;
+
         }
+
+
+        /*
+            Find App
+
+            find target application
+
+            A file will be checked in the following order:
+                -   Windows Environment Variable PATH
+                -   C:\Program Files
+                -   C:\Program Files (x86)
+                -   C:\Users\$USER\AppData\Local
+                -   Patcher exe directory (Where the patcher was executed from)
+                -   Powershell where command
+
+            @return     str | directory name
+        */
+
+        public string FindApp( )
+        {
+
+            /*
+                Check for path inside Windows Environment Variables
+            */
+
+            String path         = Environment.GetEnvironmentVariable( "path" );
+            String[] folders    = path.Split( ';' );
+
+            foreach ( String folder in folders )
+            {
+                if ( File.Exists( folder + app_target_exe ) )
+                    return folder;
+                else if ( File.Exists( folder + "\\" + app_target_exe ) )
+                    return folder + "\\";
+            }
+
+            /*
+                Program files 64
+                    C:\Program Files
+            */
+
+            if ( File.Exists( find_InProg64 ) )
+            {
+
+                MessageBox.Show(
+                    string.Format( "Found match: {0}\n   {1}", "find_InProg64", find_InProg64 ),
+                    Lng.msgbox_ok_generate_finished_title,
+                    MessageBoxButtons.OK, MessageBoxIcon.None
+                );
+
+                return Path.GetDirectoryName( find_InProg64 );
+            }
+
+            /*
+                Program files 86
+                    C:\Program Files (x86)
+            */
+
+            if ( File.Exists( find_InProg86 ) )
+            {
+                MessageBox.Show(
+                    string.Format( "Found match: {0}\n   {1}", "find_InProg86", find_InProg86 ),
+                    Lng.msgbox_ok_generate_finished_title,
+                    MessageBoxButtons.OK, MessageBoxIcon.None
+                );
+
+                return Path.GetDirectoryName( find_InProg86 );
+            }
+
+            /*
+                AppData
+                    C:\Users\$USER\AppData\Local
+            */
+
+            if ( File.Exists( find_InAppData ) )
+            {
+
+                MessageBox.Show(
+                    string.Format( "Found match: {0}\n   {1}", "find_InAppData", find_InAppData ),
+                    Lng.msgbox_ok_generate_finished_title,
+                    MessageBoxButtons.OK, MessageBoxIcon.None
+                );
+
+                return Path.GetDirectoryName( find_InAppData );
+            }
+
+            /*
+               Patcher exe folder
+                    This is where the exe patcher resides
+            */
+
+            if ( File.Exists( find_InAppHome ) )
+            {
+
+                MessageBox.Show(
+                    string.Format( "Found match: {0}\n   {1}", "find_InAppHome", find_InAppHome ),
+                    Lng.msgbox_ok_generate_finished_title,
+                    MessageBoxButtons.OK, MessageBoxIcon.None
+                );
+
+                return Path.GetDirectoryName( find_InAppHome );
+            }
+
+            /*
+                Last Resort
+                    Utilize powershell get-command to see if application is installed
+                    Will compile powershell to run the command:
+                        (get-command Application.exe).Path
+            */
+
+            string ps_query         = "(get-command " + app_target_exe + ").Path";
+            string ps_result        = PowershellQ( ps_query );
+            ps_result               = ps_result.Replace( @"\", @"\\" ).Replace( @"""", @"\""" );
+            string target_where     = null;
+
+            using ( var reader = new StringReader( ps_result ) )
+            {
+                target_where = @reader.ReadLine( );
+            }
+
+            if ( File.Exists( target_where ) )
+            {
+                return Path.GetDirectoryName( target_where );
+            }
+
+            return String.Empty;
+        }
+
+        # region "FindApp: Deprecated"
 
         /*
             Find App
@@ -60,24 +245,24 @@ namespace MobaXtermKG
             then check where we "think" it may be.
         */
 
-        public string FindApp(String filename)
+        public string __FindApp_Deprecated( String filename )
         {
 
-            String default_path64 = @"C:\Program Files\Mobatek\MobaXterm\";
-            String default_path86 = @"C:\Program Files (x86)\Mobatek\MobaXterm\";
+            String default_path64   = @"C:\Program Files\Mobatek\MobaXterm\";
+            String default_path86   = @"C:\Program Files (x86)\Mobatek\MobaXterm\";
 
             /*
                 this code looks in the base directory of the keygen folder to see if the mobaxterm (portable) exe file exists
                 and opens the folder in explorer.exe
             */
 
-            string[] drives = System.IO.Directory.GetFiles(app_base_path, "*mobaxterm*.exe");
-            var i_filesFound = drives.Count();
+            string[] drives         = System.IO.Directory.GetFiles(app_base_path, "*mobaxterm*.exe");
+            var i_filesFound        = drives.Count();
 
             if (i_filesFound > 0)
             {
-                string found = drives[0];
-                string folder = Path.GetDirectoryName(found);
+                string found    = drives[ 0 ];
+                string folder   = Path.GetDirectoryName(found);
 
                 if (Directory.Exists(folder))
                 {
@@ -89,8 +274,9 @@ namespace MobaXtermKG
                 Windows env variables
             */
 
-            String path = Environment.GetEnvironmentVariable("path");
-            String[] folders = path.Split(';');
+            String path         = Environment.GetEnvironmentVariable("path");
+            String[] folders    = path.Split(';');
+
             foreach (String folder in folders)
             {
                 if (File.Exists(folder + filename))
@@ -131,7 +317,7 @@ namespace MobaXtermKG
                 Utilize powershell get-command to see if mobaxterm is installed
             */
 
-            string src_targ_exe     = Properties.Settings.Default.src_res_moba_exe;
+            string src_targ_exe     = Cfg.Default.app_mobaxterm_exe;
             string ps_query         = "(get-command " + src_targ_exe + ").Path";
             string ps_result        = PowershellQ(ps_query);
             ps_result               = ps_result.Replace(@"\", @"\\").Replace(@"""", @"\""");
@@ -148,18 +334,18 @@ namespace MobaXtermKG
             }
 
             /*
-                Give the user one last change to manually define where the program executable is at.
+                Give the user one last chance to manually define where the program executable is at.
                 If this doesnt work, something has gone wrong or the program is not installed at all.
             */
 
-            SaveFileDialog dlg = new SaveFileDialog();
+            SaveFileDialog dlg      = new SaveFileDialog();
 
-            dlg.FileName = "Custom";
-            dlg.Title = "Save License File";
-            dlg.CheckPathExists = true;
-            dlg.InitialDirectory = app_base_path;
-            dlg.DefaultExt = "mxtpro";
-            dlg.Filter = @"MobaXterm License (*.mxtpro)|*.mxtpro|All files (*.*)|*.*";
+            dlg.FileName            = "Custom";
+            dlg.Title               = "Save License File";
+            dlg.CheckPathExists     = true;
+            dlg.InitialDirectory    = app_base_path;
+            dlg.DefaultExt          = "mxtpro";
+            dlg.Filter              = @"MobaXterm License (*.mxtpro)|*.mxtpro|All files (*.*)|*.*";
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
@@ -174,21 +360,46 @@ namespace MobaXtermKG
             return String.Empty;
         }
 
-        /*
-            return ProgramFiles86
+        #endregion
 
-            different way of checking for 32 vs 64 bit OS. Need it for special purposes VS the built-in functions.
+        /*
+            ProgramFiles directory
+                different way of checking for 32 vs 64 bit OS. Need it for special purposes VS the built-in functions.
+
+            IntPtr.Size
+                4   = 32-bit
+                8   = 64-bit
+
+            @return     : str
         */
 
-        public static string ProgramFilesx86()
+        public static string ProgramFiles( )
         {
-            if (8 == IntPtr.Size
-                || (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432"))))
-            {
-                return Environment.GetEnvironmentVariable("ProgramFiles(x86)");
-            }
+            if ( 4 == IntPtr.Size || ( !String.IsNullOrEmpty( Environment.GetEnvironmentVariable( "PROCESSOR_ARCHITEW6432" ) ) ) )
+                return Environment.GetEnvironmentVariable( "ProgramFiles(x86)" );
 
-            return Environment.GetEnvironmentVariable("ProgramFiles");
+            return Environment.GetEnvironmentVariable( "ProgramFiles" );
+        }
+
+        /*
+            ProgramFiles64 directory
+
+            @return     : str
+        */
+
+        public static string ProgramFilesx64( )
+        {
+            return Environment.GetEnvironmentVariable( "ProgramFiles" );
+        }
+
+
+        /*
+            return ProgramFiles86 directory
+        */
+
+        public static string ProgramFilesx86( )
+        {
+            return Environment.GetEnvironmentVariable( "ProgramFiles(x86)" );
         }
 
         /*
@@ -265,41 +476,126 @@ namespace MobaXtermKG
             return attribute?.DateTime ?? default(DateTime);
         }
 
-        public string PowershellQ(string query)
+        /*
+            Execute powershell query
+            checks to see if a target file has been signed with x509 cert
+
+            @param      : str query
+            @return     : str
+        */
+
+        public string PowershellQ( string query )
         {
-            using (PowerShell ps = PowerShell.Create())
+            using ( PowerShell ps = PowerShell.Create( ) )
             {
-                // Source functions
-                ps.AddScript(query);
 
-                // invoke execution on pipeline (collect output)
-                Collection<PSObject> PSOutput = ps.Invoke();
+                ps.AddScript( query );
 
-                // new string
-                StringBuilder sb = new StringBuilder();
+                Collection<PSObject> PSOutput = ps.Invoke( );
+                StringBuilder sb = new StringBuilder( );
 
-                // loop through each output object item
-                foreach (PSObject outputItem in PSOutput)
+                foreach ( PSObject PSItem in PSOutput )
                 {
-                    // if null object dumped to pipeline during script execution; then a null object may be present here
-                    if (outputItem != null)
+                    if ( PSItem != null )
                     {
-                        #if DEBUG
-                            Console.WriteLine($"Output line: [{outputItem}]");
-                        #endif
-
-                        sb.AppendLine(outputItem.ToString());
+                        Console.WriteLine( $"Output line: [{PSItem}]" );
+                        sb.AppendLine( PSItem.ToString( ) );
                     }
                 }
 
-                // error stream
-                if (ps.Streams.Error.Count > 0)
+                if ( ps.Streams.Error.Count > 0 )
                 {
                     // Error collection
                 }
 
-                return sb.ToString();
+                return sb.ToString( );
             }
         }
+
+        /*
+            x509 > File Is Signed
+            checks to see if a target file has been signed with x509 cert
+
+            @param      : str filepath
+            @return     : bool
+        */
+
+        public static bool x509_FileSigned( string filepath )
+        {
+            var runeConfig = RunspaceConfiguration.Create( );
+            using ( var rune = RunspaceFactory.CreateRunspace( runeConfig ) )
+            {
+                rune.Open( );
+                using ( var pipe = rune.CreatePipeline())
+                {
+                    string cmd_exe      = "Get-AuthenticodeSignature \"" + filepath + "\"";
+                    pipe.Commands.AddScript( cmd_exe );
+                    var results         = pipe.Invoke();
+                    rune.Close          ( );
+ 
+                    var sig             = results[ 0 ].BaseObject as Signature;
+
+                    return sig == null || sig.SignerCertificate == null ? false : ( sig.Status != SignatureStatus.NotSigned );
+                }
+            }
+        }
+
+        /*
+            x509 > Thumbprint
+            returns the thumbprint for a target file if signed with x509 cert.
+
+            @param      : str filepath
+            @return     : str
+        */
+
+        public string x509_Thumbprint( string filepath )
+        {
+            if ( Helpers.x509_FileSigned( filepath ) )
+            {
+
+                var runeConfig = RunspaceConfiguration.Create( );
+                using ( var rune = RunspaceFactory.CreateRunspace( runeConfig ) )
+                {
+                    rune.Open( );
+                    using ( var pipe = rune.CreatePipeline( ) )
+                    {
+                        string cmd_exe      = "Get-AuthenticodeSignature \"" + filepath + "\"";
+                        pipe.Commands.AddScript( cmd_exe );
+                        var results         = pipe.Invoke( );
+                        rune.Close          ( );
+ 
+                        var sig             = results[ 0 ].BaseObject as Signature;
+
+                        if ( sig != null ) 
+                            return sig.SignerCertificate.GetCertHashString( );
+
+                        return "1";
+                    }
+                }
+            }
+
+            return "0";
+        }
+
+        /*
+            Validate Executables
+            returns if a target file is an executable.
+            All executables begin with "MZ" or the hexadecimal "4D 5A"
+
+            @param      : str filepath
+            @return     : bool
+        */
+
+        public bool IsExeFile( string filepath )
+        {
+            var bytesBegin = new byte[ 2 ];
+            using( var fs = File.Open( filepath, FileMode.Open ) )
+            {
+                fs.Read( bytesBegin, 0, 2 );
+            }
+
+            return Encoding.UTF8.GetString( bytesBegin ) == "MZ";
+        }
+
     }
 }

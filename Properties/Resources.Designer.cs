@@ -108,6 +108,36 @@ namespace MobaXtermKG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bch {
+            get {
+                object obj = ResourceManager.GetObject("bch", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bg_header {
+            get {
+                object obj = ResourceManager.GetObject("bg_header", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap btc {
+            get {
+                object obj = ResourceManager.GetObject("btc", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap chat {
             get {
                 object obj = ResourceManager.GetObject("chat", resourceCulture);
@@ -121,6 +151,16 @@ namespace MobaXtermKG.Properties {
         internal static System.Drawing.Bitmap error {
             get {
                 object obj = ResourceManager.GetObject("error", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap eth {
+            get {
+                object obj = ResourceManager.GetObject("eth", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -142,6 +182,33 @@ namespace MobaXtermKG.Properties {
             get {
                 object obj = ResourceManager.GetObject("information", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BCH.
+        /// </summary>
+        internal static string lbl_contrib_bch {
+            get {
+                return ResourceManager.GetString("lbl_contrib_bch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BTC.
+        /// </summary>
+        internal static string lbl_contrib_btc {
+            get {
+                return ResourceManager.GetString("lbl_contrib_btc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ETH.
+        /// </summary>
+        internal static string lbl_contrib_eth {
+            get {
+                return ResourceManager.GetString("lbl_contrib_eth", resourceCulture);
             }
         }
         
@@ -221,7 +288,9 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find a valid location to place the license. Try placing the keygen exe in the same folder as the MobaXterm program executable.{0}{1}Did you install MobaXterm on your computer?.
+        ///   Looks up a localized string similar to Could not locate file {0}. Try placing the keygen file {1} in the same folder as the {0} program executable.
+        ///
+        ///The next dialog will allow you to simply save the license file {2}, however, you&apos;ll have to copy/paste the file and manually place it in the MobaXterm installation folder..
         /// </summary>
         internal static string msgbox_err_locate_msg {
             get {
@@ -235,6 +304,41 @@ namespace MobaXtermKG.Properties {
         internal static string msgbox_err_locate_title {
             get {
                 return ResourceManager.GetString("msgbox_err_locate_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not find {0}, so I can&apos;t open the folder.
+        ///
+        ///If you&apos;re sure it is installed, run the patcher and it will allow you to select the location. 
+        ///
+        ///The following locations were searched:
+        ///{1}.
+        /// </summary>
+        internal static string msgbox_nolocopen_msg {
+            get {
+                return ResourceManager.GetString("msgbox_nolocopen_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Not Found.
+        /// </summary>
+        internal static string msgbox_nolocopen_title {
+            get {
+                return ResourceManager.GetString("msgbox_nolocopen_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Patcher cannot determine where MobaXterm is installed
+        ///Tried looking in {0}
+        ///
+        ///You will be prompted to manually locate MobaXterm.exe. Ensure that MobaXterm is installed on your system..
+        /// </summary>
+        internal static string msgbox_nolocpath_msg {
+            get {
+                return ResourceManager.GetString("msgbox_nolocpath_msg", resourceCulture);
             }
         }
         
@@ -294,6 +398,15 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Key generation cancelled by user.
+        /// </summary>
+        internal static string status_diag_cancelled {
+            get {
+                return ResourceManager.GetString("status_diag_cancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Opens the folder where Mobaxterm is installed.
         /// </summary>
         internal static string statusbar_btn_openfolder {
@@ -344,6 +457,15 @@ namespace MobaXtermKG.Properties {
         internal static string statusbar_txt_version_mouseover {
             get {
                 return ResourceManager.GetString("statusbar_txt_version_mouseover", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I do this because I enjoy giving back, and I&apos;m not looking to make a profit off my work. However, donations would help immensely for one purpose -- purchasing libraries and other commercial products which have insane licensing systems. These types of products would make life much easier and get releases pumped out on a more regular basis. Don&apos;t feel obligated, this is just &quot;if you can&quot;. My main goal is better tools..
+        /// </summary>
+        internal static string txt_contrib_intro {
+            get {
+                return ResourceManager.GetString("txt_contrib_intro", resourceCulture);
             }
         }
     }

@@ -4,9 +4,6 @@
 # Add Gitignore
 !.gitignore
 
-# Allow: Docs
-!/Docs*
-
 # Bin
 !/bin
 /bin/Debug/*

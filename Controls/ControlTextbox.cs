@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 /*
 
@@ -32,25 +33,34 @@ namespace MobaXtermKG
             Fields
         */
 
-        private Color borderColor = Color.MediumSlateBlue;
-        private int borderSize = 1;
-        private bool underlineStyle = false;
-        private Color borderFocusColor = Color.HotPink;
-        private bool isFocused = false;
-        private bool bAllowFocus = true;
-        private Color placeholderColor = Color.DarkGray;
-        private string placeholderText = "";
-        public bool isPlaceholder = false;
-        private bool isPasswordChar = false;
+        private Color borderColor           = Color.MediumSlateBlue;
+        private int borderSize              = 1;
+        private bool underlineStyle         = false;
+        private Color borderFocusColor      = Color.HotPink;
+        private bool bAllowFocus            = true;
+        private bool isFocused              = false;
+        private bool bEnableScrollbars      = true;
+        private Color placeholderColor      = Color.DarkGray;
+        private string placeholderText      = "";
+        public bool isPlaceholder           = false;
+        private bool isPasswordChar         = false;
 
         /*
             Constructor
         */
 
-        public AetherxTextBox()
+        public AetherxTextBox( )
         {
-            InitializeComponent();
+            InitializeComponent( );
+
+            Selectable              = true;
+            this.ActiveControl      = null;
+            this.Padding            = new System.Windows.Forms.Padding( 3, 3, 3, 3 );
         }
+
+
+        const int WM_SETFOCUS       = 0x0007;
+        const int WM_KILLFOCUS      = 0x0008;
 
         /*
             Events
@@ -59,10 +69,85 @@ namespace MobaXtermKG
         public event EventHandler _TextChanged;
 
         /*
+            Properties > Scrollbars
+        */
+
+        /*
+        [
+            Category    ( "Aetherx" ),
+            Description ( "Display scrollbars if text box set to Multiline" ),
+        ] 
+
+        public enum ArrowColor { Red, Green, Magenta, Pink, Orange, Black, Yellow };
+        private ArrowColor _foreColor;
+
+        [ Browsable( true ) ]
+        public ArrowColor ArrowColr
+        {
+            get { return _foreColor; }
+            set { _foreColor = value; }
+        }
+        */
+
+        /*
+            Enables or disables selection highlight. 
+            If you set `Selectable` to `false` then the selection highlight will be disabled.
+
+            enabled by default.
+        */
+
+        [
+            Category    ( "Aetherx" ),
+            Description ( "Display scrollbars if text box set to Multiline" ),
+        ] 
+
+        public bool Selectable { get; set; }
+
+        protected override void WndProc( ref Message m )
+        {
+            if ( m.Msg == WM_SETFOCUS && !Selectable )
+            {
+                m.Msg           = WM_KILLFOCUS;
+                this.Cursor     = Cursors.Default;
+            }
+
+            base.WndProc( ref m );
+        }
+
+        /*
+            Properties > Scrollbars
+        */
+
+        [
+            Category    ( "Aetherx" ),
+            Description ( "Display scrollbars if text box set to Multiline" ),
+        ] 
+
+        public bool MultilineScrollbars
+        {
+            get
+            {
+                return bEnableScrollbars;
+            }
+
+            set
+            {
+                bEnableScrollbars = value;
+
+                if ( bEnableScrollbars )
+                    textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+                else if ( !bEnableScrollbars )
+                    textBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
+
+                UpdateControlHeight( );
+            }
+        }
+
+        /*
             Properties > Border Color
         */
 
-        [Category("Aetherx UI")]
+        [ Category( "Aetherx" ) ]
         public Color BorderColor
         {
             get
@@ -73,7 +158,7 @@ namespace MobaXtermKG
             set
             {
                 borderColor = value;
-                this.Invalidate();
+                this.Invalidate( );
             }
         }
 
@@ -81,7 +166,7 @@ namespace MobaXtermKG
             Properties > Border Size
         */
 
-        [Category("Aetherx UI")]
+        [ Category( "Aetherx" ) ]
         public int BorderSize
         {
             get
@@ -92,7 +177,7 @@ namespace MobaXtermKG
             set
             {
                 borderSize = value;
-                this.Invalidate();
+                this.Invalidate( );
             }
         }
 
@@ -100,7 +185,7 @@ namespace MobaXtermKG
             Properties > Underline Style
         */
 
-        [Category("Aetherx UI")]
+        [ Category( "Aetherx" ) ]
         public bool UnderlineStyle
         {
             get
@@ -111,7 +196,7 @@ namespace MobaXtermKG
             set
             {
                 underlineStyle = value;
-                this.Invalidate();
+                this.Invalidate( );
             }
         }
 
@@ -119,7 +204,7 @@ namespace MobaXtermKG
             Properties > Password Char
         */
 
-        [Category("Aetherx UI")]
+        [ Category( "Aetherx" ) ]
         public bool PasswordChar
         {
             get { return isPasswordChar; }
@@ -134,7 +219,7 @@ namespace MobaXtermKG
             Properties > Multiline
         */
 
-        [Category("Aetherx UI")]
+        [ Category( "Aetherx" ) ]
         public bool Multiline
         {
             get
@@ -145,8 +230,17 @@ namespace MobaXtermKG
             set
             {
                 textBox1.Multiline = value;
-                textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-                UpdateControlHeight();
+
+                if ( bEnableScrollbars == true )
+                {
+                    textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+                }
+                else if ( bEnableScrollbars == false )
+                {
+                    textBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
+                }
+
+                UpdateControlHeight( );
             }
         }
 
@@ -154,7 +248,7 @@ namespace MobaXtermKG
             Properties > Readonly
         */
 
-        [Category("Aetherx UI")]
+        [Category("Aetherx")]
         public bool ReadOnly
         {
             get
@@ -172,7 +266,7 @@ namespace MobaXtermKG
             Properties > Background Color
         */
 
-        [Category("Aetherx UI")]
+        [Category("Aetherx")]
         public override Color BackColor
         {
             get
@@ -182,8 +276,8 @@ namespace MobaXtermKG
 
             set
             {
-                base.BackColor = value;
-                textBox1.BackColor = value;
+                base.BackColor      = value;
+                textBox1.BackColor  = value;
             }
         }
 
@@ -191,7 +285,7 @@ namespace MobaXtermKG
             Properties > Foreground Color
         */
 
-        [Category("Aetherx UI")]
+        [Category("Aetherx")]
         public override Color ForeColor
         {
             get
@@ -201,8 +295,8 @@ namespace MobaXtermKG
 
             set
             {
-                base.ForeColor = value;
-                textBox1.ForeColor = value;
+                base.ForeColor      = value;
+                textBox1.ForeColor  = value;
             }
         }
 
@@ -210,7 +304,7 @@ namespace MobaXtermKG
             Properties > Font
         */
 
-        [Category("Aetherx UI")]
+        [Category("Aetherx")]
         public override Font Font
         {
             get
@@ -220,11 +314,12 @@ namespace MobaXtermKG
 
             set
             {
-                base.Font = value;
-                textBox1.Font = value;
+                base.Font       = value;
+                textBox1.Font   = value;
+
                 if (this.DesignMode)
                 {
-                    UpdateControlHeight();
+                    UpdateControlHeight( );
                 }
             }
         }
@@ -233,12 +328,12 @@ namespace MobaXtermKG
             Properties > Value (replaces Text)
         */
 
-        [Category("Aetherx UI")]
+        [Category("Aetherx")]
         public string Value
         {
             get
             {
-                if (isPlaceholder)
+                if ( isPlaceholder )
                     return "";
                 else
                     return textBox1.Text;
@@ -247,7 +342,7 @@ namespace MobaXtermKG
             set
             {
                 textBox1.Text = value;
-                SetPlaceholder();
+                SetPlaceholder( );
             }
         }
 
@@ -268,7 +363,7 @@ namespace MobaXtermKG
             Properties > Allow Focus
         */
 
-        [Category("Aetherx UI")]
+        [Category("Aetherx")]
         public bool AllowFocus
         {
             get
@@ -286,7 +381,7 @@ namespace MobaXtermKG
             Properties > Focus Border Color
         */
 
-        [Category("Aetherx UI")]
+        [Category("Aetherx")]
         public Color BorderFocusColor
         {
             get
@@ -300,7 +395,7 @@ namespace MobaXtermKG
             }
         }
 
-        [Category("Aetherx UI")]
+        [Category("Aetherx")]
         public Color PlaceholderColor
         {
             get
@@ -311,12 +406,13 @@ namespace MobaXtermKG
             set
             {
                 placeholderColor = value;
-                if (isPasswordChar)
+
+                if ( isPasswordChar )
                     textBox1.ForeColor = value;
             }
         }
 
-        [Category("Aetherx UI")]
+        [Category("Aetherx")]
         public string PlaceholderText
         {
             get
@@ -326,32 +422,34 @@ namespace MobaXtermKG
 
             set
             {
-                placeholderText = value;
-                textBox1.Text = "";
-                SetPlaceholder();
+                placeholderText     = value;
+                textBox1.Text       = "";
+                SetPlaceholder( );
             }
         }
 
-        private void SetPlaceholder()
+        private void SetPlaceholder( )
         {
             if (string.IsNullOrWhiteSpace(textBox1.Text) && placeholderText != "")
             {
-                isPlaceholder = true;
-                textBox1.Text = placeholderText;
-                textBox1.ForeColor = placeholderColor;
-                if (isPasswordChar)
+                isPlaceholder           = true;
+                textBox1.Text           = placeholderText;
+                textBox1.ForeColor      = placeholderColor;
+
+                if ( isPasswordChar )
                     textBox1.UseSystemPasswordChar = false;
             }
         }
 
-        private void RemovePlaceholder()
+        private void RemovePlaceholder( )
         {
             if (isPlaceholder && placeholderText != "")
             {
-                isPlaceholder = false;
-                textBox1.Text = "";
-                textBox1.ForeColor = this.ForeColor;
-                if (isPasswordChar)
+                isPlaceholder           = false;
+                textBox1.Text           = "";
+                textBox1.ForeColor      = this.ForeColor;
+
+                if ( isPasswordChar )
                     textBox1.UseSystemPasswordChar = true;
             }
         }
@@ -363,41 +461,44 @@ namespace MobaXtermKG
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(e);
+            base.OnPaint( e );
             Graphics graph = e.Graphics;
 
             // Border
-            using (Pen penBorder = new Pen(borderColor, borderSize))
+            if (borderSize > 0 )
             {
-                penBorder.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
-
-                if (!isFocused)
+                using (Pen penBorder = new Pen(borderColor, borderSize))
                 {
-                    if (underlineStyle)
+                    penBorder.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
+
+                    if (!isFocused)
                     {
-                        // underline
-                        graph.DrawLine(penBorder, 0, this.Height - 1, this.Width, this.Height - 1);
+                        if (underlineStyle)
+                        {
+                            // underline
+                            graph.DrawLine( penBorder, 0, this.Height - 1, this.Width, this.Height - 1 );
+                        }
+                        else
+                        {
+                            // normal style
+                            graph.DrawRectangle( penBorder, 0, 0, this.Width - 1, this.Height - 1 );
+                        }
                     }
                     else
                     {
-                        // normal style
-                        graph.DrawRectangle(penBorder, 0, 0, this.Width - 0.5F, this.Height - 0.5F);
-                    }
-                }
-                else
-                {
 
-                    penBorder.Color = borderFocusColor;
+                        penBorder.Color = borderFocusColor;
 
-                    if (underlineStyle)
-                    {
-                        // underline
-                        graph.DrawLine(penBorder, 0, this.Height - 1, this.Width, this.Height - 1);
-                    }
-                    else
-                    {
-                        // normal style
-                        graph.DrawRectangle(penBorder, 0, 0, this.Width - 0.5F, this.Height - 0.5F);
+                        if (underlineStyle)
+                        {
+                            // underline
+                            graph.DrawLine(penBorder, 0, this.Height - 1, this.Width, this.Height - 1);
+                        }
+                        else
+                        {
+                            // normal style
+                            graph.DrawRectangle(penBorder, 0, 0, this.Width - 1, this.Height - 1 );
+                        }
                     }
                 }
             }
@@ -407,12 +508,12 @@ namespace MobaXtermKG
             Override Methods > onResize
         */
 
-        protected override void OnResize(EventArgs e)
+        protected override void OnResize( EventArgs e )
         {
-            base.OnResize(e);
-            if (this.DesignMode)
+            base.OnResize( e );
+            if ( this.DesignMode )
             {
-                UpdateControlHeight();
+                UpdateControlHeight( );
             }
         }
 
@@ -420,30 +521,29 @@ namespace MobaXtermKG
             Override Methods > onLoad
         */
 
-        protected override void OnLoad(EventArgs e)
+        protected override void OnLoad( EventArgs e )
         {
-            base.OnLoad(e);
-            UpdateControlHeight();
+            base.OnLoad( e );
+            UpdateControlHeight( );
         }
 
         /*
             Override Methods > Update Control Height
         */
 
-        private void UpdateControlHeight()
+        private void UpdateControlHeight( )
         {
-            if (textBox1.Multiline == false)
+            if ( textBox1.Multiline == false )
             {
-                int txtHeight = TextRenderer.MeasureText("Text", this.Font).Height + 1;
-                textBox1.Multiline = true;
-                textBox1.MinimumSize = new Size(0, txtHeight);
-                textBox1.Multiline = false;
-
-                this.Height = textBox1.Height + this.Padding.Top + this.Padding.Bottom;
+                int txtHeight           = TextRenderer.MeasureText( "Text", this.Font ).Height + 1;
+                textBox1.Multiline      = true;
+                textBox1.MinimumSize    = new Size( 0, txtHeight );
+                textBox1.Multiline      = false;
+                this.Height             = textBox1.Height + this.Padding.Top + this.Padding.Bottom;
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBox1_TextChanged( object sender, EventArgs e )
         {
             if (_TextChanged != null)
             {
@@ -451,27 +551,42 @@ namespace MobaXtermKG
             }
         }
 
-        private void textBox1_Click(object sender, EventArgs e)
+        private void textBox1_MouseDown( object sender, MouseEventArgs e )
         {
-            this.OnClick(e);
+            this.OnMouseDown( e );
         }
 
-        private void textBox1_MouseEnter(object sender, EventArgs e)
+        private void textBox1_MouseUp( object sender, MouseEventArgs e )
         {
-            this.OnMouseEnter(e);
+            this.OnMouseUp( e );
         }
 
-        private void textBox1_MouseLeave(object sender, EventArgs e)
+        private void textBox1_MouseMove( object sender, MouseEventArgs e )
         {
-            this.OnMouseLeave(e);
+            this.OnMouseMove( e );
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void textBox1_Click( object sender, EventArgs e )
         {
-            this.OnKeyPress(e);
+            this.OnClick( e );
         }
 
-        private void textBox1_Enter(object sender, EventArgs e)
+        private void textBox1_MouseEnter( object sender, EventArgs e )
+        {
+            this.OnMouseEnter( e );
+        }
+
+        private void textBox1_MouseLeave( object sender, EventArgs e )
+        {
+            this.OnMouseLeave( e );
+        }
+
+        private void textBox1_KeyPress( object sender, KeyPressEventArgs e )
+        {
+            this.OnKeyPress( e );
+        }
+
+        private void textBox1_Enter( object sender, EventArgs e )
         {
             if (bAllowFocus)
             {
@@ -481,11 +596,11 @@ namespace MobaXtermKG
             }
         }
 
-        private void textBox1_Leave(object sender, EventArgs e)
+        private void textBox1_Leave( object sender, EventArgs e )
         {
             isFocused = false;
-            this.Invalidate();
-            SetPlaceholder();
+            this.Invalidate( );
+            SetPlaceholder( );
         }
     }
 }

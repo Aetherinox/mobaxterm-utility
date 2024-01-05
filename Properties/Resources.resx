@@ -133,17 +133,41 @@
     <value>TPB Profile</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="bch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bg_header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bg_header.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="chat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Materials\bell.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="error" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Materials\error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="eth" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\eth.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="exclamation" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Materials\exclamation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="information" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Materials\info.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lbl_contrib_bch" xml:space="preserve">
+    <value>BCH</value>
+    <comment>Bitcoin Cash</comment>
+  </data>
+  <data name="lbl_contrib_btc" xml:space="preserve">
+    <value>BTC</value>
+    <comment>Bitcoin</comment>
+  </data>
+  <data name="lbl_contrib_eth" xml:space="preserve">
+    <value>ETH</value>
+    <comment>Etherium</comment>
   </data>
   <data name="license_file_inside_mobaxterm" xml:space="preserve">
     <value>license file which will be placed inside the install path of MobaXterm.</value>
@@ -170,10 +194,29 @@
     <value>Fatal Error</value>
   </data>
   <data name="msgbox_err_locate_msg" xml:space="preserve">
-    <value>Could not find a valid location to place the license. Try placing the keygen exe in the same folder as the MobaXterm program executable.{0}{1}Did you install MobaXterm on your computer?</value>
+    <value>Could not locate file {0}. Try placing the keygen file {1} in the same folder as the {0} program executable.
+
+The next dialog will allow you to simply save the license file {2}, however, you'll have to copy/paste the file and manually place it in the MobaXterm installation folder.</value>
   </data>
   <data name="msgbox_err_locate_title" xml:space="preserve">
     <value>No valid Path to MobaXterm</value>
+  </data>
+  <data name="msgbox_nolocopen_msg" xml:space="preserve">
+    <value>Could not find {0}, so I can't open the folder.
+
+If you're sure it is installed, run the patcher and it will allow you to select the location. 
+
+The following locations were searched:
+{1}</value>
+  </data>
+  <data name="msgbox_nolocopen_title" xml:space="preserve">
+    <value>{0} Not Found</value>
+  </data>
+  <data name="msgbox_nolocpath_msg" xml:space="preserve">
+    <value>Patcher cannot determine where MobaXterm is installed
+Tried looking in {0}
+
+You will be prompted to manually locate MobaXterm.exe. Ensure that MobaXterm is installed on your system.</value>
   </data>
   <data name="msgbox_ok_generate_finished_msg" xml:space="preserve">
     <value>License key has been successfully generated in:{0}{1}{2}</value>
@@ -210,5 +253,11 @@
   </data>
   <data name="statusbar_txt_version_mouseover" xml:space="preserve">
     <value>Enter version you are running. Default:</value>
+  </data>
+  <data name="status_diag_cancelled" xml:space="preserve">
+    <value>Key generation cancelled by user</value>
+  </data>
+  <data name="txt_contrib_intro" xml:space="preserve">
+    <value>I do this because I enjoy giving back, and I'm not looking to make a profit off my work. However, donations would help immensely for one purpose -- purchasing libraries and other commercial products which have insane licensing systems. These types of products would make life much easier and get releases pumped out on a more regular basis. Don't feel obligated, this is just "if you can". My main goal is better tools.</value>
   </data>
 </root>

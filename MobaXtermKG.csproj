@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\AppInfo.cs" />
+    <Compile Include="Classes\Receiver.cs" />
     <Compile Include="Classes\Helpers.cs" />
     <Compile Include="Classes\MessageBox.cs" />
     <Compile Include="Controls\ControlButton.cs">
@@ -136,6 +137,12 @@
     </Compile>
     <Compile Include="Controls\ControlTextbox.Designer.cs">
       <DependentUpon>ControlTextbox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormContribute.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormContribute.Designer.cs">
+      <DependentUpon>FormContribute.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormAbout.cs">
       <SubType>Form</SubType>
@@ -166,6 +173,9 @@
     <EmbeddedResource Include="Controls\ControlTextbox.resx">
       <DependentUpon>ControlTextbox.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormContribute.resx">
+      <DependentUpon>FormContribute.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAbout.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
@@ -206,6 +216,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Materials\mobaxterm_128.ico" />
+    <None Include="Resources\bg_header.jpg" />
+    <None Include="Resources\bg_header_2.jpg" />
+    <None Include="Resources\eth.png" />
+    <None Include="Resources\btc.png" />
+    <None Include="Resources\bch.png" />
     <None Include="Materials\mobaxterm_logo_1.png" />
     <None Include="Resources\mobaxtgen_cli.exe" />
     <None Include="bin\Release\mirc.exe" />

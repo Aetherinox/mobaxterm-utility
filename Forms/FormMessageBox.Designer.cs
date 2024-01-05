@@ -30,198 +30,200 @@ namespace MobaXtermKG.Msgbox
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMessageBox));
-            this.panelTitleBar = new System.Windows.Forms.Panel();
+            this.pnl_Titlebar = new System.Windows.Forms.Panel();
             this.labelCaption = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.panelButtons = new System.Windows.Forms.Panel();
-            this.panelBody = new System.Windows.Forms.Panel();
+            this.btn_Close = new System.Windows.Forms.Button();
+            this.pnl_Buttons = new System.Windows.Forms.Panel();
+            this.btn_3 = new MobaXtermKG.AetherxButton();
+            this.btn_2 = new MobaXtermKG.AetherxButton();
+            this.btn_1 = new MobaXtermKG.AetherxButton();
+            this.pnl_Body = new System.Windows.Forms.Panel();
             this.labelMessage = new System.Windows.Forms.Label();
-            this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
-            this.button3 = new MobaXtermKG.AetherxButton();
-            this.button2 = new MobaXtermKG.AetherxButton();
-            this.button1 = new MobaXtermKG.AetherxButton();
-            this.panelTitleBar.SuspendLayout();
-            this.panelButtons.SuspendLayout();
-            this.panelBody.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
+            this.img_Icon = new System.Windows.Forms.PictureBox();
+            this.pnl_Titlebar.SuspendLayout();
+            this.pnl_Buttons.SuspendLayout();
+            this.pnl_Body.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.img_Icon)).BeginInit();
             this.SuspendLayout();
             // 
-            // panelTitleBar
+            // pnl_Titlebar
             // 
-            this.panelTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.panelTitleBar.Controls.Add(this.labelCaption);
-            this.panelTitleBar.Controls.Add(this.btnClose);
-            this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitleBar.Location = new System.Drawing.Point(2, 2);
-            this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(346, 25);
-            this.panelTitleBar.TabIndex = 0;
-            this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
+            this.pnl_Titlebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.pnl_Titlebar.Controls.Add(this.labelCaption);
+            this.pnl_Titlebar.Controls.Add(this.btn_Close);
+            this.pnl_Titlebar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnl_Titlebar.Location = new System.Drawing.Point(2, 2);
+            this.pnl_Titlebar.Name = "pnl_Titlebar";
+            this.pnl_Titlebar.Size = new System.Drawing.Size(376, 28);
+            this.pnl_Titlebar.TabIndex = 0;
+            this.pnl_Titlebar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnl_TitleBar_MouseDown);
             // 
             // labelCaption
             // 
             this.labelCaption.AutoSize = true;
             this.labelCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCaption.ForeColor = System.Drawing.Color.White;
-            this.labelCaption.Location = new System.Drawing.Point(9, 3);
+            this.labelCaption.Location = new System.Drawing.Point(9, 5);
             this.labelCaption.Name = "labelCaption";
             this.labelCaption.Size = new System.Drawing.Size(86, 17);
             this.labelCaption.TabIndex = 4;
             this.labelCaption.Text = "labelCaption";
             // 
-            // btnClose
+            // btn_Close
             // 
-            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClose.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(79)))), ((int)(((byte)(95)))));
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(316, 0);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.btnClose.Size = new System.Drawing.Size(30, 25);
-            this.btnClose.TabIndex = 3;
-            this.btnClose.Text = "X";
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.btn_Close.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Close.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btn_Close.FlatAppearance.BorderSize = 0;
+            this.btn_Close.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(79)))), ((int)(((byte)(95)))));
+            this.btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Close.Font = new System.Drawing.Font("Segoe MDL2 Assets", 14.25F, System.Drawing.FontStyle.Bold);
+            this.btn_Close.ForeColor = System.Drawing.Color.White;
+            this.btn_Close.Location = new System.Drawing.Point(346, 0);
+            this.btn_Close.Name = "btn_Close";
+            this.btn_Close.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.btn_Close.Size = new System.Drawing.Size(30, 28);
+            this.btn_Close.TabIndex = 3;
+            this.btn_Close.Text = "";
+            this.btn_Close.UseVisualStyleBackColor = false;
+            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
-            // panelButtons
+            // pnl_Buttons
             // 
-            this.panelButtons.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-            this.panelButtons.Controls.Add(this.button3);
-            this.panelButtons.Controls.Add(this.button2);
-            this.panelButtons.Controls.Add(this.button1);
-            this.panelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelButtons.Location = new System.Drawing.Point(2, 88);
-            this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(346, 60);
-            this.panelButtons.TabIndex = 1;
-            this.panelButtons.Paint += new System.Windows.Forms.PaintEventHandler(this.panelButtons_Paint_1);
+            this.pnl_Buttons.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.pnl_Buttons.Controls.Add(this.btn_3);
+            this.pnl_Buttons.Controls.Add(this.btn_2);
+            this.pnl_Buttons.Controls.Add(this.btn_1);
+            this.pnl_Buttons.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnl_Buttons.Location = new System.Drawing.Point(2, 88);
+            this.pnl_Buttons.Name = "pnl_Buttons";
+            this.pnl_Buttons.Size = new System.Drawing.Size(376, 60);
+            this.pnl_Buttons.TabIndex = 1;
+            this.pnl_Buttons.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_Buttons_Paint);
+            this.pnl_Buttons.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnl_Buttons_MouseDown);
             // 
-            // panelBody
+            // btn_3
             // 
-            this.panelBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.panelBody.Controls.Add(this.labelMessage);
-            this.panelBody.Controls.Add(this.pictureBoxIcon);
-            this.panelBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.panelBody.Location = new System.Drawing.Point(2, 27);
-            this.panelBody.Name = "panelBody";
-            this.panelBody.Padding = new System.Windows.Forms.Padding(18, 13, 5, 0);
-            this.panelBody.Size = new System.Drawing.Size(346, 61);
-            this.panelBody.TabIndex = 2;
+            this.btn_3.BackColor = System.Drawing.Color.SeaGreen;
+            this.btn_3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_3.FlatAppearance.BorderSize = 0;
+            this.btn_3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_3.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_3.Location = new System.Drawing.Point(231, 12);
+            this.btn_3.Name = "btn_3";
+            this.btn_3.Size = new System.Drawing.Size(100, 28);
+            this.btn_3.TabIndex = 2;
+            this.btn_3.Text = "button3";
+            this.btn_3.UseVisualStyleBackColor = false;
+            // 
+            // btn_2
+            // 
+            this.btn_2.BackColor = System.Drawing.Color.SeaGreen;
+            this.btn_2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_2.FlatAppearance.BorderSize = 0;
+            this.btn_2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_2.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_2.Location = new System.Drawing.Point(125, 12);
+            this.btn_2.Name = "btn_2";
+            this.btn_2.Size = new System.Drawing.Size(100, 28);
+            this.btn_2.TabIndex = 1;
+            this.btn_2.Text = "button2";
+            this.btn_2.UseVisualStyleBackColor = false;
+            // 
+            // btn_1
+            // 
+            this.btn_1.BackColor = System.Drawing.Color.SeaGreen;
+            this.btn_1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_1.FlatAppearance.BorderSize = 0;
+            this.btn_1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_1.Location = new System.Drawing.Point(19, 12);
+            this.btn_1.Name = "btn_1";
+            this.btn_1.Size = new System.Drawing.Size(100, 28);
+            this.btn_1.TabIndex = 0;
+            this.btn_1.Text = "button1";
+            this.btn_1.UseVisualStyleBackColor = false;
+            // 
+            // pnl_Body
+            // 
+            this.pnl_Body.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.pnl_Body.Controls.Add(this.labelMessage);
+            this.pnl_Body.Controls.Add(this.img_Icon);
+            this.pnl_Body.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnl_Body.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.pnl_Body.Location = new System.Drawing.Point(2, 30);
+            this.pnl_Body.Name = "pnl_Body";
+            this.pnl_Body.Padding = new System.Windows.Forms.Padding(18, 13, 5, 0);
+            this.pnl_Body.Size = new System.Drawing.Size(376, 58);
+            this.pnl_Body.TabIndex = 2;
+            this.pnl_Body.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnl_Body_MouseDown);
             // 
             // labelMessage
             // 
             this.labelMessage.AutoSize = true;
             this.labelMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.labelMessage.ForeColor = System.Drawing.Color.White;
             this.labelMessage.Location = new System.Drawing.Point(58, 13);
             this.labelMessage.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
-            this.labelMessage.MaximumSize = new System.Drawing.Size(600, 0);
+            this.labelMessage.MaximumSize = new System.Drawing.Size(700, 0);
             this.labelMessage.Name = "labelMessage";
             this.labelMessage.Padding = new System.Windows.Forms.Padding(5, 5, 22, 15);
-            this.labelMessage.Size = new System.Drawing.Size(122, 37);
+            this.labelMessage.Size = new System.Drawing.Size(112, 35);
             this.labelMessage.TabIndex = 1;
             this.labelMessage.Text = "labelMessage";
             this.labelMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelMessage.Click += new System.EventHandler(this.lblMessage_Click);
+            this.labelMessage.Click += new System.EventHandler(this.lbl_Msg_Click);
             // 
-            // pictureBoxIcon
+            // img_Icon
             // 
-            this.pictureBoxIcon.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBoxIcon.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxIcon.Image")));
-            this.pictureBoxIcon.Location = new System.Drawing.Point(18, 13);
-            this.pictureBoxIcon.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.pictureBoxIcon.Name = "pictureBoxIcon";
-            this.pictureBoxIcon.Padding = new System.Windows.Forms.Padding(0, 7, 0, 0);
-            this.pictureBoxIcon.Size = new System.Drawing.Size(40, 48);
-            this.pictureBoxIcon.TabIndex = 0;
-            this.pictureBoxIcon.TabStop = false;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.SeaGreen;
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button3.Location = new System.Drawing.Point(231, 12);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 28);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.SeaGreen;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button2.Location = new System.Drawing.Point(125, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 28);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.SeaGreen;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button1.Location = new System.Drawing.Point(19, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 28);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = false;
+            this.img_Icon.Dock = System.Windows.Forms.DockStyle.Left;
+            this.img_Icon.Image = ((System.Drawing.Image)(resources.GetObject("img_Icon.Image")));
+            this.img_Icon.Location = new System.Drawing.Point(18, 13);
+            this.img_Icon.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.img_Icon.Name = "img_Icon";
+            this.img_Icon.Padding = new System.Windows.Forms.Padding(0, 7, 0, 0);
+            this.img_Icon.Size = new System.Drawing.Size(40, 45);
+            this.img_Icon.TabIndex = 0;
+            this.img_Icon.TabStop = false;
             // 
             // FormMessageBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.ClientSize = new System.Drawing.Size(350, 150);
-            this.Controls.Add(this.panelBody);
-            this.Controls.Add(this.panelButtons);
-            this.Controls.Add(this.panelTitleBar);
-            this.MinimumSize = new System.Drawing.Size(350, 150);
+            this.ClientSize = new System.Drawing.Size(380, 150);
+            this.Controls.Add(this.pnl_Body);
+            this.Controls.Add(this.pnl_Buttons);
+            this.Controls.Add(this.pnl_Titlebar);
+            this.MinimumSize = new System.Drawing.Size(380, 150);
             this.Name = "FormMessageBox";
             this.Padding = new System.Windows.Forms.Padding(2);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form1";
-            this.panelTitleBar.ResumeLayout(false);
-            this.panelTitleBar.PerformLayout();
-            this.panelButtons.ResumeLayout(false);
-            this.panelBody.ResumeLayout(false);
-            this.panelBody.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
+            this.pnl_Titlebar.ResumeLayout(false);
+            this.pnl_Titlebar.PerformLayout();
+            this.pnl_Buttons.ResumeLayout(false);
+            this.pnl_Body.ResumeLayout(false);
+            this.pnl_Body.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.img_Icon)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panelTitleBar;
-        private System.Windows.Forms.Panel panelButtons;
-        private AetherxButton button3;
-        private AetherxButton button2;
-        private AetherxButton button1;
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Panel panelBody;
+        private System.Windows.Forms.Panel pnl_Titlebar;
+        private System.Windows.Forms.Panel pnl_Buttons;
+        private AetherxButton btn_3;
+        private AetherxButton btn_2;
+        private AetherxButton btn_1;
+        private System.Windows.Forms.Button btn_Close;
+        private System.Windows.Forms.Panel pnl_Body;
         private System.Windows.Forms.Label labelMessage;
-        private System.Windows.Forms.PictureBox pictureBoxIcon;
+        private System.Windows.Forms.PictureBox img_Icon;
         private System.Windows.Forms.Label labelCaption;
     }
 }

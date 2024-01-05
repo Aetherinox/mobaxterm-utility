@@ -14,10 +14,43 @@ namespace MobaXtermKG
     public partial class FormAbout : Form
     {
 
-        public string GetReadme(string product, string version, string developer)
-        {
+        #region "Declarations"
 
-            string str_about =
+            /*
+                Define > Classes
+            */
+
+            private Helpers Helpers     = new Helpers( );
+
+            /*
+                Define > Internal > Helper
+            */
+
+            internal Helpers Helper
+            {
+                set     { Helpers = value;  }
+                get     { return Helpers;   }
+            }
+
+            /*
+                Define > Mouse
+            */
+
+            private bool mouseDown;
+            private Point lastLocation;
+
+        #endregion
+
+        #region "Generate Readme"
+
+            /*
+                Frame > Parent
+            */
+
+            public string GetReadme(string product, string version, string developer)
+            {
+
+                string str_about =
 @"{0}
 Version {1}
 {2}
@@ -58,144 +91,273 @@ This key is used to sign the releases on Github.com, all commits are also signed
 
 ";
 
-            return string.Format(str_about, product, version, developer);
-        }
+                return string.Format(str_about, product, version, developer);
+            }
+
+        #endregion
+
+        #region "Main Window: Initialize"
 
         public FormAbout()
-        {
-            InitializeComponent();
-
-            string ver = AppInfo.ProductVersionCore.ToString();
-            string product = AppInfo.Title;
-            string tm = AppInfo.Trademark;
-
-            txt_Version.Text = "v" + ver + " by " + tm;
-            lbl_Product.Text = product;
-
-            txt_Terms.Text = GetReadme(product, ver, tm);
-            txt_Terms.Value = GetReadme(product, ver, tm);
-
-            lbl_Edu.Text = Lng.about_hdr_desc;
-            lnk_TPBLink.Text = Lng.about_lnk_tpb;
-            lnk_Github.Text = Lng.about_lnk_github;
-
-            lbl_Dev_PIV_Thumbprint.Text = Lng.about_lbl_thumbprint;
-            lbl_Dev_GPG_KeyID.Text = Lng.about_lbl_gpg;
-
-            txt_Dev_PIV_Thumbprint.Value = Cfg.Default.app_dev_piv_thumbprint;
-            txt_Dev_GPG_KeyID.Value = Cfg.Default.app_dev_gpg_keyid;
-        }
-
-        private void FormAbout_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        /*
-             Main Form > Mouse Down
-             deals with moving form around on screen
-         */
-
-        private bool mouseDown;
-        private Point lastLocation;
-
-        private void FormAbout_MouseDown(object sender, MouseEventArgs e)
-        {
-            mouseDown = true;
-            lastLocation = e.Location;
-        }
-
-        /*
-            Main Form > Mouse Up
-            deals with moving form around on screen
-        */
-
-        private void FormAbout_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-
-        /*
-            Main Form > Mouse Move
-            deals with moving form around on screen
-        */
-
-        private void FormAbout_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
             {
-                this.Location = new Point(
-                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+                InitializeComponent();
 
-                this.Update();
+                /*
+                    Product, trademark, etc.
+                */
+
+                string ver                      = AppInfo.ProductVersionCore.ToString( );
+                string product                  = AppInfo.Title;
+                string tm                       = AppInfo.Trademark;
+
+                /*
+                    Form Control Buttons
+                */
+
+                btn_Close.Parent                = imgHeader;
+                btn_Close.BackColor             = Color.Transparent;
+
+                /*
+                    Headers
+                */
+
+                lbl_HeaderName.Parent           = imgHeader;
+                lbl_HeaderName.BackColor        = Color.Transparent;
+                lbl_HeaderName.Text             = product;
+
+                lbl_HeaderSub.Parent            = imgHeader;
+                lbl_HeaderSub.BackColor         = Color.Transparent;
+                lbl_HeaderSub.Text              = Lng.about_hdr_desc;
+
+                lbl_Version.Parent              = imgHeader;
+                lbl_Version.BackColor           = Color.Transparent;
+                lbl_Version.Text                = "v" + ver + " by " + tm;
+
+                /*
+                    Button Links
+                */
+
+                lnk_TPBLink.Text                = Lng.about_lnk_tpb;
+                lnk_Github.Text                 = Lng.about_lnk_github;
+
+                /*
+                    About Readme
+                */
+
+                txt_Terms.Text                  = GetReadme(product, ver, tm);
+                txt_Terms.Value                 = GetReadme(product, ver, tm);
+
+                /*
+                    GPG / PIV Fields
+                */
+
+                lbl_Dev_PIV_Thumbprint.Text     = Lng.about_lbl_thumbprint;
+                lbl_Dev_GPG_KeyID.Text          = Lng.about_lbl_gpg;
+
+                txt_Dev_PIV_Thumbprint.Value    = Cfg.Default.app_dev_piv_thumbprint;
+                txt_Dev_GPG_KeyID.Value         = Cfg.Default.app_dev_gpg_keyid;
             }
-        }
+
+            /*
+                Tweak to fix frame flickering
+            */
+
+            protected override CreateParams CreateParams
+            {
+                get
+                {
+                    CreateParams cp = base.CreateParams;
+                    cp.ExStyle |= 0x02000000;  // enable WS_EX_COMPOSITED
+                    return cp;
+                }
+            } 
+
+            private void FormAbout_Load(object sender, EventArgs e)
+            {
+
+            }
+
+        #endregion
+
+        #region "Main Window: Dragging"
+
+            private void FormAbout_MouseDown(object sender, MouseEventArgs e)
+            {
+                mouseDown = true;
+                lastLocation = e.Location;
+            }
+
+            private void FormAbout_MouseUp(object sender, MouseEventArgs e)
+            {
+                mouseDown = false;
+            }
+
+            private void FormAbout_MouseMove(object sender, MouseEventArgs e)
+            {
+                if (mouseDown)
+                {
+                    this.Location = new Point(
+                        (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                    this.Update();
+                }
+            }
+
+        #endregion
+
+        #region "Main Window: Controls"
+
+            /*
+                Window > Button > Close
+            */
+
+            private void btn_Window_Close_Click(object sender, EventArgs e)
+            {
+
+                FormParent to       = new FormParent( );
+                to.Show( );
+
+                this.Close();
+            }
+
+            /*
+                Window > Button > Close > Mouse Enter
+            */
+
+            private void btn_Window_Close_MouseEnter(object sender, EventArgs e)
+            {
+                btn_Close.ForeColor = Color.FromArgb(222, 31, 100);
+            }
+
+            /*
+                Window > Button > Close > Mouse Leave
+            */
+
+            private void btn_Window_Close_MouseLeave(object sender, EventArgs e)
+            {
+                btn_Close.ForeColor = Color.FromArgb(255, 255, 255);
+            }
+
+        #endregion
+
+        #region "Header"
 
         /*
-            Window > Button > Close
+            Header Image
         */
 
-        private void btn_Window_Close_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+            private void imgHeader_Paint( object sender, PaintEventArgs e )
+            {
+                Graphics g          = e.Graphics;
+                Color backColor     = Color.FromArgb( 65, 255, 255, 255 );
+                var imgSize         = imgHeader.ClientSize;
+
+                e.Graphics.FillRectangle( new SolidBrush( backColor ), 1, imgSize.Height - 2, imgSize.Width - 2, 2 );
+            }
+
+            private void imgHeader_MouseDown( object sender, MouseEventArgs e )
+            {
+                mouseDown = true;
+                lastLocation = e.Location;
+            }
+
+            private void imgHeader_MouseUp( object sender, MouseEventArgs e )
+            {
+                mouseDown       = false;
+            }
+
+            private void imgHeader_MouseMove( object sender, MouseEventArgs e )
+            {
+                if ( mouseDown )
+                {
+                    this.Location = new Point(
+                        ( this.Location.X - lastLocation.X ) + e.X,
+                        ( this.Location.Y - lastLocation.Y ) + e.Y
+                    );
+
+                    this.Update( );
+                }
+            }
 
         /*
-            Window > Button > Close > Mouse Enter
+            Header > Name Label
         */
 
-        private void btn_Window_Close_MouseEnter(object sender, EventArgs e)
-        {
-            closeBtn.ForeColor = Color.FromArgb(222, 31, 100);
-        }
+            private void lbl_HeaderName_MouseDown( object sender, MouseEventArgs e )
+            {
+                mouseDown = true;
+                lastLocation = e.Location;
+            }
+
+            private void lbl_HeaderName_MouseUp( object sender, MouseEventArgs e )
+            {
+                mouseDown = false;
+            }
+
+            private void lbl_HeaderName_MouseMove( object sender, MouseEventArgs e )
+            {
+                if ( mouseDown )
+                {
+                    this.Location = new Point(
+                        ( this.Location.X - lastLocation.X ) + e.X,
+                        ( this.Location.Y - lastLocation.Y ) + e.Y
+                    );
+
+                    this.Update( );
+                }
+            }
 
         /*
-            Window > Button > Close > Mouse Leave
+            Header > Sub Label
         */
 
-        private void btn_Window_Close_MouseLeave(object sender, EventArgs e)
-        {
-            closeBtn.ForeColor = Color.FromArgb(255, 255, 255);
-        }
+            private void lbl_HeaderSub_MouseDown( object sender, MouseEventArgs e )
+            {
+                mouseDown = true;
+                lastLocation = e.Location;
+            }
 
-        private void lbl_Serial_Click(object sender, EventArgs e)
-        {
+            private void lbl_HeaderSub_MouseUp( object sender, MouseEventArgs e )
+            {
+                mouseDown = false;
+            }
 
-        }
+            private void lbl_HeaderSub_MouseMove( object sender, MouseEventArgs e )
+            {
+                if ( mouseDown )
+                {
+                    this.Location = new Point(
+                        ( this.Location.X - lastLocation.X ) + e.X,
+                        ( this.Location.Y - lastLocation.Y ) + e.Y
+                    );
 
-        /*
-            Window > Logo
-        */
+                    this.Update( );
+                }
+            }
 
-        private void mat_Logo_Click(object sender, EventArgs e)
-        {
+        #endregion
 
-        }
+        #region "Header: External Links"
 
-        /*
-            Window > Button > Close
-        */
+            /*
+                The Pirate Bay
+            */
 
-        private void lblLink_TPB_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            string tpb_url = Properties.Settings.Default.app_url_tpb;
-            System.Diagnostics.Process.Start(tpb_url);
-        }
+            private void lnk_TPB_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+            {
+                System.Diagnostics.Process.Start(Cfg.Default.app_url_tpb);
+            }
 
-        private void lbl_Product_Click(object sender, EventArgs e)
-        {
+            /*
+                Github
+            */
 
-        }
+            private void lnk_Github_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+            {
+                System.Diagnostics.Process.Start(Cfg.Default.app_url_github);
+            }
 
-        private void lnk_Github_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            string github_url = Properties.Settings.Default.app_url_github;
-            System.Diagnostics.Process.Start(github_url);
-        }
+        #endregion
 
-        private void txt_Terms__TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
