@@ -1,19 +1,29 @@
 # Ignore everything
 /*
 
+# Add Manifest
+!/manifest
+
 # Add Gitignore
 !.gitignore
+
+# Add Docs
+!/Docs
 
 # Bin
 !/bin
 /bin/Debug/*
+/bin/Release/*
 /bin/Release/*.pdb
+/bin/Release/*.exe
 /bin/Release/*.manifest
 /bin/Release/*.application
 /bin/Release/*.dll
-/bin/Release/app.publish/*
+/bin/Release/*exe.config
+/bin/Release/app.publish/Application Files/*/*manifest
+/bin/Release/app.publish/*application
+/bin/Release/app.publish/*setup.exe
 /bin/Release/.vshistory*
-/bin/Release/*mxtpro*
 
 # Allow: Classes
 !/Classes*
@@ -37,7 +47,6 @@
 
 # Allow: Exts
 !*.csproj
-!*.config
 !*.sln
 !*.cs
 !*.resx
