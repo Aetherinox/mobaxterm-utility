@@ -6,6 +6,10 @@ using System.Drawing;
 using MobaXtermKG.Forms;
 using Lng = MobaXtermKG.Properties.Resources;
 using Cfg = MobaXtermKG.Properties.Settings;
+using System.Net;
+using System.Net.Http;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace MobaXtermKG
 {
@@ -19,6 +23,7 @@ namespace MobaXtermKG
                 Define > Classes
             */
 
+            static AppInfo AppInfo         = new AppInfo();
             private Helpers Helpers         = new Helpers();
             readonly private Serial Serial  = new Serial();
 
@@ -62,12 +67,30 @@ namespace MobaXtermKG
             static private string cfg_def_version       = Cfg.Default.app_def_version;
             static private string cfg_def_users         = Cfg.Default.app_def_users;
 
+            private readonly HttpClient httpClient      = new HttpClient();
+
+            private bool bUpdateAvailable               = false;
+
         #endregion
 
         #region "Main Window: Initialize"
 
             /*
                 Frame > Parent
+            */
+
+            public class Manifest
+            {
+                public string version { get; set; }
+                public string name { get; set; }
+                public string author { get; set; }
+                public string description { get; set; }
+                public string url { get; set; }
+                public IList<string> scripts { get; set; }
+            }
+
+            /*
+                Form > Parent
             */
 
             public FormParent()
@@ -141,10 +164,42 @@ namespace MobaXtermKG
 
             private void FormParent_Load( object sender, EventArgs e )
             {
-                mnu_Main.Renderer       = new ToolStripProfessionalRenderer( new mnu_Main_ColorTable( ) );
+                mnu_Main.Renderer = new ToolStripProfessionalRenderer( new mnu_Main_ColorTable( ) );
                 StatusBar.Update( Lng.status_genlicense );
-            }
 
+
+                /*
+                    get json from url
+                */
+
+                var json                    = httpClient.GetStringAsync( Cfg.Default.app_url_manifest ).Result;
+                Manifest manifest           = JsonConvert.DeserializeObject<Manifest>( json );
+                bool bUpdate                = AppInfo.UpdateAvailable( manifest.version );
+                string ver_curr             = AppInfo.PublishVersion;
+
+                if ( bUpdate )
+                    bUpdateAvailable = true;
+
+                /*
+                    update checker
+                */
+
+                if ( ( bUpdateAvailable && !Cfg.Default.bShowedUpdates ) || ( AppInfo.bIsDebug( ) && !Cfg.Default.bShowedUpdates ) )
+                {
+                    Cfg.Default.bShowedUpdates = true;
+
+                    var result = MessageBox.Show( string.Format( Lng.msgbox_update_msg, manifest.version, Cfg.Default.app_softw_name ),
+                        string.Format( Lng.msgbox_update_title, ver_curr, manifest.version ),
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation
+                    );
+
+                    string answer   = result.ToString( ).ToLower( );
+
+                    if ( String.IsNullOrEmpty( answer ) || answer == "yes" )
+                        System.Diagnostics.Process.Start( Cfg.Default.app_url_github + "/releases/" );
+                }
+
+            }
 
         #endregion
 
@@ -504,6 +559,21 @@ namespace MobaXtermKG
             }
 
             /*
+                Top Menu > Updates > Update Indicator
+            */
+
+            private void mnu_Sub_Updates_Paint( object sender, PaintEventArgs e )
+            {
+                if ( bUpdateAvailable )
+                {
+                    var imgSize     = mnu_Sub_Updates.Size;
+                    var bmp         = new Bitmap( Lng.notify_01 );
+
+                    e.Graphics.DrawImage( bmp, 7,  ( imgSize.Height / 2 ) - ( 24 / 2 ), 24, 24 );
+                }
+            }
+
+            /*
                Top Menu > Help > x509 Certificate Validation
             */
 
@@ -681,7 +751,7 @@ namespace MobaXtermKG
                     Location full is empty or directory to save doesnt exist
                 */
 
-                if ( String.IsNullOrEmpty( target_exe_where ) || !Directory.Exists( target_exe_where ) )
+                if ( String.IsNullOrEmpty( target_exe_where ) || !File.Exists( target_exe_where ) )
                 {
                     MessageBox.Show
                     (
@@ -702,9 +772,18 @@ namespace MobaXtermKG
                     return;
                 }
 
-                string licresult_SK             = Serial.SaveKey( target_exe_where, fval_name, fval_ver, fval_users );
-                txt_LicenseKey.isPlaceholder    = false;
-                txt_LicenseKey.Value            = licresult_SK;
+                /*
+                    chop full app path + exe into directory only
+                */
+
+                string src_app_fol                  = Path.GetDirectoryName( target_exe_where );
+
+                if ( Directory.Exists( src_app_fol ) )
+                {
+                    string licresult_SK             = Serial.SaveKey( src_app_fol, fval_name, fval_ver, fval_users );
+                    txt_LicenseKey.isPlaceholder    = false;
+                    txt_LicenseKey.Value            = licresult_SK;
+                }
 
                 return;
 
@@ -729,10 +808,11 @@ namespace MobaXtermKG
 
             private void btn_OpenFolder_Click( object sender, EventArgs e )
             {
-                string src_file_path        = Helper.FindApp( );
+                string src_app_full_exe     = Helper.FindApp( );
                 string src_list             = Helper.GetAppFindList( );
 
-                if ( String.IsNullOrEmpty( src_file_path ) )
+
+                if ( String.IsNullOrEmpty( src_app_full_exe ) )
                 {
                     MessageBox.Show(
                         string.Format( Lng.msgbox_nolocopen_msg, Cfg.Default.app_mobaxterm_exe, src_list ),
@@ -745,18 +825,26 @@ namespace MobaXtermKG
                 }
 
                 /*
-                    target directory
+                    chop full app path + exe into directory only
                 */
 
-                if ( Directory.Exists( src_file_path ) )
-                    Process.Start( "explorer.exe", src_file_path );
+                string src_app_fol = Path.GetDirectoryName( src_app_full_exe );
 
                 /*
-                    cannot locate mobaxterm program. Open dialog in Program Files(86)
+                    make sure file and folder exist and open folder
                 */
 
+                if ( File.Exists( src_app_full_exe ) && Directory.Exists( src_app_fol ) )
+                {
+                    Process.Start( "explorer.exe", src_app_fol );
+                }
                 else
                 {
+
+                    /*
+                        cannot locate mobaxterm program. Open dialog in Program Files(86)
+                    */
+
                     string path_progfiles = Helpers.ProgramFiles( );
                     Process.Start( "explorer.exe", path_progfiles );
 

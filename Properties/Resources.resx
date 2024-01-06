@@ -284,6 +284,20 @@ You will be prompted to manually locate MobaXterm.exe. Ensure that MobaXterm is 
   <data name="msgbox_ok_generate_title" xml:space="preserve">
     <value>Generate License File?</value>
   </data>
+  <data name="msgbox_update_msg" xml:space="preserve">
+    <value>Update v{0} is available.
+
+Updates ensure this patch works with the latest version of the target software. If you have issues generating a license for {1}, download the update by going to the top menu:
+     Help ► Updates
+
+Would you like to view the update? If not, program will start as normal.</value>
+  </data>
+  <data name="msgbox_update_title" xml:space="preserve">
+    <value>Update Available: {0} ► {1}</value>
+  </data>
+  <data name="notify_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\notify_01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="parent_intro_1" xml:space="preserve">
     <value>This program will generate a</value>
   </data>

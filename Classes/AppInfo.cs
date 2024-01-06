@@ -19,7 +19,25 @@ namespace MobaXtermKG
     {
 
         /*
+             AppInfo > Configuration Name
+        */
+
+        public bool bIsDebug( )
+        {
+            if ( System.Diagnostics.Debugger.IsAttached )
+                return true;
+
+            #if DEBUG
+                return true;
+            #else
+                return false;
+            #endif
+        }
+
+        /*
             AppInfo -> Title
+
+            @usage      :   string title = AppInfo.Title;
         */
 
         public static string Title
@@ -37,6 +55,8 @@ namespace MobaXtermKG
 
         /*
             AppInfo -> Description
+
+            @usage      :   string description = AppInfo.Description;
         */
 
         public static string Description
@@ -53,7 +73,9 @@ namespace MobaXtermKG
         }
 
         /*
-            AppInfo -> Author
+            AppInfo -> Trademark
+
+            @usage      :   string trademark = AppInfo.Trademark;
         */
 
         public static string Trademark
@@ -71,6 +93,8 @@ namespace MobaXtermKG
 
         /*
             AppInfo -> Company
+
+            @usage      :   string company = AppInfo.Company;
         */
 
         public static string Company
@@ -88,6 +112,8 @@ namespace MobaXtermKG
 
         /*
             AppInfo -> Copyright
+
+            @usage      :   string copyright = AppInfo.Copyright;
         */
 
         public static string Copyright
@@ -105,6 +131,8 @@ namespace MobaXtermKG
 
         /*
             AppInfo -> Version
+
+            @usage      :   string version = AppInfo.PublishVersion;
         */
 
         public static string Version
@@ -121,6 +149,12 @@ namespace MobaXtermKG
             }
         }
 
+        /*
+            AppInfo -> Product Version
+
+            @usage      :   string product_ver = AppInfo.ProductVersion;
+        */
+
         public static string ProductVersionCore
         {
             get
@@ -128,6 +162,12 @@ namespace MobaXtermKG
                 return System.Windows.Forms.Application.ProductVersion;
             }
         }
+
+        /*
+            AppInfo -> Publish Version
+
+            @usage      :   string publish_ver = AppInfo.PublishVersion;
+        */
 
         public static string PublishVersion
         {
@@ -145,5 +185,97 @@ namespace MobaXtermKG
                 }
             }
         }
+
+        /*
+            AppInfo -> Update Available
+                returns if an update is available by comparing the provided version
+                with the product version.
+
+        @return     :   true    Update Available
+                        false   Current version
+
+        */
+
+        public bool UpdateAvailable( string v2 )
+        { 
+
+            string v1       = PublishVersion;
+            int vnum_1      = 0;
+            int vnum_2      = 0;
+ 
+            for ( int i = 0, j = 0; ( i < v1.Length || j < v2.Length ); )
+            {
+       
+                while ( i < v1.Length && v1[ i ] != '.' )
+                {
+                    vnum_1 = vnum_1 * 10 + ( v1[ i ] - '0' );
+                    i++;
+                }
+ 
+                while ( j < v2.Length && v2[ j ] != '.' )
+                {
+                    vnum_2 = vnum_2 * 10 + ( v2[ j ] - '0' );
+                    j++;
+                }
+ 
+                if ( vnum_1 > vnum_2 )
+                    return false;
+                if ( vnum_2 > vnum_1 )
+                    return true;
+ 
+                vnum_1 = vnum_2 = 0;
+
+                i++;
+                j++;
+            }
+
+            return false;
+        }
+
+        /*
+            AppInfo -> Version Check
+                compare two versions.
+
+        @return     :   1   = v2 smaller
+                        -1  = v1 smaller
+                        0   = equal
+
+        */
+
+        static int VersionCheck( string v1, string v2 )
+        {
+
+            int vnum_1      = 0;
+            int vnum_2      = 0;
+ 
+            for ( int i = 0, j = 0; ( i < v1.Length || j < v2.Length ); )
+            {
+ 
+                while ( i < v1.Length && v1[ i ] != '.' )
+                {
+                    vnum_1 = vnum_1 * 10 + ( v1[ i ] - '0' );
+                    i++;
+                }
+ 
+                while ( j < v2.Length && v2[ j ] != '.' )
+                {
+                    vnum_2 = vnum_2 * 10 + ( v2[ j ] - '0' );
+                    j++;
+                }
+ 
+                if ( vnum_1 > vnum_2 )
+                    return 1;
+                if ( vnum_2 > vnum_1 )
+                    return -1;
+ 
+                vnum_1 = vnum_2 = 0;
+
+                i++;
+                j++;
+            } 
+
+            return 0; 
+        } 
+
     }
 }

@@ -36,7 +36,7 @@
     <ProductName>MobaXterm</ProductName>
     <PublisherName>Aetherx</PublisherName>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.2.0.0</ApplicationVersion>
+    <ApplicationVersion>1.2.1.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -95,6 +95,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -166,11 +169,6 @@
     <Compile Include="Classes\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\Serial.cs" />
-    <Compile Include="Resources\resources.en1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>resources.en.resx</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Controls\ControlTextbox.resx">
       <DependentUpon>ControlTextbox.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -199,12 +197,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Resources\resources.en.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>resources.en1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <None Include="aetherx_piv_9a.pfx" />
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -217,8 +212,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Materials\mobaxterm_128.ico" />
+    <None Include="Resources\notify_2.png" />
+    <None Include="Resources\notify_01.png" />
+    <None Include="Resources\ico_notice_1.png" />
     <None Include="Resources\bg_header.jpg" />
-    <None Include="Resources\bg_header_2.jpg" />
     <None Include="Resources\eth.png" />
     <None Include="Resources\btc.png" />
     <None Include="Resources\bch.png" />

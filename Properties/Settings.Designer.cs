@@ -12,7 +12,7 @@ namespace MobaXtermKG.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.6.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.8.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -101,6 +101,37 @@ namespace MobaXtermKG.Properties {
         public string app_dev_gpg_keyid {
             get {
                 return ((string)(this["app_dev_gpg_keyid"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://raw.githubusercontent.com/Aetherinox/MobaXtermKeygen/master/Manifest/mani" +
+            "fest.json")]
+        public string app_url_manifest {
+            get {
+                return ((string)(this["app_url_manifest"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool bShowedUpdates {
+            get {
+                return ((bool)(this["bShowedUpdates"]));
+            }
+            set {
+                this["bShowedUpdates"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("MobaXterm")]
+        public string app_softw_name {
+            get {
+                return ((string)(this["app_softw_name"]));
             }
         }
     }

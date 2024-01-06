@@ -511,6 +511,39 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update v{0} is available.
+        ///
+        ///Updates ensure this patch works with the latest version of the target software. If you have issues generating a license for {1}, download the update by going to the top menu:
+        ///     Help ► Updates
+        ///
+        ///Would you like to view the update? If not, program will start as normal..
+        /// </summary>
+        internal static string msgbox_update_msg {
+            get {
+                return ResourceManager.GetString("msgbox_update_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Available: {0} ► {1}.
+        /// </summary>
+        internal static string msgbox_update_title {
+            get {
+                return ResourceManager.GetString("msgbox_update_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap notify_01 {
+            get {
+                object obj = ResourceManager.GetObject("notify_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This program will generate a.
         /// </summary>
         internal static string parent_intro_1 {

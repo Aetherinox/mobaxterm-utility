@@ -193,10 +193,12 @@ namespace MobaXtermKG
             this.mnu_Sub_Updates.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.mnu_Sub_Updates.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.mnu_Sub_Updates.ForeColor = System.Drawing.Color.White;
+            this.mnu_Sub_Updates.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.mnu_Sub_Updates.Name = "mnu_Sub_Updates";
-            this.mnu_Sub_Updates.Size = new System.Drawing.Size(183, 22);
-            this.mnu_Sub_Updates.Text = "Check for Updates";
+            this.mnu_Sub_Updates.Size = new System.Drawing.Size(180, 22);
+            this.mnu_Sub_Updates.Text = "Updates";
             this.mnu_Sub_Updates.Click += new System.EventHandler(this.mnu_Sub_Updates_Click);
+            this.mnu_Sub_Updates.Paint += new System.Windows.Forms.PaintEventHandler(this.mnu_Sub_Updates_Paint);
             // 
             // mnu_Sub_Validate
             // 
@@ -204,7 +206,7 @@ namespace MobaXtermKG
             this.mnu_Sub_Validate.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.mnu_Sub_Validate.ForeColor = System.Drawing.Color.White;
             this.mnu_Sub_Validate.Name = "mnu_Sub_Validate";
-            this.mnu_Sub_Validate.Size = new System.Drawing.Size(183, 22);
+            this.mnu_Sub_Validate.Size = new System.Drawing.Size(180, 22);
             this.mnu_Sub_Validate.Text = "Validate Signature";
             this.mnu_Sub_Validate.Click += new System.EventHandler(this.mnu_Sub_Validate_Click);
             // 
@@ -215,7 +217,7 @@ namespace MobaXtermKG
             this.mnu_Help_Sep_1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.mnu_Help_Sep_1.Name = "mnu_Help_Sep_1";
             this.mnu_Help_Sep_1.Overflow = System.Windows.Forms.ToolStripItemOverflow.Always;
-            this.mnu_Help_Sep_1.Size = new System.Drawing.Size(180, 1);
+            this.mnu_Help_Sep_1.Size = new System.Drawing.Size(177, 1);
             this.mnu_Help_Sep_1.Paint += new System.Windows.Forms.PaintEventHandler(this.mnu_Help_Sep_1_Paint);
             // 
             // mnu_Sub_About
@@ -224,7 +226,7 @@ namespace MobaXtermKG
             this.mnu_Sub_About.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.mnu_Sub_About.ForeColor = System.Drawing.Color.White;
             this.mnu_Sub_About.Name = "mnu_Sub_About";
-            this.mnu_Sub_About.Size = new System.Drawing.Size(183, 22);
+            this.mnu_Sub_About.Size = new System.Drawing.Size(180, 22);
             this.mnu_Sub_About.Text = "About";
             this.mnu_Sub_About.Click += new System.EventHandler(this.mnu_Sub_About_Click);
             // 

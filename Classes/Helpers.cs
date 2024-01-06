@@ -152,20 +152,20 @@ namespace MobaXtermKG
             if ( i_filesFound > 0 )
             {
                 string found    = drives[0];
-                string folder   = Path.GetDirectoryName( found );
+                string dir      = Path.GetDirectoryName( found );
 
-                if ( Directory.Exists( folder ) )
+                if ( Directory.Exists( dir ) )
                 {
 
                     #if DEBUG
                         MessageBox.Show(
-                            string.Format( Lng.msgbox_debug_findpath_msg, app_target_exe, folder ),
+                            string.Format( Lng.msgbox_debug_findpath_msg, app_target_exe, dir ),
                             string.Format( Lng.msgbox_debug_findpath_title ),
                             MessageBoxButtons.OK, MessageBoxIcon.None
                         );
                     #endif
 
-                    return folder;
+                    return found;
                 }
             }
 
@@ -179,7 +179,7 @@ namespace MobaXtermKG
             foreach ( String folder in folders )
             {
                 if ( File.Exists( folder + app_target_exe ) )
-
+                {
                     #if DEBUG
                         MessageBox.Show(
                             string.Format( Lng.msgbox_debug_findpath_env_c1_msg, app_target_exe, folder ),
@@ -188,9 +188,10 @@ namespace MobaXtermKG
                         );
                     #endif
 
-                    return folder;
+                    return folder + app_target_exe;
+                }
                 else if ( File.Exists( folder + "\\" + app_target_exe ) )
-
+                {
                     #if DEBUG
                         MessageBox.Show(
                             string.Format( Lng.msgbox_debug_findpath_env_c2_msg, app_target_exe, folder ),
@@ -199,7 +200,8 @@ namespace MobaXtermKG
                         );
                     #endif
 
-                    return folder + "\\";
+                    return folder + "\\" + app_target_exe;
+                }
             }
 
             /*
@@ -218,7 +220,7 @@ namespace MobaXtermKG
                     );
                 #endif
 
-                return Path.GetDirectoryName( find_InProg64 );
+                return find_InProg64;
             }
 
             /*
@@ -228,6 +230,7 @@ namespace MobaXtermKG
 
             if ( File.Exists( find_InProg86 ) )
             {
+
                 #if DEBUG
                     MessageBox.Show(
                         string.Format( Lng.msgbox_debug_findpath_msg, app_target_exe, find_InProg86 ),
@@ -236,7 +239,7 @@ namespace MobaXtermKG
                     );
                 #endif
 
-                return Path.GetDirectoryName( find_InProg86 );
+                return find_InProg86;
             }
 
             /*
@@ -255,7 +258,7 @@ namespace MobaXtermKG
                     );
                 #endif
 
-                return Path.GetDirectoryName( find_InAppData );
+                return find_InAppData;
             }
 
             /*
@@ -274,14 +277,12 @@ namespace MobaXtermKG
                     );
                 #endif
 
-                return Path.GetDirectoryName( find_InAppHome );
+                return find_InAppHome;
             }
 
             /*
                 Last Resort
                     Utilize powershell get-command to see if application is installed
-                    Will compile powershell to run the command:
-                        (get-command Application.exe).Path
             */
 
             string ps_query         = "(get-command " + app_target_exe + ").Path";
@@ -305,7 +306,7 @@ namespace MobaXtermKG
                     );
                 #endif
 
-                return Path.GetDirectoryName( target_where );
+                return target_where;
             }
 
             return String.Empty;
