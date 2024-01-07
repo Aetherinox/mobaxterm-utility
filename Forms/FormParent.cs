@@ -8,6 +8,7 @@ using Lng = MobaXtermKG.Properties.Resources;
 using Cfg = MobaXtermKG.Properties.Settings;
 using System.Net.Http;
 using System.Collections.Generic;
+using System.Web.Script.Serialization;
 
 namespace MobaXtermKG
 {
@@ -65,7 +66,9 @@ namespace MobaXtermKG
             static private string cfg_def_version       = Cfg.Default.app_def_version;
             static private string cfg_def_users         = Cfg.Default.app_def_users;
 
-            private readonly HttpClient httpClient      = new HttpClient();
+            /*
+                variables > updates
+            */
 
             private bool bUpdateAvailable               = false;
 
@@ -75,6 +78,10 @@ namespace MobaXtermKG
 
             /*
                 Frame > Parent
+            */
+
+            /*
+                Manifest > Json
             */
 
             public class Manifest
@@ -164,6 +171,47 @@ namespace MobaXtermKG
             {
                 mnu_Main.Renderer = new ToolStripProfessionalRenderer( new mnu_Main_ColorTable( ) );
                 StatusBar.Update( Lng.status_genlicense );
+
+
+                using (var webClient = new System.Net.WebClient()) {
+                    var json = webClient.DownloadString( Cfg.Default.app_url_manifest );
+
+
+                    JavaScriptSerializer serializer = new JavaScriptSerializer(); 
+                    Manifest manifest   = serializer.Deserialize<Manifest>(json);
+                    string version      = manifest.version;
+
+                    /*
+                        get json from url
+                    */
+
+                    bool bUpdate                = AppInfo.UpdateAvailable( manifest.version );
+                    string ver_curr             = AppInfo.PublishVersion;
+
+                    if ( bUpdate )
+                        bUpdateAvailable = true;
+
+                    /*
+                        update checker
+                    */
+
+                    if ( ( bUpdateAvailable && !Cfg.Default.bShowedUpdates ) || ( AppInfo.bIsDebug( ) ) )
+                    {
+                        Cfg.Default.bShowedUpdates = true;
+
+                        var result = MessageBox.Show( string.Format( Lng.msgbox_update_msg, manifest.version, Cfg.Default.app_softw_name ),
+                            string.Format( Lng.msgbox_update_title, ver_curr, manifest.version ),
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation
+                        );
+
+                        string answer   = result.ToString( ).ToLower( );
+
+                        if ( String.IsNullOrEmpty( answer ) || answer == "yes" )
+                            System.Diagnostics.Process.Start( Cfg.Default.app_url_github + "/releases/" );
+                    }
+
+                }
+
 
             }
 
