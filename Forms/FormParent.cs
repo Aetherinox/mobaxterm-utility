@@ -6,10 +6,8 @@ using System.Drawing;
 using MobaXtermKG.Forms;
 using Lng = MobaXtermKG.Properties.Resources;
 using Cfg = MobaXtermKG.Properties.Settings;
-using System.Net;
 using System.Net.Http;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace MobaXtermKG
 {
@@ -166,38 +164,6 @@ namespace MobaXtermKG
             {
                 mnu_Main.Renderer = new ToolStripProfessionalRenderer( new mnu_Main_ColorTable( ) );
                 StatusBar.Update( Lng.status_genlicense );
-
-
-                /*
-                    get json from url
-                */
-
-                var json                    = httpClient.GetStringAsync( Cfg.Default.app_url_manifest ).Result;
-                Manifest manifest           = JsonConvert.DeserializeObject<Manifest>( json );
-                bool bUpdate                = AppInfo.UpdateAvailable( manifest.version );
-                string ver_curr             = AppInfo.PublishVersion;
-
-                if ( bUpdate )
-                    bUpdateAvailable = true;
-
-                /*
-                    update checker
-                */
-
-                if ( ( bUpdateAvailable && !Cfg.Default.bShowedUpdates ) || ( AppInfo.bIsDebug( ) && !Cfg.Default.bShowedUpdates ) )
-                {
-                    Cfg.Default.bShowedUpdates = true;
-
-                    var result = MessageBox.Show( string.Format( Lng.msgbox_update_msg, manifest.version, Cfg.Default.app_softw_name ),
-                        string.Format( Lng.msgbox_update_title, ver_curr, manifest.version ),
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation
-                    );
-
-                    string answer   = result.ToString( ).ToLower( );
-
-                    if ( String.IsNullOrEmpty( answer ) || answer == "yes" )
-                        System.Diagnostics.Process.Start( Cfg.Default.app_url_github + "/releases/" );
-                }
 
             }
 
