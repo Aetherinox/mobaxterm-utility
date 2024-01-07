@@ -57,7 +57,7 @@ namespace MobaXtermKG
             static private string app_target_exe        = Cfg.Default.app_mobaxterm_exe;
 
             /*
-                variables > current keygen path / folder
+                Define > current keygen path / folder
             */
 
             static private string app_cli_exe           = Cfg.Default.app_cli_exe;
@@ -67,18 +67,10 @@ namespace MobaXtermKG
             static private string cfg_def_users         = Cfg.Default.app_def_users;
 
             /*
-                variables > updates
+                Define > updates
             */
 
             private bool bUpdateAvailable               = false;
-
-        #endregion
-
-        #region "Main Window: Initialize"
-
-            /*
-                Frame > Parent
-            */
 
             /*
                 Manifest > Json
@@ -93,6 +85,10 @@ namespace MobaXtermKG
                 public string url { get; set; }
                 public IList<string> scripts { get; set; }
             }
+
+        #endregion
+
+        #region "Main Window: Initialize"
 
             /*
                 Form > Parent
@@ -172,30 +168,40 @@ namespace MobaXtermKG
                 mnu_Main.Renderer = new ToolStripProfessionalRenderer( new mnu_Main_ColorTable( ) );
                 StatusBar.Update( Lng.status_genlicense );
 
+                /*
+                    update checker > json
+                        views the data stored at https://github.com/Aetherinox/MobaXtermKeygen/blob/master/Manifest/manifest.json
+                */
 
-                using (var webClient = new System.Net.WebClient()) {
+                using ( var webClient = new System.Net.WebClient( ) )
+                {
                     var json = webClient.DownloadString( Cfg.Default.app_url_manifest );
 
+                    if( json == null )
+                        return;
 
-                    JavaScriptSerializer serializer = new JavaScriptSerializer(); 
-                    Manifest manifest   = serializer.Deserialize<Manifest>(json);
-                    string version      = manifest.version;
+                    JavaScriptSerializer serializer     = new JavaScriptSerializer( ); 
+                    Manifest manifest                   = serializer.Deserialize<Manifest>( json );
 
                     /*
-                        get json from url
+                        Check if update is available for end-user
                     */
 
-                    bool bUpdate                = AppInfo.UpdateAvailable( manifest.version );
-                    string ver_curr             = AppInfo.PublishVersion;
+                    bool bUpdate        = AppInfo.UpdateAvailable( manifest.version );
+                    string ver_curr     = AppInfo.PublishVersion;
 
-                    if ( bUpdate )
+                    /*
+                        determines if the update notification appears
+                    */
+
+                    if ( bUpdate || AppInfo.bIsDebug( ) )
                         bUpdateAvailable = true;
 
                     /*
                         update checker
                     */
 
-                    if ( ( bUpdateAvailable && !Cfg.Default.bShowedUpdates ) || ( AppInfo.bIsDebug( ) ) )
+                    if ( ( bUpdateAvailable && !Cfg.Default.bShowedUpdates ) )
                     {
                         Cfg.Default.bShowedUpdates = true;
 
@@ -206,7 +212,7 @@ namespace MobaXtermKG
 
                         string answer   = result.ToString( ).ToLower( );
 
-                        if ( String.IsNullOrEmpty( answer ) || answer == "yes" )
+                        if ( answer == "yes" )
                             System.Diagnostics.Process.Start( Cfg.Default.app_url_github + "/releases/" );
                     }
 

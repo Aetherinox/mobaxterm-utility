@@ -513,8 +513,7 @@ namespace MobaXtermKG.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Update v{0} is available.
         ///
-        ///Updates ensure this patch works with the latest version of the target software. If you have issues generating a license for {1}, download the update by going to the top menu:
-        ///     Help ► Updates
+        ///Updates ensure this patch works with the latest version {1}. If you have issues using this tool, download the latest version in the top menu: Help ► Updates
         ///
         ///Would you like to view the update? If not, program will start as normal..
         /// </summary>
