@@ -157,12 +157,12 @@ namespace MobaXtermKG
             // mnu_Sub_Exit
             // 
             this.mnu_Sub_Exit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-            this.mnu_Sub_Exit.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.mnu_Sub_Exit.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.mnu_Sub_Exit.ForeColor = System.Drawing.Color.White;
             this.mnu_Sub_Exit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.mnu_Sub_Exit.Name = "mnu_Sub_Exit";
             this.mnu_Sub_Exit.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.mnu_Sub_Exit.Size = new System.Drawing.Size(95, 21);
+            this.mnu_Sub_Exit.Size = new System.Drawing.Size(180, 21);
             this.mnu_Sub_Exit.Text = "Exit";
             this.mnu_Sub_Exit.Click += new System.EventHandler(this.mnu_Sub_Exit_Click);
             // 
@@ -191,7 +191,7 @@ namespace MobaXtermKG
             // mnu_Sub_Updates
             // 
             this.mnu_Sub_Updates.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-            this.mnu_Sub_Updates.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.mnu_Sub_Updates.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.mnu_Sub_Updates.ForeColor = System.Drawing.Color.White;
             this.mnu_Sub_Updates.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.mnu_Sub_Updates.Name = "mnu_Sub_Updates";
@@ -203,7 +203,7 @@ namespace MobaXtermKG
             // mnu_Sub_Validate
             // 
             this.mnu_Sub_Validate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-            this.mnu_Sub_Validate.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.mnu_Sub_Validate.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.mnu_Sub_Validate.ForeColor = System.Drawing.Color.White;
             this.mnu_Sub_Validate.Name = "mnu_Sub_Validate";
             this.mnu_Sub_Validate.Size = new System.Drawing.Size(180, 22);
@@ -223,7 +223,7 @@ namespace MobaXtermKG
             // mnu_Sub_About
             // 
             this.mnu_Sub_About.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-            this.mnu_Sub_About.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.mnu_Sub_About.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.mnu_Sub_About.ForeColor = System.Drawing.Color.White;
             this.mnu_Sub_About.Name = "mnu_Sub_About";
             this.mnu_Sub_About.Size = new System.Drawing.Size(180, 22);

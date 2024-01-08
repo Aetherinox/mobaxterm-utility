@@ -265,18 +265,18 @@ namespace MobaXtermKG.Properties {
         ///
         ///{1}.
         /// </summary>
-        internal static string msgbox_debug_findpath_env_c1_msg {
+        internal static string msgbox_debug_fpath_env_c1_msg {
             get {
-                return ResourceManager.GetString("msgbox_debug_findpath_env_c1_msg", resourceCulture);
+                return ResourceManager.GetString("msgbox_debug_fpath_env_c1_msg", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Debug: 1000C-1.
         /// </summary>
-        internal static string msgbox_debug_findpath_env_c1_title {
+        internal static string msgbox_debug_fpath_env_c1_title {
             get {
-                return ResourceManager.GetString("msgbox_debug_findpath_env_c1_title", resourceCulture);
+                return ResourceManager.GetString("msgbox_debug_fpath_env_c1_title", resourceCulture);
             }
         }
         
@@ -285,18 +285,18 @@ namespace MobaXtermKG.Properties {
         ///
         ///{1}.
         /// </summary>
-        internal static string msgbox_debug_findpath_env_c2_msg {
+        internal static string msgbox_debug_fpath_env_c2_msg {
             get {
-                return ResourceManager.GetString("msgbox_debug_findpath_env_c2_msg", resourceCulture);
+                return ResourceManager.GetString("msgbox_debug_fpath_env_c2_msg", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Debug: 1000C-2.
         /// </summary>
-        internal static string msgbox_debug_findpath_env_c2_title {
+        internal static string msgbox_debug_fpath_env_c2_title {
             get {
-                return ResourceManager.GetString("msgbox_debug_findpath_env_c2_title", resourceCulture);
+                return ResourceManager.GetString("msgbox_debug_fpath_env_c2_title", resourceCulture);
             }
         }
         
@@ -305,9 +305,9 @@ namespace MobaXtermKG.Properties {
         ///
         ///{1}.
         /// </summary>
-        internal static string msgbox_debug_findpath_msg {
+        internal static string msgbox_debug_fpath_msg {
             get {
-                return ResourceManager.GetString("msgbox_debug_findpath_msg", resourceCulture);
+                return ResourceManager.GetString("msgbox_debug_fpath_msg", resourceCulture);
             }
         }
         
@@ -316,27 +316,27 @@ namespace MobaXtermKG.Properties {
         ///
         ///{1}.
         /// </summary>
-        internal static string msgbox_debug_findpath_ps_msg {
+        internal static string msgbox_debug_fpath_ps_msg {
             get {
-                return ResourceManager.GetString("msgbox_debug_findpath_ps_msg", resourceCulture);
+                return ResourceManager.GetString("msgbox_debug_fpath_ps_msg", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Debug: 1000B.
         /// </summary>
-        internal static string msgbox_debug_findpath_ps_title {
+        internal static string msgbox_debug_fpath_ps_title {
             get {
-                return ResourceManager.GetString("msgbox_debug_findpath_ps_title", resourceCulture);
+                return ResourceManager.GetString("msgbox_debug_fpath_ps_title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Debug: 1000A.
         /// </summary>
-        internal static string msgbox_debug_findpath_title {
+        internal static string msgbox_debug_fpath_title {
             get {
-                return ResourceManager.GetString("msgbox_debug_findpath_title", resourceCulture);
+                return ResourceManager.GetString("msgbox_debug_fpath_title", resourceCulture);
             }
         }
         

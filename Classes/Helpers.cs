@@ -40,6 +40,12 @@ namespace MobaXtermKG
     {
 
         /*
+            Define > Classes
+        */
+
+        private AppInfo AppInfo             = new AppInfo( );
+
+        /*
             Get filename / paths to currently running patcher
         */
 
@@ -157,13 +163,14 @@ namespace MobaXtermKG
                 if ( Directory.Exists( dir ) )
                 {
 
-                    #if DEBUG
+                    if ( AppInfo.bIsDebug( ) )
+                    {
                         MessageBox.Show(
-                            string.Format( Lng.msgbox_debug_findpath_msg, app_target_exe, dir ),
-                            string.Format( Lng.msgbox_debug_findpath_title ),
+                            string.Format( Lng.msgbox_debug_fpath_msg, app_target_exe, dir ),
+                            string.Format( Lng.msgbox_debug_fpath_title ),
                             MessageBoxButtons.OK, MessageBoxIcon.None
                         );
-                    #endif
+                    }
 
                     return found;
                 }
@@ -180,25 +187,27 @@ namespace MobaXtermKG
             {
                 if ( File.Exists( folder + app_target_exe ) )
                 {
-                    #if DEBUG
+                    if ( AppInfo.bIsDebug( ) )
+                    {
                         MessageBox.Show(
-                            string.Format( Lng.msgbox_debug_findpath_env_c1_msg, app_target_exe, folder ),
-                            string.Format( Lng.msgbox_debug_findpath_env_c1_title ),
+                            string.Format( Lng.msgbox_debug_fpath_env_c1_msg, app_target_exe, folder ),
+                            string.Format( Lng.msgbox_debug_fpath_env_c1_title ),
                             MessageBoxButtons.OK, MessageBoxIcon.None
                         );
-                    #endif
+                    }
 
                     return folder + app_target_exe;
                 }
                 else if ( File.Exists( folder + "\\" + app_target_exe ) )
                 {
-                    #if DEBUG
+                    if ( AppInfo.bIsDebug( ) )
+                    {
                         MessageBox.Show(
-                            string.Format( Lng.msgbox_debug_findpath_env_c2_msg, app_target_exe, folder ),
-                            string.Format( Lng.msgbox_debug_findpath_env_c2_title ),
+                            string.Format( Lng.msgbox_debug_fpath_env_c2_msg, app_target_exe, folder ),
+                            string.Format( Lng.msgbox_debug_fpath_env_c2_title ),
                             MessageBoxButtons.OK, MessageBoxIcon.None
                         );
-                    #endif
+                    }
 
                     return folder + "\\" + app_target_exe;
                 }
@@ -212,13 +221,14 @@ namespace MobaXtermKG
             if ( File.Exists( find_InProg64 ) )
             {
 
-                #if DEBUG
+                if ( AppInfo.bIsDebug( ) )
+                {
                     MessageBox.Show(
-                        string.Format( Lng.msgbox_debug_findpath_msg, app_target_exe, find_InProg64 ),
-                        string.Format( Lng.msgbox_debug_findpath_title ),
+                        string.Format( Lng.msgbox_debug_fpath_msg, app_target_exe, find_InProg64 ),
+                        string.Format( Lng.msgbox_debug_fpath_title ),
                         MessageBoxButtons.OK, MessageBoxIcon.None
                     );
-                #endif
+                }
 
                 return find_InProg64;
             }
@@ -231,13 +241,14 @@ namespace MobaXtermKG
             if ( File.Exists( find_InProg86 ) )
             {
 
-                #if DEBUG
+                if ( AppInfo.bIsDebug( ) )
+                {
                     MessageBox.Show(
-                        string.Format( Lng.msgbox_debug_findpath_msg, app_target_exe, find_InProg86 ),
-                        string.Format( Lng.msgbox_debug_findpath_title ),
+                        string.Format( Lng.msgbox_debug_fpath_msg, app_target_exe, find_InProg86 ),
+                        string.Format( Lng.msgbox_debug_fpath_title ),
                         MessageBoxButtons.OK, MessageBoxIcon.None
                     );
-                #endif
+                }
 
                 return find_InProg86;
             }
@@ -250,13 +261,14 @@ namespace MobaXtermKG
             if ( File.Exists( find_InAppData ) )
             {
 
-                #if DEBUG
+                if ( AppInfo.bIsDebug( ) )
+                {
                     MessageBox.Show(
-                        string.Format( Lng.msgbox_debug_findpath_msg, app_target_exe, find_InAppData ),
-                        string.Format( Lng.msgbox_debug_findpath_title ),
+                        string.Format( Lng.msgbox_debug_fpath_msg, app_target_exe, find_InAppData ),
+                        string.Format( Lng.msgbox_debug_fpath_title ),
                         MessageBoxButtons.OK, MessageBoxIcon.None
                     );
-                #endif
+                }
 
                 return find_InAppData;
             }
@@ -269,13 +281,14 @@ namespace MobaXtermKG
             if ( File.Exists( find_InAppHome ) )
             {
 
-                #if DEBUG
+                if ( AppInfo.bIsDebug( ) )
+                {
                     MessageBox.Show(
-                        string.Format( Lng.msgbox_debug_findpath_msg, app_target_exe, find_InAppHome ),
-                        string.Format( Lng.msgbox_debug_findpath_title ),
+                        string.Format( Lng.msgbox_debug_fpath_msg, app_target_exe, find_InAppHome ),
+                        string.Format( Lng.msgbox_debug_fpath_title ),
                         MessageBoxButtons.OK, MessageBoxIcon.None
                     );
-                #endif
+                }
 
                 return find_InAppHome;
             }
@@ -298,13 +311,14 @@ namespace MobaXtermKG
             if ( File.Exists( target_where ) )
             {
 
-                #if DEBUG
+                if ( AppInfo.bIsDebug( ) )
+                {
                     MessageBox.Show(
-                        string.Format( Lng.msgbox_debug_findpath_ps_msg, app_target_exe, target_where ),
-                        string.Format( Lng.msgbox_debug_findpath_ps_title ),
+                        string.Format( Lng.msgbox_debug_fpath_ps_msg, app_target_exe, target_where ),
+                        string.Format( Lng.msgbox_debug_fpath_ps_title ),
                         MessageBoxButtons.OK, MessageBoxIcon.None
                     );
-                #endif
+                }
 
                 return target_where;
             }

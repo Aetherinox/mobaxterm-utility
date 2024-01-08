@@ -20,28 +20,34 @@ namespace MobaXtermKG
     class Serial
     {
 
-            /*
-                Could not find MobaXterm.exe
+        /*
+            Define > Classes
+        */
 
-                patch_launch_fullpath       : Full path to exe
-                patch_launch_dir            : Directory only
-                patch_launch_exe            : Patcher exe filename only
-            */
+        private AppInfo AppInfo             = new AppInfo( );
 
-            static private string patch_launch_fullpath = Process.GetCurrentProcess( ).MainModule.FileName;
-            static private string patch_launch_dir      = Path.GetDirectoryName( patch_launch_fullpath );
-            static private string patch_launch_exe      = Path.GetFileName( patch_launch_fullpath );
-            static private string app_target_exe        = Cfg.Default.app_mobaxterm_exe;
+        /*
+            Could not find MobaXterm.exe
 
-            /*
-                variables > current keygen path / folder
-            */
+            patch_launch_fullpath       : Full path to exe
+            patch_launch_dir            : Directory only
+            patch_launch_exe            : Patcher exe filename only
+        */
 
-            static private string app_cli_exe           = Cfg.Default.app_cli_exe;
-            static private string app_cli_path          = Path.Combine( patch_launch_dir, app_cli_exe );
+        static private string patch_launch_fullpath = Process.GetCurrentProcess( ).MainModule.FileName;
+        static private string patch_launch_dir      = Path.GetDirectoryName( patch_launch_fullpath );
+        static private string patch_launch_exe      = Path.GetFileName( patch_launch_fullpath );
+        static private string app_target_exe        = Cfg.Default.app_mobaxterm_exe;
 
-            static private string cfg_def_version       = Cfg.Default.app_def_version;
-            static private string cfg_def_users         = Cfg.Default.app_def_users;
+        /*
+            variables > current keygen path / folder
+        */
+
+        static private string app_cli_exe           = Cfg.Default.app_cli_exe;
+        static private string app_cli_path          = Path.Combine( patch_launch_dir, app_cli_exe );
+
+        static private string cfg_def_version       = Cfg.Default.app_def_version;
+        static private string cfg_def_users         = Cfg.Default.app_def_users;
 
         /*
              To generate MobaXterm license key, we rely on our command-line tool.
@@ -55,13 +61,14 @@ namespace MobaXtermKG
         public string Generate( String query )
         {
 
-            #if DEBUG
+            if ( AppInfo.bIsDebug( ) )
+            {
                 MessageBox.Show(
                     string.Format( Lng.msgbox_debug_callfunc_msg, "Generate" ),
                     string.Format( Lng.msgbox_debug_callfunc_title ),
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation
                 );
-            #endif
+            }
 
             //  Export patched resource file
             File.WriteAllBytes( app_cli_exe, Lng.mobaxtgen_cli );
@@ -101,12 +108,13 @@ namespace MobaXtermKG
                 {
                     if ( PSItem != null )
                     {
-                        #if DEBUG
+                        if ( AppInfo.bIsDebug( ) )
+                        {
                             MessageBox.Show( String.Format( Lng.msgbox_debug_ps_output_msg, PSItem ),
                                 Lng.msgbox_debug_ps_output_title,
                                 MessageBoxButtons.OK, MessageBoxIcon.None
                             );
-                        #endif
+                        }
 
                         sb.AppendLine( PSItem.ToString( ) );
                     }
@@ -137,13 +145,14 @@ namespace MobaXtermKG
         public string SaveKey_Dialog( String name, String ver = "23.6", String users = "1" )
         {
 
-            #if DEBUG
+            if ( AppInfo.bIsDebug( ) )
+            {
                 MessageBox.Show(
                     string.Format( Lng.msgbox_debug_callfunc_msg, "SaveKey_Dialog" ),
                     string.Format( Lng.msgbox_debug_callfunc_title ),
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation
                 );
-            #endif
+            }
 
             SaveFileDialog dlg      = new SaveFileDialog( );
 
@@ -221,13 +230,14 @@ namespace MobaXtermKG
         public string SaveKey( String path, String name, String ver = "23.6", String users = "1" )
         {
 
-            #if DEBUG
+            if ( AppInfo.bIsDebug( ) )
+            {
                 MessageBox.Show(
                     string.Format( Lng.msgbox_debug_callfunc_msg, "SaveKey" ),
                     string.Format( Lng.msgbox_debug_callfunc_title ),
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation
                 );
-            #endif
+            }
 
             //  Set vars where mxtpro license file will be extracted from activator and determine the name
             //  of the Custom.mxtpro.bak

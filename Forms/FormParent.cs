@@ -22,7 +22,7 @@ namespace MobaXtermKG
                 Define > Classes
             */
 
-            static AppInfo AppInfo         = new AppInfo();
+            private AppInfo AppInfo         = new AppInfo();
             private Helpers Helpers         = new Helpers();
             readonly private Serial Serial  = new Serial();
 
@@ -217,7 +217,6 @@ namespace MobaXtermKG
                     }
 
                 }
-
 
             }
 

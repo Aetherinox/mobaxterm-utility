@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-/*
+﻿/*
     @app        : MobaXterm Keygen
     @repo       : https://github.com/Aetherinox/MobaXtermKeygen
     @author     : Aetherinox
 */
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lng = MobaXtermKG.Properties.Resources;

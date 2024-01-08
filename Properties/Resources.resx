@@ -184,36 +184,36 @@
   <data name="msgbox_debug_callfunc_title" xml:space="preserve">
     <value>Function Called</value>
   </data>
-  <data name="msgbox_debug_findpath_env_c1_msg" xml:space="preserve">
+  <data name="msgbox_debug_fpath_env_c1_msg" xml:space="preserve">
     <value>Located {0} with Windows Env Var in:
 
 {1}</value>
   </data>
-  <data name="msgbox_debug_findpath_env_c1_title" xml:space="preserve">
+  <data name="msgbox_debug_fpath_env_c1_title" xml:space="preserve">
     <value>Debug: 1000C-1</value>
   </data>
-  <data name="msgbox_debug_findpath_env_c2_msg" xml:space="preserve">
+  <data name="msgbox_debug_fpath_env_c2_msg" xml:space="preserve">
     <value>Located {0} with Windows Env Var in:
 
 {1}</value>
   </data>
-  <data name="msgbox_debug_findpath_env_c2_title" xml:space="preserve">
+  <data name="msgbox_debug_fpath_env_c2_title" xml:space="preserve">
     <value>Debug: 1000C-2</value>
   </data>
-  <data name="msgbox_debug_findpath_msg" xml:space="preserve">
+  <data name="msgbox_debug_fpath_msg" xml:space="preserve">
     <value>Located {0} In:
 
 {1}</value>
   </data>
-  <data name="msgbox_debug_findpath_ps_msg" xml:space="preserve">
+  <data name="msgbox_debug_fpath_ps_msg" xml:space="preserve">
     <value>Located {0} with Powershell in:
 
 {1}</value>
   </data>
-  <data name="msgbox_debug_findpath_ps_title" xml:space="preserve">
+  <data name="msgbox_debug_fpath_ps_title" xml:space="preserve">
     <value>Debug: 1000B</value>
   </data>
-  <data name="msgbox_debug_findpath_title" xml:space="preserve">
+  <data name="msgbox_debug_fpath_title" xml:space="preserve">
     <value>Debug: 1000A</value>
   </data>
   <data name="msgbox_debug_ps_output_msg" xml:space="preserve">
