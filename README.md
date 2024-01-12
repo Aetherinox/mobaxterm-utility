@@ -83,7 +83,7 @@ Binaries are signed with one of the following x509 certificates:
 
 | Thumbprint | Starting Date |
 | --- | --- |
-| `cd38de71bc3f5aca427c4a0088b0fe14d29476f4` | 02/2024 |
+| `58a1539d6988d76f44bae27c27ed5645d3b1222a` | 02/2024 |
 | `70575bdfb02b3f1b45a37431bef9a8c9933a4ace` | 07/2023 |
 
 <br />
