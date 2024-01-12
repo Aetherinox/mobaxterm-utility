@@ -77,7 +77,20 @@ As of `v1.0.0.0` and onwards, binaries are GPG signed with the key `CB5C4C30CD0D
 - [keyserver.ubuntu.com](keyserver.ubuntu.com)
 - [keys.openpgp.org](https://keys.openpgp.org)
 
-Binaries are also signed with a certificate which has the Thumbprint `70575bdfb02b3f1b45a37431bef9a8c9933a4ace`. If you downloaded this elsewhere on the internet and the binary is not signed with that certificate serial number; **IT IS NOT MINE**. You should delete it.
+<br />
+
+Binaries are signed with one of the following x509 certificates:
+
+| Thumbprint | Starting Date |
+| --- | --- |
+| `cd38de71bc3f5aca427c4a0088b0fe14d29476f4` | 02/2024 |
+| `70575bdfb02b3f1b45a37431bef9a8c9933a4ace` | 07/2023 |
+
+<br />
+
+If you downloaded this elsewhere on the internet and the files are not signed with with above certificates; **IT IS NOT MINE**. You should delete it.
+
+- 
 
 <br />
 
