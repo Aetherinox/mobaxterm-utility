@@ -90,8 +90,6 @@ Binaries are signed with one of the following x509 certificates:
 
 If you downloaded this elsewhere on the internet and the files are not signed with with above certificates; **IT IS NOT MINE**. You should delete it.
 
-- 
-
 <br />
 
 ---
