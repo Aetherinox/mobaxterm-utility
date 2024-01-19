@@ -86,6 +86,8 @@
 /Properties/.vshistory*
 
 # Allow: Exts
+!/app.config
+!/app.manifest
 !*.csproj
 !*.sln
 !*.cs
