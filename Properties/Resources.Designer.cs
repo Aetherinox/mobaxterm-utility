@@ -223,6 +223,16 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] mobaxterm_cli {
+            get {
+                object obj = ResourceManager.GetObject("mobaxterm_cli", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap mobaxterm_logo_1 {
@@ -233,12 +243,20 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to This program requires it being ran as admin. Right-click on the program and select &quot;Run As Admin&quot;..
         /// </summary>
-        internal static byte[] mobaxtgen_cli {
+        internal static string msgbox_core_runas_msg {
             get {
-                object obj = ResourceManager.GetObject("mobaxtgen_cli", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("msgbox_core_runas_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requires Admin.
+        /// </summary>
+        internal static string msgbox_core_runas_title {
+            get {
+                return ResourceManager.GetString("msgbox_core_runas_title", resourceCulture);
             }
         }
         
@@ -257,6 +275,45 @@ namespace MobaXtermKG.Properties {
         internal static string msgbox_debug_callfunc_title {
             get {
                 return ResourceManager.GetString("msgbox_debug_callfunc_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to disable debug logging?.
+        /// </summary>
+        internal static string msgbox_debug_egg_disable_msg {
+            get {
+                return ResourceManager.GetString("msgbox_debug_egg_disable_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Debug Logging?.
+        /// </summary>
+        internal static string msgbox_debug_egg_disable_title {
+            get {
+                return ResourceManager.GetString("msgbox_debug_egg_disable_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to enable debug logging?
+        ///
+        ///All logs will be stored in the location:
+        ///     {0}.
+        /// </summary>
+        internal static string msgbox_debug_egg_enable_msg {
+            get {
+                return ResourceManager.GetString("msgbox_debug_egg_enable_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable Debug Logging?.
+        /// </summary>
+        internal static string msgbox_debug_egg_enable_title {
+            get {
+                return ResourceManager.GetString("msgbox_debug_egg_enable_title", resourceCulture);
             }
         }
         
@@ -390,7 +447,7 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No valid Path to MobaXterm.
+        ///   Looks up a localized string similar to No valid Path to {0|.
         /// </summary>
         internal static string msgbox_err_locate_title {
             get {
@@ -445,30 +502,18 @@ namespace MobaXtermKG.Properties {
         ///The following locations were searched:
         ///{1}.
         /// </summary>
-        internal static string msgbox_nolocopen_msg {
+        internal static string msgbox_nolocate_cannot_open_msg {
             get {
-                return ResourceManager.GetString("msgbox_nolocopen_msg", resourceCulture);
+                return ResourceManager.GetString("msgbox_nolocate_cannot_open_msg", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to {0} Not Found.
         /// </summary>
-        internal static string msgbox_nolocopen_title {
+        internal static string msgbox_nolocate_cannot_open_title {
             get {
-                return ResourceManager.GetString("msgbox_nolocopen_title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Patcher cannot determine where MobaXterm is installed
-        ///Tried looking in {0}
-        ///
-        ///You will be prompted to manually locate MobaXterm.exe. Ensure that MobaXterm is installed on your system..
-        /// </summary>
-        internal static string msgbox_nolocpath_msg {
-            get {
-                return ResourceManager.GetString("msgbox_nolocpath_msg", resourceCulture);
+                return ResourceManager.GetString("msgbox_nolocate_cannot_open_title", resourceCulture);
             }
         }
         
@@ -607,20 +652,119 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fatal Error: Can&apos;t find {0}.
-        /// </summary>
-        internal static string status_libmissing {
-            get {
-                return ResourceManager.GetString("status_libmissing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Critical error -- restart keygen.
         /// </summary>
         internal static string status_misslib_critical_fail {
             get {
                 return ResourceManager.GetString("status_misslib_critical_fail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service {0} already running.
+        /// </summary>
+        internal static string status_service_already_running {
+            get {
+                return ResourceManager.GetString("status_service_already_running", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service {0} not started.
+        /// </summary>
+        internal static string status_service_not_started {
+            get {
+                return ResourceManager.GetString("status_service_not_started", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restarting Service {0}.
+        /// </summary>
+        internal static string status_service_restart_begin {
+            get {
+                return ResourceManager.GetString("status_service_restart_begin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed restarting service {0}.
+        /// </summary>
+        internal static string status_service_restart_fail {
+            get {
+                return ResourceManager.GetString("status_service_restart_fail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not start service {0}.
+        /// </summary>
+        internal static string status_service_start_fail {
+            get {
+                return ResourceManager.GetString("status_service_start_fail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service {0} started.
+        /// </summary>
+        internal static string status_service_start_success {
+            get {
+                return ResourceManager.GetString("status_service_start_success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shutting down task {0} ....
+        /// </summary>
+        internal static string status_task_stop {
+            get {
+                return ResourceManager.GetString("status_task_stop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shutting down tasks for {0} ....
+        /// </summary>
+        internal static string status_task_stop_app {
+            get {
+                return ResourceManager.GetString("status_task_stop_app", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not kill {0}.
+        /// </summary>
+        internal static string status_taskkill_fail {
+            get {
+                return ResourceManager.GetString("status_taskkill_fail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not restart task {0}.
+        /// </summary>
+        internal static string status_taskkill_fail_cmd {
+            get {
+                return ResourceManager.GetString("status_taskkill_fail_cmd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not kill task {0}.
+        /// </summary>
+        internal static string status_taskkill_fail_proc {
+            get {
+                return ResourceManager.GetString("status_taskkill_fail_proc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopped service {0} ....
+        /// </summary>
+        internal static string status_taskkill_succ {
+            get {
+                return ResourceManager.GetString("status_taskkill_succ", resourceCulture);
             }
         }
         

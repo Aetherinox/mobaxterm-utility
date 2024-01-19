@@ -292,6 +292,7 @@ namespace MobaXtermKG
             this.Controls.Add(this.txt_Terms);
             this.Controls.Add(this.pnl_HeaderBtm);
             this.Controls.Add(this.imgHeader);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);

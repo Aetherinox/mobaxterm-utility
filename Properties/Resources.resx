@@ -172,17 +172,38 @@
   <data name="mobaxterm_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Materials\mobaxterm_128.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="mobaxterm_cli" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mobaxterm_cli.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="mobaxterm_logo_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Materials\mobaxterm_logo_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mobaxtgen_cli" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mobaxtgen_cli.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="msgbox_core_runas_msg" xml:space="preserve">
+    <value>This program requires it being ran as admin. Right-click on the program and select "Run As Admin".</value>
+  </data>
+  <data name="msgbox_core_runas_title" xml:space="preserve">
+    <value>Requires Admin</value>
   </data>
   <data name="msgbox_debug_callfunc_msg" xml:space="preserve">
     <value>   {0}</value>
   </data>
   <data name="msgbox_debug_callfunc_title" xml:space="preserve">
     <value>Function Called</value>
+  </data>
+  <data name="msgbox_debug_egg_disable_msg" xml:space="preserve">
+    <value>Do you want to disable debug logging?</value>
+  </data>
+  <data name="msgbox_debug_egg_disable_title" xml:space="preserve">
+    <value>Disable Debug Logging?</value>
+  </data>
+  <data name="msgbox_debug_egg_enable_msg" xml:space="preserve">
+    <value>Do you want to enable debug logging?
+
+All logs will be stored in the location:
+     {0}</value>
+  </data>
+  <data name="msgbox_debug_egg_enable_title" xml:space="preserve">
+    <value>Enable Debug Logging?</value>
   </data>
   <data name="msgbox_debug_fpath_env_c1_msg" xml:space="preserve">
     <value>Located {0} with Windows Env Var in:
@@ -236,7 +257,7 @@ The next dialog will allow you to simply save the license file {2}
 You'll need to copy/paste the saved {2} file into the MobaXterm installation folder.</value>
   </data>
   <data name="msgbox_err_locate_title" xml:space="preserve">
-    <value>No valid Path to MobaXterm</value>
+    <value>No valid Path to {0|</value>
   </data>
   <data name="msgbox_err_misslib_msg" xml:space="preserve">
     <value>Cannot locate a required library file:
@@ -253,7 +274,7 @@ Add the missing library file and restart the program.</value>
   <data name="msgbox_generate_cancel_title" xml:space="preserve">
     <value>Operation Cancelled</value>
   </data>
-  <data name="msgbox_nolocopen_msg" xml:space="preserve">
+  <data name="msgbox_nolocate_cannot_open_msg" xml:space="preserve">
     <value>Could not find {0}, so I can't open the folder.
 
 If you're sure it is installed, run the patcher and it will allow you to select the location. 
@@ -261,14 +282,8 @@ If you're sure it is installed, run the patcher and it will allow you to select 
 The following locations were searched:
 {1}</value>
   </data>
-  <data name="msgbox_nolocopen_title" xml:space="preserve">
+  <data name="msgbox_nolocate_cannot_open_title" xml:space="preserve">
     <value>{0} Not Found</value>
-  </data>
-  <data name="msgbox_nolocpath_msg" xml:space="preserve">
-    <value>Patcher cannot determine where MobaXterm is installed
-Tried looking in {0}
-
-You will be prompted to manually locate MobaXterm.exe. Ensure that MobaXterm is installed on your system.</value>
   </data>
   <data name="msgbox_ok_generate_finished_msg" xml:space="preserve">
     <value>License key has been successfully generated in:
@@ -318,11 +333,44 @@ Would you like to view the update? If not, program will start as normal.</value>
   <data name="status_genlicense" xml:space="preserve">
     <value>Press Generate to create license key ...</value>
   </data>
-  <data name="status_libmissing" xml:space="preserve">
-    <value>Fatal Error: Can't find {0}</value>
-  </data>
   <data name="status_misslib_critical_fail" xml:space="preserve">
     <value>Critical error -- restart keygen</value>
+  </data>
+  <data name="status_service_already_running" xml:space="preserve">
+    <value>Service {0} already running</value>
+  </data>
+  <data name="status_service_not_started" xml:space="preserve">
+    <value>Service {0} not started</value>
+  </data>
+  <data name="status_service_restart_begin" xml:space="preserve">
+    <value>Restarting Service {0}</value>
+  </data>
+  <data name="status_service_restart_fail" xml:space="preserve">
+    <value>Failed restarting service {0}</value>
+  </data>
+  <data name="status_service_start_fail" xml:space="preserve">
+    <value>Could not start service {0}</value>
+  </data>
+  <data name="status_service_start_success" xml:space="preserve">
+    <value>Service {0} started</value>
+  </data>
+  <data name="status_taskkill_fail" xml:space="preserve">
+    <value>Could not kill {0}</value>
+  </data>
+  <data name="status_taskkill_fail_cmd" xml:space="preserve">
+    <value>Could not restart task {0}</value>
+  </data>
+  <data name="status_taskkill_fail_proc" xml:space="preserve">
+    <value>Could not kill task {0}</value>
+  </data>
+  <data name="status_taskkill_succ" xml:space="preserve">
+    <value>Stopped service {0} ...</value>
+  </data>
+  <data name="status_task_stop" xml:space="preserve">
+    <value>Shutting down task {0} ...</value>
+  </data>
+  <data name="status_task_stop_app" xml:space="preserve">
+    <value>Shutting down tasks for {0} ...</value>
   </data>
   <data name="status_txt_name_mouseover" xml:space="preserve">
     <value>Enter name to appear on license (required)</value>

@@ -4,8 +4,14 @@
     @author     : Aetherinox
 */
 
+#region "Using"
+
 using System;
 using System.Reflection;
+using Res = MobaXtermKG.Properties.Resources;
+using Cfg = MobaXtermKG.Properties.Settings;
+
+#endregion
 
 namespace MobaXtermKG
 {
@@ -18,13 +24,29 @@ namespace MobaXtermKG
     class AppInfo
     {
 
+        #region "Define: Fileinfo"
+
+            /*
+                Define > File Name
+                    utilized with logging
+            */
+
+            readonly static string log_file = "AppInfo.cs";
+
+        #endregion
+
         /*
-             AppInfo > Configuration Name
+             AppInfo > Get Debug
+
+             @ret       : bool
         */
 
         public bool bIsDebug( )
         {
             if ( System.Diagnostics.Debugger.IsAttached )
+                return true;
+
+            if ( Cfg.Default.app_bDevmode )
                 return true;
 
             #if DEBUG
@@ -35,9 +57,26 @@ namespace MobaXtermKG
         }
 
         /*
+             AppInfo > Get Resources
+
+             @ret       : string
+        */
+
+        public string GetResources( )
+        {
+            foreach(string resourceName in Assembly.GetExecutingAssembly( ).GetManifestResourceNames( ) )
+            {
+                return resourceName;
+            }
+
+            return string.Empty;
+        }
+
+        /*
             AppInfo -> Title
 
-            @usage      :   string title = AppInfo.Title;
+            @usage      : string title = AppInfo.Title;
+            @ret        : str
         */
 
         public static string Title
@@ -56,7 +95,8 @@ namespace MobaXtermKG
         /*
             AppInfo -> Description
 
-            @usage      :   string description = AppInfo.Description;
+            @usage      : string description = AppInfo.Description;
+            @ret        : str
         */
 
         public static string Description
@@ -75,7 +115,8 @@ namespace MobaXtermKG
         /*
             AppInfo -> Trademark
 
-            @usage      :   string trademark = AppInfo.Trademark;
+            @usage      : string trademark = AppInfo.Trademark;
+            @ret        : str
         */
 
         public static string Trademark
@@ -94,7 +135,8 @@ namespace MobaXtermKG
         /*
             AppInfo -> Company
 
-            @usage      :   string company = AppInfo.Company;
+            @usage      : string company = AppInfo.Company;
+            @ret        : str
         */
 
         public static string Company
@@ -113,7 +155,8 @@ namespace MobaXtermKG
         /*
             AppInfo -> Copyright
 
-            @usage      :   string copyright = AppInfo.Copyright;
+            @usage      : string copyright = AppInfo.Copyright;
+            @ret        : str
         */
 
         public static string Copyright
@@ -122,7 +165,7 @@ namespace MobaXtermKG
             {
                 AssemblyCopyrightAttribute cr = (AssemblyCopyrightAttribute)Assembly.GetExecutingAssembly().GetCustomAttribute(typeof(AssemblyCopyrightAttribute));
 
-                if (cr != null && !string.IsNullOrEmpty(cr.Copyright))
+                if ( cr != null && !string.IsNullOrEmpty( cr.Copyright ) )
                     return cr.Copyright;
 
                 return string.Empty;
@@ -132,7 +175,8 @@ namespace MobaXtermKG
         /*
             AppInfo -> Version
 
-            @usage      :   string version = AppInfo.PublishVersion;
+            @usage      : string version = AppInfo.PublishVersion;
+            @ret        : str
         */
 
         public static string Version
@@ -152,7 +196,8 @@ namespace MobaXtermKG
         /*
             AppInfo -> Product Version
 
-            @usage      :   string product_ver = AppInfo.ProductVersion;
+            @usage      : string product_ver = AppInfo.ProductVersion;
+            @ret        : str
         */
 
         public static string ProductVersionCore
@@ -166,22 +211,23 @@ namespace MobaXtermKG
         /*
             AppInfo -> Publish Version
 
-            @usage      :   string publish_ver = AppInfo.PublishVersion;
+            @usage      : string publish_ver = AppInfo.PublishVersion;
+            @ret        : str
         */
 
         public static string PublishVersion
         {
             get
             {
-                if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+                if ( System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed )
                 {
                     Version ver = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
-                    return string.Format("{0}.{1}.{2}.{3}", ver.Major, ver.Minor, ver.Build, ver.Revision);
+                    return string.Format( "{0}.{1}.{2}.{3}", ver.Major, ver.Minor, ver.Build, ver.Revision );
                 }
                 else
                 {
                     var ver = Assembly.GetExecutingAssembly().GetName().Version;
-                    return string.Format("{0}.{1}.{2}.{3}", ver.Major, ver.Minor, ver.Build, ver.Revision);
+                    return string.Format( "{0}.{1}.{2}.{3}", ver.Major, ver.Minor, ver.Build, ver.Revision );
                 }
             }
         }
@@ -191,8 +237,8 @@ namespace MobaXtermKG
                 returns if an update is available by comparing the provided version
                 with the product version.
 
-        @return     :   true    Update Available
-                        false   Current version
+        @ret            : true      Update Available
+                          false     Current version
 
         */
 
@@ -236,9 +282,11 @@ namespace MobaXtermKG
             AppInfo -> Version Check
                 compare two versions.
 
-        @return     :   1   = v2 smaller
-                        -1  = v1 smaller
-                        0   = equal
+            @arg        : str v1
+            @arg        : str v2
+            @ret        : 0 = equal
+                          1 = v2 smaller
+                         -1 = v1 smaller
 
         */
 

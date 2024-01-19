@@ -1,20 +1,42 @@
-﻿using System;
+﻿/*
+    @app        : MobaXterm Keygen
+    @repo       : https://github.com/Aetherinox/MobaXtermKeygen
+    @author     : Aetherinox
+*/
+
+#region "Using"
+
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing;
 using MobaXtermKG.Forms;
-using Lng = MobaXtermKG.Properties.Resources;
-using Cfg = MobaXtermKG.Properties.Settings;
-using System.Net.Http;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
+using System.Threading.Tasks;
+using System.Net;
+using Res = MobaXtermKG.Properties.Resources;
+using Cfg = MobaXtermKG.Properties.Settings;
+
+#endregion
 
 namespace MobaXtermKG
 {
 
     public partial class FormParent : Form, IReceiver
     {
+
+        #region "Define: Fileinfo"
+
+            /*
+                Define > File Name
+                    utilized with logging
+            */
+
+            readonly static string log_file = "FormParent.cs";
+
+        #endregion
 
         #region "Declarations"
 
@@ -27,6 +49,14 @@ namespace MobaXtermKG
             readonly private Serial Serial  = new Serial();
 
             /*
+                Define > Debug Activation
+            */
+
+            static int i_DebugClicks                        = 0;
+            private System.Windows.Forms.Timer DebugTimer   = new System.Windows.Forms.Timer( );
+            Stopwatch SW_DebugRemains                       = new Stopwatch( );
+
+            /*
                 Define > Internal > Helper
             */
 
@@ -35,13 +65,6 @@ namespace MobaXtermKG
                 set     { Helpers = value;  }
                 get     { return Helpers;   }
             }
-
-            /*
-                Define > Mouse
-            */
-
-            private bool mouseDown;
-            private Point lastLocation;
 
             /*
                 Could not find MobaXterm.exe
@@ -67,10 +90,40 @@ namespace MobaXtermKG
             static private string cfg_def_users         = Cfg.Default.app_def_users;
 
             /*
+                Define > Mouse
+            */
+
+            private bool mouseDown;
+            private Point lastLocation;
+
+            /*
                 Define > updates
             */
 
             private bool bUpdateAvailable               = false;
+
+            /*
+                Form > Register Object
+
+                    used to show / hide form without creating a new instance
+
+                @usage      : FormParent.Object = this;
+            */
+
+            private static FormParent Obj;
+
+            public static FormParent Object
+            {
+                get
+                {
+                    if ( Obj == null )
+                    {
+                        Obj = new FormParent( );
+                    }
+                    return Obj;
+                }
+                set { Obj = value; }
+            }
 
             /*
                 Manifest > Json
@@ -83,7 +136,9 @@ namespace MobaXtermKG
                 public string author { get; set; }
                 public string description { get; set; }
                 public string url { get; set; }
-                public IList<string> scripts { get; set; }
+                public string piv { get; set; }
+                public string gpg { get; set; }
+                public IList<string> products { get; set; }
             }
 
         #endregion
@@ -97,10 +152,27 @@ namespace MobaXtermKG
             public FormParent()
             {
 
+                SetStyle( ControlStyles.OptimizedDoubleBuffer, true );
                 InitializeComponent( );
+
+                /*
+                    Register Form Object
+                */
+
+                FormParent.Object           = this;
+
+                /*
+                    Initialize Receiver
+                */
+
                 StatusBar.InitializeReceiver( this );
 
+                /*
+                    Renderers
+                */
+
                 this.status_Strip.Renderer  = new StatusBar_Renderer( );
+                this.mnu_Main.Renderer      = new ToolStripProfessionalRenderer( new mnu_Main_ColorTable( ) );
 
                 /*
                     Product, trademark, etc.
@@ -136,9 +208,9 @@ namespace MobaXtermKG
                     Richtext in body of interface
                 */
 
-                string l1                   = Lng.parent_intro_1;
+                string l1                   = Res.parent_intro_1;
                 string l2                   = Cfg.Default.app_def_mxtpro;
-                string l3                   = Lng.parent_intro_3;
+                string l3                   = Res.parent_intro_3;
 
                 rtxt_Desc.Text              = "";
 
@@ -163,25 +235,64 @@ namespace MobaXtermKG
                 Frame > Parent > Load
             */
 
-            private void FormParent_Load( object sender, EventArgs e )
+            private async void FormParent_Load( object sender, EventArgs e )
             {
-                mnu_Main.Renderer = new ToolStripProfessionalRenderer( new mnu_Main_ColorTable( ) );
-                StatusBar.Update( Lng.status_genlicense );
+                await Task.Run( ( ) => CheckUpdates( Cfg.Default.app_url_manifest ) );
+                StatusBar.Update( string.Format( "" ) );
+
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Form Load", String.Format( "FormParent_Load : {0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
 
                 /*
-                    update checker > json
-                        views the data stored at https://github.com/Aetherinox/MobaXtermKeygen/blob/master/Manifest/manifest.json
+                    Debug Timer
+                        forces the debug activation timer to expire every X seconds.
+                        A user must click on the header image at least 7 times in a matter of 7 seconds in order for debug mode to activate.
+
+                        see method DebugTimer_Tick for functionality
                 */
 
-                using ( var webClient = new System.Net.WebClient( ) )
-                {
-                    var json = webClient.DownloadString( Cfg.Default.app_url_manifest );
+                DebugTimer.Interval     = ( 10 * 700 );
+                DebugTimer.Tick         += new EventHandler( DebugTimer_Tick );
+                DebugTimer.Start        ( );
+                SW_DebugRemains.Start   ( );
+            }
 
-                    if( json == null )
-                        return;
+            /*
+                Debug Timer > Tick
+                    This termines how long a user has to click the header image in order to enable developer mode.
+                    This is easier than creating yet another menu item.
+            */
+
+            private void DebugTimer_Tick(object sender, EventArgs e)
+            {
+                i_DebugClicks = 0;
+                SW_DebugRemains.Restart( );
+            }
+
+            /*
+                Task > Check for Updates
+
+                    views the data stored at https://github.com/Aetherinox/windowfx-patcher/blob/master/Manifest/manifest.json
+            */
+
+            private async Task CheckUpdates( string uri )
+            {
+                try
+                {
+                    var webClient       = new WebClient( );
+                    var json            = await webClient.DownloadStringTaskAsync( uri );
 
                     JavaScriptSerializer serializer     = new JavaScriptSerializer( ); 
                     Manifest manifest                   = serializer.Deserialize<Manifest>( json );
+
+                    /*
+                        validate json results from github
+                    */
+
+                    if ( manifest != null )
+                        Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Uplink", String.Format( "{0} : {1}", "FormParent.CheckUpdates", "Successful connection - populated manifest data" ) );
+                    else
+                       Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Uplink", String.Format( "{0} : {1}", "FormParent.CheckUpdates", "Successful connection - missing manifest data" ) );
+
 
                     /*
                         Check if update is available for end-user
@@ -201,23 +312,28 @@ namespace MobaXtermKG
                         update checker
                     */
 
-                    if ( ( bUpdateAvailable && !Cfg.Default.bShowedUpdates ) )
+                    #pragma warning disable CS4014
+                    Task.Factory.StartNew( () =>
                     {
-                        Cfg.Default.bShowedUpdates = true;
+                        if ( ( bUpdateAvailable && !Cfg.Default.bShowedUpdates ) )
+                        {
+                            Cfg.Default.bShowedUpdates = true;
 
-                        var result = MessageBox.Show( string.Format( Lng.msgbox_update_msg, manifest.version, Cfg.Default.app_softw_name ),
-                            string.Format( Lng.msgbox_update_title, ver_curr, manifest.version ),
-                            MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation
-                        );
+                            var result = MessageBox.Show( new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen }, string.Format( Res.msgbox_update_msg, manifest.version, Cfg.Default.app_name ),
+                                string.Format( Res.msgbox_update_title, ver_curr, manifest.version ),
+                                MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation
+                            );
 
-                        string answer   = result.ToString( ).ToLower( );
-
-                        if ( answer == "yes" )
-                            System.Diagnostics.Process.Start( Cfg.Default.app_url_github + "/releases/" );
-                    }
-
+                            if ( result.ToString( ).ToLower( ) == "yes" )
+                                System.Diagnostics.Process.Start( Cfg.Default.app_url_github + "/releases/" );
+                        }
+                     });
                 }
-
+                catch ( WebException e )
+                {
+                    Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Uplink", String.Format( "{0} : {1}", "FormParent.CheckUpdates", "Failed connection - exception" ) );
+                    Log.Send( log_file, 0, "", String.Format( "{0}", e.Message ) );
+                }
             }
 
         #endregion
@@ -540,6 +656,7 @@ namespace MobaXtermKG
 
             private void mnu_Sub_Exit_Click( object sender, EventArgs e )
             {
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
 
                 /*
                     delete the cli exe as we no longer need it
@@ -561,6 +678,8 @@ namespace MobaXtermKG
 
             private void mnu_Cat_Contribute_Click( object sender, EventArgs e )
             {
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
+
                 this.Hide( );
 
                 FormContribute to   = new FormContribute( );
@@ -574,6 +693,8 @@ namespace MobaXtermKG
 
             private void mnu_Sub_Updates_Click( object sender, EventArgs e )
             {
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
+
                 System.Diagnostics.Process.Start( Cfg.Default.app_url_github );
             }
 
@@ -586,7 +707,7 @@ namespace MobaXtermKG
                 if ( bUpdateAvailable )
                 {
                     var imgSize     = mnu_Sub_Updates.Size;
-                    var bmp         = new Bitmap( Lng.notify_01 );
+                    var bmp         = new Bitmap( Res.notify_01 );
 
                     e.Graphics.DrawImage( bmp, 7,  ( imgSize.Height / 2 ) - ( 24 / 2 ), 24, 24 );
                 }
@@ -598,6 +719,8 @@ namespace MobaXtermKG
 
             private void mnu_Sub_Validate_Click( object sender, EventArgs e )
             {
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
+
                 string exe_target = System.AppDomain.CurrentDomain.FriendlyName;
                 if ( !File.Exists( exe_target ) )
                 {
@@ -678,6 +801,8 @@ namespace MobaXtermKG
 
             private void mnu_Sub_About_Click( object sender, EventArgs e )
             {
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
+
                 this.Hide( );
 
                 FormAbout to    = new FormAbout( );
@@ -695,7 +820,7 @@ namespace MobaXtermKG
 
             private void btn_Generate_MouseEnter( object sender, EventArgs e )
             {
-                StatusBar.Update( Lng.status_genlicense );
+                StatusBar.Update( Res.status_genlicense );
             }
 
             /*
@@ -704,6 +829,7 @@ namespace MobaXtermKG
 
             private void btn_Generate_Click( object sender, EventArgs e )
             {
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
 
                 string fval_name    = txt_Name.Value;
                 string fval_ver     = txt_Version.Value;
@@ -714,7 +840,7 @@ namespace MobaXtermKG
                 {
                     MessageBox.Show
                     (
-                        Lng.msgbox_err_gen_missname_msg, Lng.msgbox_err_gen_missname_title,
+                        Res.msgbox_err_gen_missname_msg, Res.msgbox_err_gen_missname_title,
                         MessageBoxButtons.OK, MessageBoxIcon.Error
                     );
 
@@ -741,7 +867,7 @@ namespace MobaXtermKG
                     Do you wish to generate a new license key for MobaXterm?
                 */
 
-                var result      = MessageBox.Show( Lng.msgbox_ok_generate_msg, Lng.msgbox_ok_generate_title, MessageBoxButtons.YesNo, MessageBoxIcon.Question );
+                var result      = MessageBox.Show( Res.msgbox_ok_generate_msg, Res.msgbox_ok_generate_title, MessageBoxButtons.YesNo, MessageBoxIcon.Question );
                 string answer   = result.ToString( ).ToLower( );
 
                 /*
@@ -752,8 +878,8 @@ namespace MobaXtermKG
                 {
                     MessageBox.Show
                     (
-                        string.Format( Lng.msgbox_generate_cancel_msg ),
-                        Lng.msgbox_generate_cancel_title,
+                        string.Format( Res.msgbox_generate_cancel_msg ),
+                        Res.msgbox_generate_cancel_title,
                         MessageBoxButtons.OK, MessageBoxIcon.Error
                     );
 
@@ -774,8 +900,8 @@ namespace MobaXtermKG
                 {
                     MessageBox.Show
                     (
-                        string.Format( Lng.msgbox_err_locate_msg, Cfg.Default.app_mobaxterm_exe, patch_launch_exe, Cfg.Default.app_def_mxtpro ),
-                        Lng.msgbox_err_locate_title,
+                        String.Format( Res.msgbox_err_locate_msg, Cfg.Default.app_mobaxterm_exe, patch_launch_exe, Cfg.Default.app_def_mxtpro ),
+                        String.Format( Res.msgbox_err_locate_title, Cfg.Default.app_name ),
                         MessageBoxButtons.OK, MessageBoxIcon.Error
                     );
 
@@ -810,7 +936,7 @@ namespace MobaXtermKG
 
         #endregion
 
-        #region "Body: Open Folder Button"
+        #region "Button: Open Folder"
 
             /*
                 button > hover
@@ -818,24 +944,25 @@ namespace MobaXtermKG
 
             private void btn_OpenFolder_MouseEnter( object sender, EventArgs e )
             {
-                StatusBar.Update( string.Format( Lng.status_btn_openfolder, app_target_exe ) );
+                StatusBar.Update( string.Format( Res.status_btn_openfolder, app_target_exe ) );
             }
 
             /*
-                button > open folder where mirc "should" be
+                button > open folder to find app
             */
 
             private void btn_OpenFolder_Click( object sender, EventArgs e )
             {
-                string src_app_full_exe     = Helper.FindApp( );
-                string src_list             = Helper.GetAppFindList( );
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
 
+                string src_app_full_exe     = Helper.FindApp( );
+                string src_list             = Helper.FindAppGetList( );
 
                 if ( String.IsNullOrEmpty( src_app_full_exe ) )
                 {
                     MessageBox.Show(
-                        string.Format( Lng.msgbox_nolocopen_msg, Cfg.Default.app_mobaxterm_exe, src_list ),
-                        string.Format( Lng.msgbox_nolocopen_title, Cfg.Default.app_mobaxterm_exe ),
+                        string.Format( Res.msgbox_nolocate_cannot_open_msg, Cfg.Default.app_name, src_list ),
+                        string.Format( Res.msgbox_nolocate_cannot_open_title, Cfg.Default.app_name ),
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error
                     );
@@ -868,8 +995,8 @@ namespace MobaXtermKG
                     Process.Start( "explorer.exe", path_progfiles );
 
                     MessageBox.Show(
-                        string.Format( Lng.msgbox_nolocopen_msg, Cfg.Default.app_mobaxterm_exe, src_list ),
-                        string.Format( Lng.msgbox_nolocopen_title, Cfg.Default.app_mobaxterm_exe ),
+                        string.Format( Res.msgbox_nolocate_cannot_open_msg, Cfg.Default.app_mobaxterm_exe, src_list ),
+                        string.Format( Res.msgbox_nolocate_cannot_open_title, Cfg.Default.app_mobaxterm_exe ),
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error
                     );
@@ -886,7 +1013,7 @@ namespace MobaXtermKG
 
             private void txt_Name_MouseEnter( object sender, EventArgs e )
             {
-                StatusBar.Update( Lng.status_txt_name_mouseover );
+                StatusBar.Update( Res.status_txt_name_mouseover );
             }
 
             /*
@@ -895,7 +1022,7 @@ namespace MobaXtermKG
 
             private void txt_Users_MouseEnter( object sender, EventArgs e )
             {
-                StatusBar.Update( string.Format( "{0} {1}", Lng.status_txt_users_mouseover, Cfg.Default.app_def_users ) );
+                StatusBar.Update( string.Format( "{0} {1}", Res.status_txt_users_mouseover, Cfg.Default.app_def_users ) );
             }
 
             /*
@@ -904,7 +1031,7 @@ namespace MobaXtermKG
 
             private void txt_Version_MouseEnter( object sender, EventArgs e )
             {
-                StatusBar.Update( string.Format( "{0} {1}", Lng.status_txt_version_mouseover, Cfg.Default.app_def_version ) );
+                StatusBar.Update( string.Format( "{0} {1}", Res.status_txt_version_mouseover, Cfg.Default.app_def_version ) );
             }
 
         #endregion
@@ -985,6 +1112,103 @@ namespace MobaXtermKG
                 status_Strip.Refresh( );
             }
 
+        #endregion
+
+        #region "Debug Mode: Header"
+
+            /*
+                Debug Mode > Header Click
+                    if the user clicks the header a certain number of times in a short duration, they will enable
+                    debugging mode.
+            */
+
+            private void lbl_HeaderName_MouseClick( object sender, MouseEventArgs e )
+            {
+
+                /*
+                    add +1 to clicks
+                */
+
+                i_DebugClicks++;
+
+                /*
+                    don't go higher than 7, otherwise each click after 7 will re-activate dialog
+                */
+
+                int i_DebugRemains = 7 - i_DebugClicks;
+                if ( i_DebugRemains > 7 )
+                    return;
+
+                /*
+                    timer > remaining
+                */
+
+                int remains         = 7 - Convert.ToInt32( SW_DebugRemains.Elapsed.TotalSeconds );
+
+
+                /*
+                    prompt to enable / disable debug
+                */
+
+                if ( Cfg.Default.app_bDevmode )
+                    Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Debug ] Trigger", String.Format( "Disable debug with {0} more clicks -- {1} seconds remain", i_DebugRemains, remains ) );
+                else
+                    Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Debug ] Trigger", String.Format( "Enable debug with {0} more clicks -- {1} seconds remain", i_DebugRemains, remains ) );
+
+                /*
+                    wait until 7 clicks are done in X seconds
+                */
+
+                if ( i_DebugClicks >= 7 )
+                {
+
+                    if ( Cfg.Default.app_bDevmode )
+                    {
+
+                        /*
+                            Debug > disable
+                        */
+
+                        var resp_input = MessageBox.Show
+                        (
+                            new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
+                            Res.msgbox_debug_egg_disable_msg,
+                            Res.msgbox_debug_egg_disable_title,
+                            MessageBoxButtons.YesNo, MessageBoxIcon.None
+                        );
+
+                        if ( resp_input.ToString( ).ToLower( ) == "yes" )
+                        {
+                            Cfg.Default.app_bDevmode = false;
+                            Program.DisableDebugConsole( );
+                        }
+
+                    }
+                    else
+                    {
+
+                        /*
+                            Debug > enable
+                        */
+
+                        string log_path = Log.GetStorageFile( );
+                        var resp_input = MessageBox.Show
+                        (
+                            new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
+                            String.Format( Res.msgbox_debug_egg_enable_msg, log_path ),
+                            Res.msgbox_debug_egg_enable_title,
+                            MessageBoxButtons.YesNo, MessageBoxIcon.None
+                        );
+
+                        if ( resp_input.ToString( ).ToLower( ) == "yes" )
+                        {
+                            Cfg.Default.app_bDevmode = true;
+                            Program.EnableDebugConsole( );
+                        }
+
+                    }
+                }
+            }
         #endregion
 
     }

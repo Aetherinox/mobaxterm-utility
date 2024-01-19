@@ -1,15 +1,40 @@
-﻿using MobaXtermKG;
+﻿/*
+    @app        : MobaXterm Keygen
+    @repo       : https://github.com/Aetherinox/MobaXtermKeygen
+    @author     : Aetherinox
+*/
+
+#region "Using"
+
+using MobaXtermKG;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Lng = MobaXtermKG.Properties.Resources;
+using System.Threading.Tasks;
+using System.Net;
+using System.Web.Script.Serialization;
+using System.Collections.Generic;
+using Res = MobaXtermKG.Properties.Resources;
 using Cfg = MobaXtermKG.Properties.Settings;
+
+#endregion
 
 namespace MobaXtermKG
 {
 
     public partial class FormAbout : Form
     {
+
+        #region "Define: Fileinfo"
+
+            /*
+                Define > File Name
+                    utilized with logging
+            */
+
+            readonly static string log_file = "FormAbout.cs";
+
+        #endregion
 
         #region "Declarations"
 
@@ -18,6 +43,7 @@ namespace MobaXtermKG
             */
 
             private Helpers Helpers     = new Helpers( );
+            private AppInfo AppInfo     = new AppInfo( );
 
             /*
                 Define > Internal > Helper
@@ -43,6 +69,23 @@ namespace MobaXtermKG
             private string ver                  = AppInfo.ProductVersionCore.ToString( );
             private string product              = AppInfo.Title;
             private string tm                   = AppInfo.Trademark;
+
+            /*
+                Manifest > Json
+            */
+
+            public class Manifest
+            {
+                public string version { get; set; }
+                public string name { get; set; }
+                public string author { get; set; }
+                public string description { get; set; }
+                public string url { get; set; }
+                public string piv { get; set; }
+                public string gpg { get; set; }
+                public string lnk1 { get; set; }
+                public IList<string> products { get; set; }
+            }
 
         #endregion
 
@@ -132,17 +175,17 @@ This key is used to sign the releases on Github.com, all commits are also signed
 
                 lbl_HeaderSub.Parent            = imgHeader;
                 lbl_HeaderSub.BackColor         = Color.Transparent;
-                lbl_HeaderSub.Text              = Lng.about_hdr_desc;
+                lbl_HeaderSub.Text              = Res.about_hdr_desc;
 
                 /*
                     Button Links
                 */
 
-                lnk_TPB.Text                = "⠀⠀⠀⠀⠀⠀  ⠀";
+                lnk_TPB.Text                    = "⠀⠀⠀⠀⠀⠀  ⠀";
                 lnk_Github.Text                 = "⠀⠀⠀⠀⠀⠀     ⠀";
 
-                lnk_TPB.Parent              = imgHeader;
-                lnk_TPB.BackColor           = Color.Transparent;
+                lnk_TPB.Parent                  = imgHeader;
+                lnk_TPB.BackColor               = Color.Transparent;
 
                 lnk_Github.Parent               = imgHeader;
                 lnk_Github.BackColor            = Color.Transparent;
@@ -167,32 +210,62 @@ This key is used to sign the releases on Github.com, all commits are also signed
                     GPG / PIV Fields
                 */
 
-                lbl_Dev_PIV_Thumbprint.Text     = Lng.about_lbl_thumbprint;
-                lbl_Dev_GPG_KeyID.Text          = Lng.about_lbl_gpg;
+                lbl_Dev_PIV_Thumbprint.Text     = Res.about_lbl_thumbprint;
+                lbl_Dev_GPG_KeyID.Text          = Res.about_lbl_gpg;
 
                 txt_Dev_PIV_Thumbprint.Value    = Cfg.Default.app_dev_piv_thumbprint;
                 txt_Dev_GPG_KeyID.Value         = Cfg.Default.app_dev_gpg_keyid;
 
             }
 
-            private void FormAbout_Load(object sender, EventArgs e)
+            private async void FormAbout_Load(object sender, EventArgs e)
             {
-
+                await Task.Run( ( ) => FetchJson( Cfg.Default.app_url_manifest ) );
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Form Load", String.Format( "FormAbout_Load : {0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
             }
 
             /*
-                Tweak to fix frame flickering
+                Task > Fetch Json
+
+                    views the data stored at https://github.com/Aetherinox/MobaXtermKeygen/blob/master/Manifest/manifest.json
             */
 
-            protected override CreateParams CreateParams
+            private async Task FetchJson( string uri )
             {
-                get
+                try
                 {
-                    CreateParams cp = base.CreateParams;
-                    cp.ExStyle |= 0x02000000;  // enable WS_EX_COMPOSITED
-                    return cp;
+                    var webClient       = new WebClient( );
+                    var json            = await webClient.DownloadStringTaskAsync( uri );
+
+                    JavaScriptSerializer serializer     = new JavaScriptSerializer( ); 
+                    Manifest manifest                   = serializer.Deserialize<Manifest>( json );
+
+                    /*
+                        validate json results from github
+                    */
+
+                    if ( manifest != null )
+                        Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Uplink", String.Format( "{0} : {1}", "FormAbout.FetchJson", "Successful connection - populated manifest data" ) );
+                    else
+                       Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Uplink", String.Format( "{0} : {1}", "FormAbout.FetchJson", "Successful connection - missing manifest data" ) );
+
+                    /*
+                        Check if update is available for end-user
+                    */
+
+                    if ( !string.IsNullOrEmpty( manifest.piv ) )
+                        txt_Dev_PIV_Thumbprint.Value    = manifest.piv;
+
+                    if ( !string.IsNullOrEmpty( manifest.gpg ) )
+                        txt_Dev_GPG_KeyID.Value         = manifest.gpg;
+
                 }
-            } 
+                catch ( WebException e )
+                {
+                    Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Uplink", String.Format( "{0} : {1}", "FormAbout.FetchJson", "Failed connection - exception" ) );
+                    Log.Send( log_file, 0, "", String.Format( "{0}", e.Message ) );
+                }
+            }
 
         #endregion
 
@@ -402,8 +475,8 @@ This key is used to sign the releases on Github.com, all commits are also signed
 
             private bool _bTPB_Hover            = false;
             private bool _bGithub_Hover         = false;
-            private string lnk_TPB_label        = " " + Lng.about_lnk_tpb;
-            private string lnk_Github_Label     = " " + Lng.about_lnk_github;
+            private string lnk_TPB_label        = " " + Res.about_lnk_tpb;
+            private string lnk_Github_Label     = " " + Res.about_lnk_github;
             private Color clr_Filler            = Color.FromArgb( 125, 0, 0, 0 );
             private Color clr_Text              = Color.FromArgb( 255, 255, 128 );
 
@@ -482,7 +555,12 @@ This key is used to sign the releases on Github.com, all commits are also signed
 
             private void lnk_TPB_LinkClicked( object sender, LinkLabelLinkClickedEventArgs e )
             {
-                System.Diagnostics.Process.Start( Cfg.Default.app_url_tpb );
+                string link = Cfg.Default.app_url_tpb;;
+                Log.Send
+                (
+                    log_file,  new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ),  "[ App.Win ] Link", String.Format( "{0} Link: {1}", System.Reflection.MethodBase.GetCurrentMethod( ).Name, link ) 
+                );
+                System.Diagnostics.Process.Start( link );
             }
 
             /*
@@ -524,7 +602,12 @@ This key is used to sign the releases on Github.com, all commits are also signed
 
             private void lnk_Github_LinkClicked( object sender, LinkLabelLinkClickedEventArgs e )
             {
-                System.Diagnostics.Process.Start( Cfg.Default.app_url_github );
+                string link = Cfg.Default.app_url_github;
+                Log.Send
+                (
+                    log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Link", String.Format( "{0} Link: {1}", System.Reflection.MethodBase.GetCurrentMethod( ).Name, link )
+                );
+                System.Diagnostics.Process.Start( link );
             }
 
         #endregion

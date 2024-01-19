@@ -291,6 +291,7 @@
             this.Controls.Add(this.txt_BTC);
             this.Controls.Add(this.lbl_Contrib_Intro);
             this.Controls.Add(this.imgHeader);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -299,6 +300,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MobaXterm : Contribute";
+            this.Load += new System.EventHandler(this.FormContribute_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FormContribute_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormContribute_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FormContribute_MouseMove);

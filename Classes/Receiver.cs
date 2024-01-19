@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Lng = MobaXtermKG.Properties.Resources;
+using Res = MobaXtermKG.Properties.Resources;
 using Cfg = MobaXtermKG.Properties.Settings;
 
 namespace MobaXtermKG

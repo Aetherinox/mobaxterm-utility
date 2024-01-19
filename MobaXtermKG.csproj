@@ -21,7 +21,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <PublishUrl>H:\Apps\MobaXterm\MobaXterm Keygen\Source\Built\</PublishUrl>
+    <PublishUrl>H:\Apps\MobaXterm\MobaXterm Keygen\Built\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -36,7 +36,7 @@
     <ProductName>MobaXterm</ProductName>
     <PublisherName>Aetherx</PublisherName>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.2.1.0</ApplicationVersion>
+    <ApplicationVersion>1.3.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -69,11 +69,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>70575BDFB02B3F1B45A37431BEF9A8C9933A4ACE</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>58A1539D6988D76F44BAE27C27ED5645D3B1222A</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>
-    </ManifestKeyFile>
+    <ManifestKeyFile>aetherx_9a.priv.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -82,7 +81,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>aetherx_piv_9a.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>aetherx_9a.priv.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestTimestampUrl>http://timestamp.comodoca.com/authenticode</ManifestTimestampUrl>
@@ -90,8 +89,10 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
   <PropertyGroup>
-    <NoWin32Manifest>true</NoWin32Manifest>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -107,6 +108,7 @@
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\WindowsPowerShell\3.0\System.Management.Automation.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -119,6 +121,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\FolderBrowserDialogEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\Hash.cs" />
+    <Compile Include="Classes\Log.cs" />
     <Compile Include="Classes\Perms.cs" />
     <Compile Include="Classes\AppInfo.cs" />
     <Compile Include="Classes\Receiver.cs" />
@@ -189,21 +196,22 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <None Include="aetherx_piv_9a.pfx" />
+    <None Include="aetherx_9a.priv.pfx" />
     <None Include="app.config" />
+    <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -212,18 +220,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Materials\mobaxterm_128.ico" />
-    <None Include="Resources\notify_2.png" />
+    <None Include="Resources\mobaxterm_cli.exe" />
     <None Include="Resources\notify_01.png" />
-    <None Include="Resources\ico_notice_1.png" />
     <None Include="Resources\bg_header.jpg" />
     <None Include="Resources\eth.png" />
     <None Include="Resources\btc.png" />
     <None Include="Resources\bch.png" />
     <None Include="Materials\mobaxterm_logo_1.png" />
     <None Include="Resources\mobaxtgen_cli.exe" />
-    <None Include="bin\Release\mirc.exe" />
-    <None Include="bin\Release\xtgen.py" />
-    <None Include="bin\Release\xtgen.exe" />
     <None Include="Materials\error.png" />
     <None Include="Materials\question.png" />
     <None Include="Materials\info.png" />
@@ -242,6 +246,8 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

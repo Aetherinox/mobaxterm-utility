@@ -199,6 +199,7 @@ namespace MobaXtermKG.Msgbox
             this.Controls.Add(this.pnl_Body);
             this.Controls.Add(this.pnl_Buttons);
             this.Controls.Add(this.pnl_Titlebar);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(380, 150);
             this.Name = "FormMessageBox";

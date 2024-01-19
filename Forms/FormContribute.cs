@@ -1,21 +1,45 @@
-﻿using System;
+﻿/*
+    @app        : MobaXterm Keygen
+    @repo       : https://github.com/Aetherinox/MobaXtermKeygen
+    @author     : Aetherinox
+*/
+
+#region "Using"
+
+using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Lng = MobaXtermKG.Properties.Resources;
+using Res = MobaXtermKG.Properties.Resources;
 using Cfg = MobaXtermKG.Properties.Settings;
+
+#endregion
 
 namespace MobaXtermKG.Forms
 {
     public partial class FormContribute : Form
     {
 
+        #region "Fileinfo"
+
+            /*
+                Define > File Name
+            */
+
+            readonly static string log_file = "FormContribute.cs";
+
+        #endregion
+
         #region "Declarations"
 
             /*
-                Define
+                Define > Classes
             */
 
             private Helpers Helpers     = new Helpers( );
+
+            /*
+                Define > Mouse
+            */
 
             private bool mouseDown;
             private Point lastLocation;
@@ -59,25 +83,17 @@ namespace MobaXtermKG.Forms
                     Intro
                 */
 
-                lbl_Contrib_Intro.Text      = Lng.txt_contrib_intro;
-                lbl_BTC.Text                = Lng.lbl_contrib_btc; 
-                lbl_ETH.Text                = Lng.lbl_contrib_eth; 
-                lbl_BCH.Text                = Lng.lbl_contrib_bch; 
+                lbl_Contrib_Intro.Text      = Res.txt_contrib_intro;
+                lbl_BTC.Text                = Res.lbl_contrib_btc; 
+                lbl_ETH.Text                = Res.lbl_contrib_eth; 
+                lbl_BCH.Text                = Res.lbl_contrib_bch; 
 
             }
 
-            /*
-                Tweak to fix frame flickering
-            */
-
-            protected override CreateParams CreateParams
+            private void FormContribute_Load( object sender, EventArgs e )
             {
-                get
-                {
-                    CreateParams cp = base.CreateParams;
-                    cp.ExStyle |= 0x02000000;  // enable WS_EX_COMPOSITED
-                    return cp;
-                }
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Form Load", String.Format( "FormContribute_Load : {0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
+
             }
 
         #endregion

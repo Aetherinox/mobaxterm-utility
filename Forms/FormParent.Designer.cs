@@ -119,6 +119,7 @@ namespace MobaXtermKG
             this.lbl_HeaderName.Size = new System.Drawing.Size(228, 32);
             this.lbl_HeaderName.TabIndex = 5;
             this.lbl_HeaderName.Text = "MobaXterm Patcher";
+            this.lbl_HeaderName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbl_HeaderName_MouseClick);
             this.lbl_HeaderName.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lbl_HeaderName_MouseDown);
             this.lbl_HeaderName.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lbl_HeaderName_MouseMove);
             this.lbl_HeaderName.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lbl_HeaderName_MouseUp);
@@ -162,7 +163,7 @@ namespace MobaXtermKG
             this.mnu_Sub_Exit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.mnu_Sub_Exit.Name = "mnu_Sub_Exit";
             this.mnu_Sub_Exit.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.mnu_Sub_Exit.Size = new System.Drawing.Size(180, 21);
+            this.mnu_Sub_Exit.Size = new System.Drawing.Size(93, 21);
             this.mnu_Sub_Exit.Text = "Exit";
             this.mnu_Sub_Exit.Click += new System.EventHandler(this.mnu_Sub_Exit_Click);
             // 
@@ -195,7 +196,7 @@ namespace MobaXtermKG
             this.mnu_Sub_Updates.ForeColor = System.Drawing.Color.White;
             this.mnu_Sub_Updates.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.mnu_Sub_Updates.Name = "mnu_Sub_Updates";
-            this.mnu_Sub_Updates.Size = new System.Drawing.Size(180, 22);
+            this.mnu_Sub_Updates.Size = new System.Drawing.Size(168, 22);
             this.mnu_Sub_Updates.Text = "Updates";
             this.mnu_Sub_Updates.Click += new System.EventHandler(this.mnu_Sub_Updates_Click);
             this.mnu_Sub_Updates.Paint += new System.Windows.Forms.PaintEventHandler(this.mnu_Sub_Updates_Paint);
@@ -206,7 +207,7 @@ namespace MobaXtermKG
             this.mnu_Sub_Validate.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.mnu_Sub_Validate.ForeColor = System.Drawing.Color.White;
             this.mnu_Sub_Validate.Name = "mnu_Sub_Validate";
-            this.mnu_Sub_Validate.Size = new System.Drawing.Size(180, 22);
+            this.mnu_Sub_Validate.Size = new System.Drawing.Size(168, 22);
             this.mnu_Sub_Validate.Text = "Validate Signature";
             this.mnu_Sub_Validate.Click += new System.EventHandler(this.mnu_Sub_Validate_Click);
             // 
@@ -217,7 +218,7 @@ namespace MobaXtermKG
             this.mnu_Help_Sep_1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.mnu_Help_Sep_1.Name = "mnu_Help_Sep_1";
             this.mnu_Help_Sep_1.Overflow = System.Windows.Forms.ToolStripItemOverflow.Always;
-            this.mnu_Help_Sep_1.Size = new System.Drawing.Size(177, 1);
+            this.mnu_Help_Sep_1.Size = new System.Drawing.Size(165, 1);
             this.mnu_Help_Sep_1.Paint += new System.Windows.Forms.PaintEventHandler(this.mnu_Help_Sep_1_Paint);
             // 
             // mnu_Sub_About
@@ -226,7 +227,7 @@ namespace MobaXtermKG
             this.mnu_Sub_About.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.mnu_Sub_About.ForeColor = System.Drawing.Color.White;
             this.mnu_Sub_About.Name = "mnu_Sub_About";
-            this.mnu_Sub_About.Size = new System.Drawing.Size(180, 22);
+            this.mnu_Sub_About.Size = new System.Drawing.Size(168, 22);
             this.mnu_Sub_About.Text = "About";
             this.mnu_Sub_About.Click += new System.EventHandler(this.mnu_Sub_About_Click);
             // 
@@ -528,6 +529,7 @@ namespace MobaXtermKG
             this.Controls.Add(this.btn_Minimize);
             this.Controls.Add(this.mnu_Main);
             this.Controls.Add(this.imgHeader);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
