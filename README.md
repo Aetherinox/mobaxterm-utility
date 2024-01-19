@@ -33,8 +33,8 @@ This utility has been developed to work on the following versions:
 Developer holds no responsibility with what people decide to do with this app. It was developed strictly for demonstration purposes only related to software securit and used as an example for presentations.
 Developed under the following conditions:
 
-- Visual Studio 2022 (17.6.5)
-- v4.8.0 .NET Framework
+- Visual Studio 2022 (17.8.4)
+- v4.8.1 .NET Framework
 - C# language
 
 <br />
