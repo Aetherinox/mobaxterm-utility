@@ -447,7 +447,7 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No valid Path to {0|.
+        ///   Looks up a localized string similar to No valid Path to {0}.
         /// </summary>
         internal static string msgbox_err_locate_title {
             get {

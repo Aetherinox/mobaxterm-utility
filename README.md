@@ -7,7 +7,6 @@
 
 </div>
 
-
 ---
 
 <br />
@@ -30,7 +29,6 @@ This utility has been developed to work on the following versions:
 <br />
 
 # Notice
-
 
 Developer holds no responsibility with what people decide to do with this app. It was developed strictly for demonstration purposes only related to software securit and used as an example for presentations.
 Developed under the following conditions:

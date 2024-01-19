@@ -16,6 +16,7 @@ using System.Web.Script.Serialization;
 using System.Collections.Generic;
 using Res = MobaXtermKG.Properties.Resources;
 using Cfg = MobaXtermKG.Properties.Settings;
+using System.Reflection;
 
 #endregion
 
@@ -36,7 +37,7 @@ namespace MobaXtermKG
 
         #endregion
 
-        #region "Declarations"
+        #region "Define: General"
 
             /*
                 Define > Classes
@@ -157,25 +158,37 @@ This key is used to sign the releases on Github.com, all commits are also signed
             public FormAbout()
             {
                 InitializeComponent();
+                SetStyle( ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true );
+
+                typeof( Panel ).InvokeMember( "DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, 
+                null, this, new object[] { true } );
+
+                SuspendLayout( );
 
                 /*
                     Form Control Buttons
                 */
 
+                btn_Close.SuspendLayout         ( );
                 btn_Close.Parent                = imgHeader;
                 btn_Close.BackColor             = Color.Transparent;
+                btn_Close.ResumeLayout          ( false );
 
                 /*
                     Headers
                 */
 
+                lbl_HeaderName.SuspendLayout    ( );
                 lbl_HeaderName.Parent           = imgHeader;
                 lbl_HeaderName.BackColor        = Color.Transparent;
                 lbl_HeaderName.Text             = product;
+                lbl_HeaderName.ResumeLayout     ( false );
 
+                lbl_HeaderName.SuspendLayout    ( );
                 lbl_HeaderSub.Parent            = imgHeader;
                 lbl_HeaderSub.BackColor         = Color.Transparent;
                 lbl_HeaderSub.Text              = Res.about_hdr_desc;
+                lbl_HeaderSub.ResumeLayout     ( false );
 
                 /*
                     Button Links
@@ -184,45 +197,67 @@ This key is used to sign the releases on Github.com, all commits are also signed
                 lnk_TPB.Text                    = "⠀⠀⠀⠀⠀⠀  ⠀";
                 lnk_Github.Text                 = "⠀⠀⠀⠀⠀⠀     ⠀";
 
+                lnk_TPB.SuspendLayout           ( );
                 lnk_TPB.Parent                  = imgHeader;
                 lnk_TPB.BackColor               = Color.Transparent;
+                lnk_TPB.ResumeLayout            ( false );
 
+                lnk_Github.SuspendLayout        ( );
                 lnk_Github.Parent               = imgHeader;
                 lnk_Github.BackColor            = Color.Transparent;
+                lnk_Github.ResumeLayout         ( false );
 
+                lbl_Version.SuspendLayout       ( );
                 lbl_Version.Parent              = imgHeader;
                 lbl_Version.BackColor           = Color.Transparent;
                 lbl_Version.ForeColor           = Color.Transparent;
                 lbl_Version.Text                = "⠀⠀⠀⠀⠀⠀ ⠀⠀ ⠀⠀⠀⠀";
+                lbl_Version.ResumeLayout        ( false );
 
-
+                pnl_HeaderBtm.SuspendLayout     ( );
                 pnl_HeaderBtm.Parent            = imgHeader;
                 pnl_HeaderBtm.BackColor         = Color.Transparent;
+                pnl_HeaderBtm.ResumeLayout      ( false );
 
                 /*
                     About Readme
                 */
 
+                txt_Terms.SuspendLayout         ( );
                 txt_Terms.Text                  = GetReadme(product, ver, tm);
                 txt_Terms.Value                 = GetReadme(product, ver, tm);
+                txt_Terms.ResumeLayout          ( false );
 
                 /*
                     GPG / PIV Fields
                 */
 
+                lbl_Dev_PIV_Thumbprint.SuspendLayout( );
                 lbl_Dev_PIV_Thumbprint.Text     = Res.about_lbl_thumbprint;
-                lbl_Dev_GPG_KeyID.Text          = Res.about_lbl_gpg;
-
                 txt_Dev_PIV_Thumbprint.Value    = Cfg.Default.app_dev_piv_thumbprint;
+                lbl_Dev_PIV_Thumbprint.ResumeLayout( false );
+
+                lbl_Dev_GPG_KeyID.Text          = Res.about_lbl_gpg;
                 txt_Dev_GPG_KeyID.Value         = Cfg.Default.app_dev_gpg_keyid;
 
+                ResumeLayout( false );
             }
 
             private async void FormAbout_Load(object sender, EventArgs e)
             {
                 await Task.Run( ( ) => FetchJson( Cfg.Default.app_url_manifest ) );
-                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Form Load", String.Format( "FormAbout_Load : {0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Form", String.Format( "FormAbout_Load : {0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
             }
+
+            protected override CreateParams CreateParams
+            {
+                get
+                {
+                    CreateParams cp = base.CreateParams;
+                    cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+                    return cp;
+                }
+           }
 
             /*
                 Task > Fetch Json
@@ -245,9 +280,9 @@ This key is used to sign the releases on Github.com, all commits are also signed
                     */
 
                     if ( manifest != null )
-                        Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Uplink", String.Format( "{0} : {1}", "FormAbout.FetchJson", "Successful connection - populated manifest data" ) );
+                        Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Uplink", String.Format( "{0} : {1}", "FormAbout.FetchJson", "Successful connection - populated manifest data" ) );
                     else
-                       Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Uplink", String.Format( "{0} : {1}", "FormAbout.FetchJson", "Successful connection - missing manifest data" ) );
+                       Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Uplink", String.Format( "{0} : {1}", "FormAbout.FetchJson", "Successful connection - missing manifest data" ) );
 
                     /*
                         Check if update is available for end-user
@@ -262,7 +297,7 @@ This key is used to sign the releases on Github.com, all commits are also signed
                 }
                 catch ( WebException e )
                 {
-                    Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Uplink", String.Format( "{0} : {1}", "FormAbout.FetchJson", "Failed connection - exception" ) );
+                    Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Uplink", String.Format( "{0} : {1}", "FormAbout.FetchJson", "Failed connection - exception" ) );
                     Log.Send( log_file, 0, "", String.Format( "{0}", e.Message ) );
                 }
             }
@@ -558,7 +593,7 @@ This key is used to sign the releases on Github.com, all commits are also signed
                 string link = Cfg.Default.app_url_tpb;;
                 Log.Send
                 (
-                    log_file,  new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ),  "[ App.Win ] Link", String.Format( "{0} Link: {1}", System.Reflection.MethodBase.GetCurrentMethod( ).Name, link ) 
+                    log_file,  new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ),  "[ App.Interface ] Link", String.Format( "{0} Link: {1}", System.Reflection.MethodBase.GetCurrentMethod( ).Name, link ) 
                 );
                 System.Diagnostics.Process.Start( link );
             }
@@ -605,7 +640,7 @@ This key is used to sign the releases on Github.com, all commits are also signed
                 string link = Cfg.Default.app_url_github;
                 Log.Send
                 (
-                    log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Link", String.Format( "{0} Link: {1}", System.Reflection.MethodBase.GetCurrentMethod( ).Name, link )
+                    log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Link", String.Format( "{0} Link: {1}", System.Reflection.MethodBase.GetCurrentMethod( ).Name, link )
                 );
                 System.Diagnostics.Process.Start( link );
             }

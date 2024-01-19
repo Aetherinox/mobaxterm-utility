@@ -257,7 +257,7 @@ The next dialog will allow you to simply save the license file {2}
 You'll need to copy/paste the saved {2} file into the MobaXterm installation folder.</value>
   </data>
   <data name="msgbox_err_locate_title" xml:space="preserve">
-    <value>No valid Path to {0|</value>
+    <value>No valid Path to {0}</value>
   </data>
   <data name="msgbox_err_misslib_msg" xml:space="preserve">
     <value>Cannot locate a required library file:

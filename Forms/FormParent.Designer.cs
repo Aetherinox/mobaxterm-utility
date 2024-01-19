@@ -339,6 +339,7 @@ namespace MobaXtermKG
             // 
             this.aetherxRTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.aetherxRTextBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.aetherxRTextBox1.DetectUrls = false;
             this.aetherxRTextBox1.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.aetherxRTextBox1.ForeColor = System.Drawing.Color.White;
             this.aetherxRTextBox1.Location = new System.Drawing.Point(19, 278);
@@ -462,6 +463,7 @@ namespace MobaXtermKG
             // 
             this.rtxt_Desc.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtxt_Desc.Cursor = System.Windows.Forms.Cursors.Default;
+            this.rtxt_Desc.DetectUrls = false;
             this.rtxt_Desc.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.rtxt_Desc.ForeColor = System.Drawing.Color.White;
             this.rtxt_Desc.Location = new System.Drawing.Point(19, 162);
@@ -512,6 +514,7 @@ namespace MobaXtermKG
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
             this.ClientSize = new System.Drawing.Size(530, 481);
             this.Controls.Add(this.lbl_HeaderSub);

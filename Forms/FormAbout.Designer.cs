@@ -37,6 +37,7 @@ namespace MobaXtermKG
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAbout));
             this.lnk_TPB = new System.Windows.Forms.LinkLabel();
             this.lnk_Github = new System.Windows.Forms.LinkLabel();
             this.lbl_Dev_PIV_Thumbprint = new System.Windows.Forms.Label();
@@ -198,7 +199,7 @@ namespace MobaXtermKG
             // 
             this.txt_Dev_GPG_KeyID.AllowFocus = true;
             this.txt_Dev_GPG_KeyID.AutoScroll = true;
-            this.txt_Dev_GPG_KeyID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.txt_Dev_GPG_KeyID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
             this.txt_Dev_GPG_KeyID.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(41)))), ((int)(((byte)(99)))));
             this.txt_Dev_GPG_KeyID.BorderFocusColor = System.Drawing.Color.White;
             this.txt_Dev_GPG_KeyID.BorderSize = 1;
@@ -224,7 +225,7 @@ namespace MobaXtermKG
             // 
             this.txt_Dev_PIV_Thumbprint.AllowFocus = true;
             this.txt_Dev_PIV_Thumbprint.AutoScroll = true;
-            this.txt_Dev_PIV_Thumbprint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.txt_Dev_PIV_Thumbprint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
             this.txt_Dev_PIV_Thumbprint.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(41)))), ((int)(((byte)(99)))));
             this.txt_Dev_PIV_Thumbprint.BorderFocusColor = System.Drawing.Color.White;
             this.txt_Dev_PIV_Thumbprint.BorderSize = 1;
@@ -250,7 +251,7 @@ namespace MobaXtermKG
             // 
             this.txt_Terms.AllowFocus = false;
             this.txt_Terms.AutoScroll = true;
-            this.txt_Terms.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.txt_Terms.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
             this.txt_Terms.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(41)))), ((int)(((byte)(99)))));
             this.txt_Terms.BorderFocusColor = System.Drawing.Color.HotPink;
             this.txt_Terms.BorderSize = 1;
@@ -276,6 +277,7 @@ namespace MobaXtermKG
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.ClientSize = new System.Drawing.Size(530, 481);
             this.ControlBox = false;
@@ -295,6 +297,7 @@ namespace MobaXtermKG
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormAbout";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

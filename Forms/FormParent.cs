@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using System.Net;
 using Res = MobaXtermKG.Properties.Resources;
 using Cfg = MobaXtermKG.Properties.Settings;
+using System.Reflection;
 
 #endregion
 
@@ -38,7 +39,7 @@ namespace MobaXtermKG
 
         #endregion
 
-        #region "Declarations"
+        #region "Define: General"
 
             /*
                 Define > Classes
@@ -151,15 +152,21 @@ namespace MobaXtermKG
 
             public FormParent()
             {
-
-                SetStyle( ControlStyles.OptimizedDoubleBuffer, true );
+                Stopwatch sw_LoadTime = new Stopwatch();
+                sw_LoadTime.Start( );
                 InitializeComponent( );
+                SetStyle( ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true );
+
+                typeof( Panel ).InvokeMember( "DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, 
+                null, this, new object[] { true } );
+
+                SuspendLayout( );
 
                 /*
                     Register Form Object
                 */
 
-                FormParent.Object           = this;
+                FormParent.Object = this;
 
                 /*
                     Initialize Receiver
@@ -186,23 +193,31 @@ namespace MobaXtermKG
                     Form Control Buttons
                 */
 
+                btn_Close.SuspendLayout     ( );
                 btn_Close.Parent            = imgHeader;
                 btn_Close.BackColor         = Color.Transparent;
+                btn_Close.ResumeLayout      ( false );
 
+                btn_Minimize.SuspendLayout  ( );
                 btn_Minimize.Parent         = imgHeader;
                 btn_Minimize.BackColor      = Color.Transparent;
+                btn_Minimize.ResumeLayout   ( false );
 
                 /*
                     Headers
                 */
 
+                lbl_HeaderName.SuspendLayout ( );
                 lbl_HeaderName.Parent       = imgHeader;
                 lbl_HeaderName.BackColor    = Color.Transparent;
                 lbl_HeaderName.Text         = product;
+                lbl_HeaderName.ResumeLayout ( false );
 
+                lbl_HeaderSub.SuspendLayout ( );
                 lbl_HeaderSub.Parent        = imgHeader;
                 lbl_HeaderSub.BackColor     = Color.Transparent;
                 lbl_HeaderSub.Text          = "v" + ver + " by " + tm;
+                lbl_HeaderSub.ResumeLayout  ( false );
 
                 /*
                     Richtext in body of interface
@@ -212,11 +227,13 @@ namespace MobaXtermKG
                 string l2                   = Cfg.Default.app_def_mxtpro;
                 string l3                   = Res.parent_intro_3;
 
+                rtxt_Desc.SuspendLayout     ( );
                 rtxt_Desc.Text              = "";
 
                 rtxt_Desc.AppendText        ( l1 );
                 rtxt_Desc.Select            ( 0, l1.Length);
                 rtxt_Desc.SelectionColor    = Color.White;
+
 
                 rtxt_Desc.AppendText        ( " " );
 
@@ -229,6 +246,16 @@ namespace MobaXtermKG
                 rtxt_Desc.AppendText        ( l3 );
                 rtxt_Desc.Select            ( l1.Length + 1 + l2.Length + 1, l3.Length );
                 rtxt_Desc.SelectionColor    = Color.White;
+                rtxt_Desc.ResumeLayout      ( false );
+
+                ResumeLayout( false );
+
+                sw_LoadTime.Stop            ( );
+                TimeSpan ts                 = sw_LoadTime.Elapsed;
+                string sw_TimeElapsed       = String.Format( "{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds,ts.Milliseconds / 10 );
+
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Form", String.Format( "FormParent : {0} - Elapsed Loadtime {1}", System.Reflection.MethodBase.GetCurrentMethod( ).Name, sw_TimeElapsed ) );
+
             }
 
             /*
@@ -240,7 +267,7 @@ namespace MobaXtermKG
                 await Task.Run( ( ) => CheckUpdates( Cfg.Default.app_url_manifest ) );
                 StatusBar.Update( string.Format( "" ) );
 
-                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Form Load", String.Format( "FormParent_Load : {0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Form", String.Format( "FormParent_Load : {0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
 
                 /*
                     Debug Timer
@@ -289,9 +316,9 @@ namespace MobaXtermKG
                     */
 
                     if ( manifest != null )
-                        Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Uplink", String.Format( "{0} : {1}", "FormParent.CheckUpdates", "Successful connection - populated manifest data" ) );
+                        Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Uplink", String.Format( "{0} : {1}", "FormParent.CheckUpdates", "Successful connection - populated manifest data" ) );
                     else
-                       Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Uplink", String.Format( "{0} : {1}", "FormParent.CheckUpdates", "Successful connection - missing manifest data" ) );
+                       Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Uplink", String.Format( "{0} : {1}", "FormParent.CheckUpdates", "Successful connection - missing manifest data" ) );
 
 
                     /*
@@ -331,7 +358,7 @@ namespace MobaXtermKG
                 }
                 catch ( WebException e )
                 {
-                    Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Uplink", String.Format( "{0} : {1}", "FormParent.CheckUpdates", "Failed connection - exception" ) );
+                    Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Uplink", String.Format( "{0} : {1}", "FormParent.CheckUpdates", "Failed connection - exception" ) );
                     Log.Send( log_file, 0, "", String.Format( "{0}", e.Message ) );
                 }
             }
@@ -656,7 +683,7 @@ namespace MobaXtermKG
 
             private void mnu_Sub_Exit_Click( object sender, EventArgs e )
             {
-                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
 
                 /*
                     delete the cli exe as we no longer need it
@@ -678,7 +705,7 @@ namespace MobaXtermKG
 
             private void mnu_Cat_Contribute_Click( object sender, EventArgs e )
             {
-                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
 
                 this.Hide( );
 
@@ -693,7 +720,7 @@ namespace MobaXtermKG
 
             private void mnu_Sub_Updates_Click( object sender, EventArgs e )
             {
-                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
 
                 System.Diagnostics.Process.Start( Cfg.Default.app_url_github );
             }
@@ -719,7 +746,7 @@ namespace MobaXtermKG
 
             private void mnu_Sub_Validate_Click( object sender, EventArgs e )
             {
-                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
 
                 string exe_target = System.AppDomain.CurrentDomain.FriendlyName;
                 if ( !File.Exists( exe_target ) )
@@ -801,7 +828,7 @@ namespace MobaXtermKG
 
             private void mnu_Sub_About_Click( object sender, EventArgs e )
             {
-                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
 
                 this.Hide( );
 
@@ -829,7 +856,7 @@ namespace MobaXtermKG
 
             private void btn_Generate_Click( object sender, EventArgs e )
             {
-                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
 
                 string fval_name    = txt_Name.Value;
                 string fval_ver     = txt_Version.Value;
@@ -953,7 +980,7 @@ namespace MobaXtermKG
 
             private void btn_OpenFolder_Click( object sender, EventArgs e )
             {
-                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Button", String.Format( "{0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
 
                 string src_app_full_exe     = Helper.FindApp( );
                 string src_list             = Helper.FindAppGetList( );

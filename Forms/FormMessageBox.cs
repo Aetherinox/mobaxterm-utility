@@ -7,6 +7,18 @@ namespace MobaXtermKG.Msgbox
 {
     public partial class FormMessageBox : Form
     {
+
+        #region "Define: Fileinfo"
+
+            /*
+                Define > File Name
+                    utilized with logging
+            */
+
+            readonly static string log_file = "FormMessageBox.cs";
+
+        #endregion
+
         #region "Fields"
 
             private Color primaryColor  = Color.CornflowerBlue;

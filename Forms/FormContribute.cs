@@ -11,15 +11,17 @@ using System.Drawing;
 using System.Windows.Forms;
 using Res = MobaXtermKG.Properties.Resources;
 using Cfg = MobaXtermKG.Properties.Settings;
+using System.Reflection;
 
 #endregion
 
 namespace MobaXtermKG.Forms
 {
+
     public partial class FormContribute : Form
     {
 
-        #region "Fileinfo"
+        #region "Define: Fileinfo"
 
             /*
                 Define > File Name
@@ -29,7 +31,7 @@ namespace MobaXtermKG.Forms
 
         #endregion
 
-        #region "Declarations"
+        #region "Define: General"
 
             /*
                 Define > Classes
@@ -51,50 +53,72 @@ namespace MobaXtermKG.Forms
             public FormContribute( )
             {
                 InitializeComponent( );
+                SetStyle( ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true );
+
+                typeof( Panel ).InvokeMember( "DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, 
+                null, this, new object[] { true } );
+
+                SuspendLayout( );
 
                 /*
                     Product, trademark, etc.
                 */
 
-                string ver                  = AppInfo.ProductVersionCore.ToString( );
-                string product              = AppInfo.Title;
-                string tm                   = AppInfo.Trademark;
+                string ver                      = AppInfo.ProductVersionCore.ToString( );
+                string product                  = AppInfo.Title;
+                string tm                       = AppInfo.Trademark;
 
                 /*
                     Form Control Buttons
                 */
 
-                btn_Close.Parent            = imgHeader;
-                btn_Close.BackColor         = Color.Transparent;
+                btn_Close.SuspendLayout         ( );
+                btn_Close.Parent                = imgHeader;
+                btn_Close.BackColor             = Color.Transparent;
+                btn_Close.ResumeLayout          ( false );
 
                 /*
                     Headers
                 */
 
-                lbl_HeaderName.Parent       = imgHeader;
-                lbl_HeaderName.BackColor    = Color.Transparent;
-                lbl_HeaderName.Text         = product;
+                lbl_HeaderName.SuspendLayout    ( );
+                lbl_HeaderName.Parent           = imgHeader;
+                lbl_HeaderName.BackColor        = Color.Transparent;
+                lbl_HeaderName.Text             = product;
+                lbl_HeaderName.ResumeLayout     ( false );
 
-                lbl_HeaderSub.Parent        = imgHeader;
-                lbl_HeaderSub.BackColor     = Color.Transparent;
-                lbl_HeaderSub.Text          = "v" + ver + " by " + tm;
+                lbl_HeaderSub.SuspendLayout     ( );
+                lbl_HeaderSub.Parent            = imgHeader;
+                lbl_HeaderSub.BackColor         = Color.Transparent;
+                lbl_HeaderSub.Text              = "v" + ver + " by " + tm;
+                lbl_HeaderSub.ResumeLayout      ( false );
 
                 /*
                     Intro
                 */
 
-                lbl_Contrib_Intro.Text      = Res.txt_contrib_intro;
-                lbl_BTC.Text                = Res.lbl_contrib_btc; 
-                lbl_ETH.Text                = Res.lbl_contrib_eth; 
-                lbl_BCH.Text                = Res.lbl_contrib_bch; 
+                lbl_Contrib_Intro.Text          = Res.txt_contrib_intro;
+                lbl_BTC.Text                    = Res.lbl_contrib_btc; 
+                lbl_ETH.Text                    = Res.lbl_contrib_eth; 
+                lbl_BCH.Text                    = Res.lbl_contrib_bch; 
 
+                ResumeLayout( false );
             }
 
             private void FormContribute_Load( object sender, EventArgs e )
             {
-                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Win ] Form Load", String.Format( "FormContribute_Load : {0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
-
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Interface ] Form", String.Format( "FormContribute_Load : {0}", System.Reflection.MethodBase.GetCurrentMethod( ).Name ) );
             }
+
+            protected override CreateParams CreateParams
+            {
+                get
+                {
+                    CreateParams cp = base.CreateParams;
+                    cp.ExStyle |= 0x02000000;
+                    return cp;
+                }
+           }
 
         #endregion
 
