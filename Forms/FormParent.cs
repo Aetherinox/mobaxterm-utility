@@ -786,7 +786,8 @@ namespace MobaXtermKG
                         /* certificate: resource file signed and authentic */
 
                         MessageBox.Show
-                        ( 
+                        (
+                            new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
                             string.Format( "Successfully validated that this patch is authentic, continuing...\n\nCertificate Thumbprint: \n{0}", x509_cert ),
                             "Integrity Check Successful",
                             MessageBoxButtons.OK, MessageBoxIcon.Information
@@ -798,6 +799,7 @@ namespace MobaXtermKG
 
                         MessageBox.Show
                         (
+                            new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
                             string.Format( "The fails associated to this patch have a signature, however, it is not by the developer who wrote the patch, aborting...\n\nCertificate Thumbprint: \n{0}", x509_cert ),
                             "Integrity Check Failed",
                             MessageBoxButtons.OK, MessageBoxIcon.Error
@@ -810,6 +812,7 @@ namespace MobaXtermKG
 
                     MessageBox.Show
                     (
+                        new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
                         string.Format( "The files for this activator are not signed and may be fake from another source. Files from this activator's developer will ALWAYS be signed.\n\nEnsure you downloaded this patch from the developer.\n\nFailed File(s):\n     {0}", exe_target ),
                         "Integrity Check Failed",
                         MessageBoxButtons.OK, MessageBoxIcon.Error
@@ -879,6 +882,7 @@ namespace MobaXtermKG
                 {
                     MessageBox.Show
                     (
+                        new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
                         Res.msgbox_err_gen_missname_msg, Res.msgbox_err_gen_missname_title,
                         MessageBoxButtons.OK, MessageBoxIcon.Error
                     );
@@ -917,6 +921,7 @@ namespace MobaXtermKG
                 {
                     MessageBox.Show
                     (
+                        new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
                         string.Format( Res.msgbox_generate_cancel_msg ),
                         Res.msgbox_generate_cancel_title,
                         MessageBoxButtons.OK, MessageBoxIcon.Error
@@ -939,6 +944,7 @@ namespace MobaXtermKG
                 {
                     MessageBox.Show
                     (
+                        new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
                         String.Format( Res.msgbox_err_locate_msg, Cfg.Default.app_mobaxterm_exe, patch_launch_exe, Cfg.Default.app_def_mxtpro ),
                         String.Format( Res.msgbox_err_locate_title, Cfg.Default.app_name ),
                         MessageBoxButtons.OK, MessageBoxIcon.Error
