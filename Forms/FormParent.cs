@@ -41,7 +41,7 @@ namespace MobaXtermKG
 
         #region "Define: General"
 
-            /*
+           /*
                 Define > Classes
             */
 
@@ -346,7 +346,10 @@ namespace MobaXtermKG
                         {
                             Cfg.Default.bShowedUpdates = true;
 
-                            var result = MessageBox.Show( new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen }, string.Format( Res.msgbox_update_msg, manifest.version, Cfg.Default.app_name ),
+                            var result = MessageBox.Show
+                            ( 
+                                new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
+                                string.Format( Res.msgbox_update_msg, manifest.version, Cfg.Default.app_name ),
                                 string.Format( Res.msgbox_update_title, ver_curr, manifest.version ),
                                 MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation
                             );
@@ -752,7 +755,10 @@ namespace MobaXtermKG
                 if ( !File.Exists( exe_target ) )
                 {
 
-                    MessageBox.Show( string.Format( "Could not find executable's location. Aborting validation\n\nFilename: \n{0}", exe_target ),
+                    MessageBox.Show
+                    (
+                        new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
+                        string.Format( "Could not find executable's location. Aborting validation\n\nFilename: \n{0}", exe_target ),
                         "Integrity Check: Aborted",
                         MessageBoxButtons.OK, MessageBoxIcon.Error
                     );
@@ -763,7 +769,7 @@ namespace MobaXtermKG
                 string x509_cert    = Helper.x509_Thumbprint( exe_target );
 
                 /*
-                    x509 certificate
+                    509 certificate
 
                     Add integrity validation. Ensure the resource DLL has been signed by the developer,
                     otherwise cancel the patching step.
@@ -779,7 +785,9 @@ namespace MobaXtermKG
 
                         /* certificate: resource file signed and authentic */
 
-                        MessageBox.Show( string.Format( "Successfully validated that this patch is authentic, continuing...\n\nCertificate Thumbprint: \n{0}", x509_cert ),
+                        MessageBox.Show
+                        ( 
+                            string.Format( "Successfully validated that this patch is authentic, continuing...\n\nCertificate Thumbprint: \n{0}", x509_cert ),
                             "Integrity Check Successful",
                             MessageBoxButtons.OK, MessageBoxIcon.Information
                         );
@@ -788,7 +796,9 @@ namespace MobaXtermKG
                     {
                         /* certificate: resource file signed but not by developer */
 
-                        MessageBox.Show( string.Format( "The fails associated to this patch have a signature, however, it is not by the developer who wrote the patch, aborting...\n\nCertificate Thumbprint: \n{0}", x509_cert ),
+                        MessageBox.Show
+                        (
+                            string.Format( "The fails associated to this patch have a signature, however, it is not by the developer who wrote the patch, aborting...\n\nCertificate Thumbprint: \n{0}", x509_cert ),
                             "Integrity Check Failed",
                             MessageBoxButtons.OK, MessageBoxIcon.Error
                         );
@@ -798,7 +808,9 @@ namespace MobaXtermKG
                 {
                     /* certificate: resource file not signed at all */
 
-                    MessageBox.Show( string.Format( "The files for this activator are not signed and may be fake from another source. Files from this activator's developer will ALWAYS be signed.\n\nEnsure you downloaded this patch from the developer.\n\nFailed File(s):\n     {0}", exe_target ),
+                    MessageBox.Show
+                    (
+                        string.Format( "The files for this activator are not signed and may be fake from another source. Files from this activator's developer will ALWAYS be signed.\n\nEnsure you downloaded this patch from the developer.\n\nFailed File(s):\n     {0}", exe_target ),
                         "Integrity Check Failed",
                         MessageBoxButtons.OK, MessageBoxIcon.Error
                     );
@@ -987,7 +999,9 @@ namespace MobaXtermKG
 
                 if ( String.IsNullOrEmpty( src_app_full_exe ) )
                 {
-                    MessageBox.Show(
+                    MessageBox.Show
+                    (
+                        new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
                         string.Format( Res.msgbox_nolocate_cannot_open_msg, Cfg.Default.app_name, src_list ),
                         string.Format( Res.msgbox_nolocate_cannot_open_title, Cfg.Default.app_name ),
                         MessageBoxButtons.OK,
@@ -1021,7 +1035,9 @@ namespace MobaXtermKG
                     string path_progfiles = Helpers.ProgramFiles( );
                     Process.Start( "explorer.exe", path_progfiles );
 
-                    MessageBox.Show(
+                    MessageBox.Show
+                    (
+                        new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
                         string.Format( Res.msgbox_nolocate_cannot_open_msg, Cfg.Default.app_mobaxterm_exe, src_list ),
                         string.Format( Res.msgbox_nolocate_cannot_open_title, Cfg.Default.app_mobaxterm_exe ),
                         MessageBoxButtons.OK,
