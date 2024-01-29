@@ -1,7 +1,19 @@
-﻿using System;
+﻿/*
+    @app        : MobaXterm
+    @repo       : https://github.com/Aetherinox/MobaXtermKeygen
+    @author     : Aetherinox
+*/
+
+#region "Using"
+
+using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Res = MobaXtermKG.Properties.Resources;
+using Cfg = MobaXtermKG.Properties.Settings;
+
+#endregion
 
 namespace MobaXtermKG.Msgbox
 {
@@ -161,7 +173,7 @@ namespace MobaXtermKG.Msgbox
                     case MessageBoxButtons.OK:
                         btn_1.Visible       = true;
                         btn_1.Location      = new Point( xCenter, yCenter );
-                        btn_1.Text          = "&OK";
+                        btn_1.Text          = Res.btn_template_ok;
                         btn_1.DialogResult  = DialogResult.OK;
 
                         SetDefaultButton( btn_Default );
@@ -175,12 +187,12 @@ namespace MobaXtermKG.Msgbox
 
                         btn_1.Visible       = true;
                         btn_1.Location      = new Point( xCenter - ( btn_1.Width / 2 ) - 5, yCenter );
-                        btn_1.Text          = "&OK";
+                        btn_1.Text          = Res.btn_template_ok;
                         btn_1.DialogResult  = DialogResult.OK;
 
                         btn_2.Visible       = true;
                         btn_2.Location      = new Point( xCenter + ( btn_2.Width / 2 ) + 5, yCenter );
-                        btn_2.Text          = "&Cancel";
+                        btn_2.Text          = Res.btn_template_cancel;
                         btn_2.DialogResult  = DialogResult.Cancel;
                         btn_2.BackColor     = Color.DimGray;
 
@@ -198,12 +210,12 @@ namespace MobaXtermKG.Msgbox
 
                         btn_1.Visible       = true;
                         btn_1.Location      = new Point(xCenter - ( btn_1.Width / 2) - 5, yCenter );
-                        btn_1.Text          = "&Retry";
+                        btn_1.Text          = Res.btn_template_retry;
                         btn_1.DialogResult  = DialogResult.Retry;
 
                         btn_2.Visible       = true;
                         btn_2.Location      = new Point( xCenter + ( btn_2.Width / 2 ) + 5, yCenter );
-                        btn_2.Text          = "&Cancel";
+                        btn_2.Text          = Res.btn_template_cancel;
                         btn_2.DialogResult  = DialogResult.Cancel;
                         btn_2.BackColor     = Color.DimGray;
 
@@ -221,12 +233,12 @@ namespace MobaXtermKG.Msgbox
 
                         btn_1.Visible       = true;
                         btn_1.Location      = new Point(xCenter - ( btn_1.Width / 2) - 5, yCenter );
-                        btn_1.Text          = "&Yes";
+                        btn_1.Text          = Res.btn_template_yes;
                         btn_1.DialogResult  = DialogResult.Yes;
 
                         btn_2.Visible       = true;
                         btn_2.Location      = new Point( xCenter + ( btn_2.Width / 2 ) + 5, yCenter );
-                        btn_2.Text          = "&No";
+                        btn_2.Text          = Res.btn_template_no;
                         btn_2.DialogResult  = DialogResult.No;
                         btn_2.BackColor     = Color.IndianRed;
 
@@ -244,18 +256,18 @@ namespace MobaXtermKG.Msgbox
 
                         btn_1.Visible       = true;
                         btn_1.Location      = new Point( xCenter - btn_1.Width - 5, yCenter );
-                        btn_1.Text          = "&Yes";
+                        btn_1.Text          = Res.btn_template_yes;
                         btn_1.DialogResult  = DialogResult.Yes;
 
                         btn_2.Visible       = true;
                         btn_2.Location      = new Point( xCenter, yCenter );
-                        btn_2.Text          = "&No";
+                        btn_2.Text          = Res.btn_template_no;
                         btn_2.DialogResult  = DialogResult.No;
                         btn_2.BackColor     = Color.IndianRed;
 
                         btn_3.Visible       = true;
                         btn_3.Location      = new Point( xCenter + btn_2.Width + 5, yCenter );
-                        btn_3.Text          = "&Cancel";
+                        btn_3.Text          = Res.btn_template_cancel;
                         btn_3.DialogResult  = DialogResult.Cancel;
                         btn_3.BackColor     = Color.DimGray;
 
@@ -271,18 +283,18 @@ namespace MobaXtermKG.Msgbox
 
                         btn_1.Visible       = true;
                         btn_1.Location      = new Point( xCenter - btn_1.Width - 5, yCenter );
-                        btn_1.Text          = "&Abort";
+                        btn_1.Text          = Res.btn_template_abort;
                         btn_1.DialogResult  = DialogResult.Abort;
                         btn_1.BackColor     = Color.Goldenrod;
 
                         btn_2.Visible       = true;
                         btn_2.Location      = new Point(xCenter, yCenter);
-                        btn_2.Text          = "&Retry";
+                        btn_2.Text          = Res.btn_template_retry;
                         btn_2.DialogResult  = DialogResult.Retry;
 
                         btn_3.Visible       = true;
                         btn_3.Location      = new Point( xCenter + btn_2.Width + 5, yCenter );
-                        btn_3.Text          = "&Ignore";
+                        btn_3.Text          = Res.btn_template_ignore;
                         btn_3.DialogResult  = DialogResult.Ignore;
                         btn_3.BackColor     = Color.IndianRed;
 

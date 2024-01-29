@@ -36,7 +36,7 @@
     <ProductName>MobaXterm</ProductName>
     <PublisherName>Aetherx</PublisherName>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.3.0.0</ApplicationVersion>
+    <ApplicationVersion>1.3.1.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -96,9 +96,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -202,7 +199,6 @@
     <None Include="aetherx_9a.priv.pfx" />
     <None Include="app.config" />
     <None Include="app.manifest" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -219,15 +215,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Materials\notify_01.png" />
+    <None Include="Materials\bch.png" />
+    <None Include="Materials\bg_header.jpg" />
+    <None Include="Materials\btc.png" />
+    <None Include="Materials\eth.png" />
     <Content Include="Materials\mobaxterm_128.ico" />
     <None Include="Resources\mobaxterm_cli.exe" />
-    <None Include="Resources\notify_01.png" />
-    <None Include="Resources\bg_header.jpg" />
-    <None Include="Resources\eth.png" />
-    <None Include="Resources\btc.png" />
-    <None Include="Resources\bch.png" />
     <None Include="Materials\mobaxterm_logo_1.png" />
-    <None Include="Resources\mobaxtgen_cli.exe" />
     <None Include="Materials\error.png" />
     <None Include="Materials\question.png" />
     <None Include="Materials\info.png" />

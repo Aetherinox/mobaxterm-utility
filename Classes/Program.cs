@@ -20,6 +20,27 @@ using Cfg = MobaXtermKG.Properties.Settings;
 namespace MobaXtermKG
 {
 
+    /*
+        Global Settings
+
+        app_bDevmode        : bool
+        Determines if debug mode is enabled
+
+        bShowedUpdates      : bool
+        This determines if the app should show the update notification. This value must be set otherwise,
+        every time the user goes from the About / Contribute WinForm back to Parent, the update notification will appear over and over.
+    */
+
+    public static class Settings
+    {
+        public static bool bShowedUpdates = false;
+        public static bool app_bDevmode = false;
+    }
+
+    /*
+        Main Program
+    */
+
     public sealed class Program
     {
 
@@ -111,7 +132,7 @@ namespace MobaXtermKG
                      ensure debug mode is turned off by default as we don't want presistence
                 */
 
-                Cfg.Default.app_bDevmode = false;
+                Settings.app_bDevmode = false;
                 Cfg.Default.Save( ) ;
 
                 /*
@@ -123,7 +144,7 @@ namespace MobaXtermKG
 
                 if ( args.Length > 0 && args[ 0 ] == Cfg.Default.app_argid_debug )
                 {
-                    Cfg.Default.app_bDevmode = true;
+                    Settings.app_bDevmode = true;
                     EnableDebugConsole( );
 
                     Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Debug ]", String.Format( "User defined {0} argument", Cfg.Default.app_argid_debug ) );

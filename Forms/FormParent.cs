@@ -277,7 +277,7 @@ namespace MobaXtermKG
                         see method DebugTimer_Tick for functionality
                 */
 
-                DebugTimer.Interval     = ( 10 * 700 );
+                DebugTimer.Interval     = ( 10 * ( 100 * Cfg.Default.app_debug_clicks_activate ) );
                 DebugTimer.Tick         += new EventHandler( DebugTimer_Tick );
                 DebugTimer.Start        ( );
                 SW_DebugRemains.Start   ( );
@@ -289,10 +289,12 @@ namespace MobaXtermKG
                     This is easier than creating yet another menu item.
             */
 
-            private void DebugTimer_Tick(object sender, EventArgs e)
+            private void DebugTimer_Tick( object sender, EventArgs e )
             {
                 i_DebugClicks = 0;
                 SW_DebugRemains.Restart( );
+
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Debug ] Timer", String.Format( "Debug timer SW_DebugRemains expired after {0} seconds -- resetting", Cfg.Default.app_debug_clicks_activate ) );
             }
 
             /*
@@ -342,9 +344,9 @@ namespace MobaXtermKG
                     #pragma warning disable CS4014
                     Task.Factory.StartNew( () =>
                     {
-                        if ( ( bUpdateAvailable && !Cfg.Default.bShowedUpdates ) )
+                        if ( ( bUpdateAvailable && !Settings.bShowedUpdates ) )
                         {
-                            Cfg.Default.bShowedUpdates = true;
+                            Settings.bShowedUpdates = true;
 
                             var result = MessageBox.Show
                             ( 
@@ -1181,25 +1183,28 @@ namespace MobaXtermKG
                 i_DebugClicks++;
 
                 /*
-                    don't go higher than 7, otherwise each click after 7 will re-activate dialog
+                    don't go higher than 7, otherwise each click after 7 will re-show confirmation dialog. Start back at 0
                 */
 
-                int i_DebugRemains = 7 - i_DebugClicks;
-                if ( i_DebugRemains > 7 )
+                int i_DebugRemains = Cfg.Default.app_debug_clicks_activate - i_DebugClicks;
+                if ( i_DebugClicks > Cfg.Default.app_debug_clicks_activate )
+                {
+                    i_DebugClicks = 0;
                     return;
+                }
 
                 /*
                     timer > remaining
                 */
 
-                int remains         = 7 - Convert.ToInt32( SW_DebugRemains.Elapsed.TotalSeconds );
+                int remains         = Cfg.Default.app_debug_clicks_activate - Convert.ToInt32( SW_DebugRemains.Elapsed.TotalSeconds );
 
 
                 /*
                     prompt to enable / disable debug
                 */
 
-                if ( Cfg.Default.app_bDevmode )
+                if ( Settings.app_bDevmode )
                     Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Debug ] Trigger", String.Format( "Disable debug with {0} more clicks -- {1} seconds remain", i_DebugRemains, remains ) );
                 else
                     Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Debug ] Trigger", String.Format( "Enable debug with {0} more clicks -- {1} seconds remain", i_DebugRemains, remains ) );
@@ -1208,10 +1213,10 @@ namespace MobaXtermKG
                     wait until 7 clicks are done in X seconds
                 */
 
-                if ( i_DebugClicks >= 7 )
+                if ( i_DebugClicks >= Cfg.Default.app_debug_clicks_activate )
                 {
 
-                    if ( Cfg.Default.app_bDevmode )
+                    if ( Settings.app_bDevmode )
                     {
 
                         /*
@@ -1228,7 +1233,7 @@ namespace MobaXtermKG
 
                         if ( resp_input.ToString( ).ToLower( ) == "yes" )
                         {
-                            Cfg.Default.app_bDevmode = false;
+                            Settings.app_bDevmode = false;
                             Program.DisableDebugConsole( );
                         }
 
@@ -1251,14 +1256,16 @@ namespace MobaXtermKG
 
                         if ( resp_input.ToString( ).ToLower( ) == "yes" )
                         {
-                            Cfg.Default.app_bDevmode = true;
+                            Settings.app_bDevmode = true;
                             Program.EnableDebugConsole( );
                         }
 
                     }
                 }
             }
+
         #endregion
+
 
     }
 }
