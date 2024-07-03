@@ -25,7 +25,7 @@ namespace MobaXtermKG.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("23.6")]
+        [global::System.Configuration.DefaultSettingValueAttribute("24.2")]
         public string app_def_version {
             get {
                 return ((string)(this["app_def_version"]));
@@ -61,7 +61,7 @@ namespace MobaXtermKG.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/Aetherinox/MobaXtermKeygen")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/Aetherinox/mobaxterm-utility")]
         public string app_url_github {
             get {
                 return ((string)(this["app_url_github"]));
@@ -106,35 +106,11 @@ namespace MobaXtermKG.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://raw.githubusercontent.com/Aetherinox/MobaXtermKeygen/master/Manifest/mani" +
-            "fest.json")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://raw.githubusercontent.com/Aetherinox/mobaxterm-utility/master/Manifest/ma" +
+            "nifest.json")]
         public string app_url_manifest {
             get {
                 return ((string)(this["app_url_manifest"]));
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool bShowedUpdates {
-            get {
-                return ((bool)(this["bShowedUpdates"]));
-            }
-            set {
-                this["bShowedUpdates"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool app_bDevmode {
-            get {
-                return ((bool)(this["app_bDevmode"]));
-            }
-            set {
-                this["app_bDevmode"] = value;
             }
         }
         
@@ -149,7 +125,7 @@ namespace MobaXtermKG.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("hex_original.dmp")]
+        [global::System.Configuration.DefaultSettingValueAttribute("hex_patched.dmp")]
         public string app_res_file_dmp_patched {
             get {
                 return ((string)(this["app_res_file_dmp_patched"]));
@@ -165,27 +141,30 @@ namespace MobaXtermKG.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool NeedsUpgrade {
             get {
                 return ((bool)(this["NeedsUpgrade"]));
             }
-            set {
-                this["NeedsUpgrade"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("MobaXterm")]
         public string app_name {
             get {
                 return ((string)(this["app_name"]));
             }
-            set {
-                this["app_name"] = value;
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        public int app_debug_clicks_activate {
+            get {
+                return ((int)(this["app_debug_clicks_activate"]));
             }
         }
     }

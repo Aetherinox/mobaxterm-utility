@@ -46,7 +46,7 @@ namespace MobaXtermKG
             if ( System.Diagnostics.Debugger.IsAttached )
                 return true;
 
-            if ( Cfg.Default.app_bDevmode )
+            if ( Settings.app_bDevmode )
                 return true;
 
             #if DEBUG

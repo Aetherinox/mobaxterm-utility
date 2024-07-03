@@ -41,7 +41,7 @@ namespace MobaXtermKG
 
         #region "Define: General"
 
-            /*
+           /*
                 Define > Classes
             */
 
@@ -277,7 +277,7 @@ namespace MobaXtermKG
                         see method DebugTimer_Tick for functionality
                 */
 
-                DebugTimer.Interval     = ( 10 * 700 );
+                DebugTimer.Interval     = ( 10 * ( 100 * Cfg.Default.app_debug_clicks_activate ) );
                 DebugTimer.Tick         += new EventHandler( DebugTimer_Tick );
                 DebugTimer.Start        ( );
                 SW_DebugRemains.Start   ( );
@@ -289,10 +289,12 @@ namespace MobaXtermKG
                     This is easier than creating yet another menu item.
             */
 
-            private void DebugTimer_Tick(object sender, EventArgs e)
+            private void DebugTimer_Tick( object sender, EventArgs e )
             {
                 i_DebugClicks = 0;
                 SW_DebugRemains.Restart( );
+
+                Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Debug ] Timer", String.Format( "Debug timer SW_DebugRemains expired after {0} seconds -- resetting", Cfg.Default.app_debug_clicks_activate ) );
             }
 
             /*
@@ -342,11 +344,14 @@ namespace MobaXtermKG
                     #pragma warning disable CS4014
                     Task.Factory.StartNew( () =>
                     {
-                        if ( ( bUpdateAvailable && !Cfg.Default.bShowedUpdates ) )
+                        if ( ( bUpdateAvailable && !Settings.bShowedUpdates ) )
                         {
-                            Cfg.Default.bShowedUpdates = true;
+                            Settings.bShowedUpdates = true;
 
-                            var result = MessageBox.Show( new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen }, string.Format( Res.msgbox_update_msg, manifest.version, Cfg.Default.app_name ),
+                            var result = MessageBox.Show
+                            ( 
+                                new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
+                                string.Format( Res.msgbox_update_msg, manifest.version, Cfg.Default.app_name ),
                                 string.Format( Res.msgbox_update_title, ver_curr, manifest.version ),
                                 MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation
                             );
@@ -752,7 +757,10 @@ namespace MobaXtermKG
                 if ( !File.Exists( exe_target ) )
                 {
 
-                    MessageBox.Show( string.Format( "Could not find executable's location. Aborting validation\n\nFilename: \n{0}", exe_target ),
+                    MessageBox.Show
+                    (
+                        new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
+                        string.Format( "Could not find executable's location. Aborting validation\n\nFilename: \n{0}", exe_target ),
                         "Integrity Check: Aborted",
                         MessageBoxButtons.OK, MessageBoxIcon.Error
                     );
@@ -763,7 +771,7 @@ namespace MobaXtermKG
                 string x509_cert    = Helper.x509_Thumbprint( exe_target );
 
                 /*
-                    x509 certificate
+                    509 certificate
 
                     Add integrity validation. Ensure the resource DLL has been signed by the developer,
                     otherwise cancel the patching step.
@@ -779,7 +787,10 @@ namespace MobaXtermKG
 
                         /* certificate: resource file signed and authentic */
 
-                        MessageBox.Show( string.Format( "Successfully validated that this patch is authentic, continuing...\n\nCertificate Thumbprint: \n{0}", x509_cert ),
+                        MessageBox.Show
+                        (
+                            new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
+                            string.Format( "Successfully validated that this patch is authentic, continuing...\n\nCertificate Thumbprint: \n{0}", x509_cert ),
                             "Integrity Check Successful",
                             MessageBoxButtons.OK, MessageBoxIcon.Information
                         );
@@ -788,7 +799,10 @@ namespace MobaXtermKG
                     {
                         /* certificate: resource file signed but not by developer */
 
-                        MessageBox.Show( string.Format( "The fails associated to this patch have a signature, however, it is not by the developer who wrote the patch, aborting...\n\nCertificate Thumbprint: \n{0}", x509_cert ),
+                        MessageBox.Show
+                        (
+                            new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
+                            string.Format( "The fails associated to this patch have a signature, however, it is not by the developer who wrote the patch, aborting...\n\nCertificate Thumbprint: \n{0}", x509_cert ),
                             "Integrity Check Failed",
                             MessageBoxButtons.OK, MessageBoxIcon.Error
                         );
@@ -798,7 +812,10 @@ namespace MobaXtermKG
                 {
                     /* certificate: resource file not signed at all */
 
-                    MessageBox.Show( string.Format( "The files for this activator are not signed and may be fake from another source. Files from this activator's developer will ALWAYS be signed.\n\nEnsure you downloaded this patch from the developer.\n\nFailed File(s):\n     {0}", exe_target ),
+                    MessageBox.Show
+                    (
+                        new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
+                        string.Format( "The files for this activator are not signed and may be fake from another source. Files from this activator's developer will ALWAYS be signed.\n\nEnsure you downloaded this patch from the developer.\n\nFailed File(s):\n     {0}", exe_target ),
                         "Integrity Check Failed",
                         MessageBoxButtons.OK, MessageBoxIcon.Error
                     );
@@ -867,6 +884,7 @@ namespace MobaXtermKG
                 {
                     MessageBox.Show
                     (
+                        new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
                         Res.msgbox_err_gen_missname_msg, Res.msgbox_err_gen_missname_title,
                         MessageBoxButtons.OK, MessageBoxIcon.Error
                     );
@@ -905,6 +923,7 @@ namespace MobaXtermKG
                 {
                     MessageBox.Show
                     (
+                        new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
                         string.Format( Res.msgbox_generate_cancel_msg ),
                         Res.msgbox_generate_cancel_title,
                         MessageBoxButtons.OK, MessageBoxIcon.Error
@@ -927,6 +946,7 @@ namespace MobaXtermKG
                 {
                     MessageBox.Show
                     (
+                        new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
                         String.Format( Res.msgbox_err_locate_msg, Cfg.Default.app_mobaxterm_exe, patch_launch_exe, Cfg.Default.app_def_mxtpro ),
                         String.Format( Res.msgbox_err_locate_title, Cfg.Default.app_name ),
                         MessageBoxButtons.OK, MessageBoxIcon.Error
@@ -987,7 +1007,9 @@ namespace MobaXtermKG
 
                 if ( String.IsNullOrEmpty( src_app_full_exe ) )
                 {
-                    MessageBox.Show(
+                    MessageBox.Show
+                    (
+                        new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
                         string.Format( Res.msgbox_nolocate_cannot_open_msg, Cfg.Default.app_name, src_list ),
                         string.Format( Res.msgbox_nolocate_cannot_open_title, Cfg.Default.app_name ),
                         MessageBoxButtons.OK,
@@ -1021,7 +1043,9 @@ namespace MobaXtermKG
                     string path_progfiles = Helpers.ProgramFiles( );
                     Process.Start( "explorer.exe", path_progfiles );
 
-                    MessageBox.Show(
+                    MessageBox.Show
+                    (
+                        new Form( ) { TopMost = true, TopLevel = true, StartPosition = FormStartPosition.CenterScreen },
                         string.Format( Res.msgbox_nolocate_cannot_open_msg, Cfg.Default.app_mobaxterm_exe, src_list ),
                         string.Format( Res.msgbox_nolocate_cannot_open_title, Cfg.Default.app_mobaxterm_exe ),
                         MessageBoxButtons.OK,
@@ -1159,25 +1183,28 @@ namespace MobaXtermKG
                 i_DebugClicks++;
 
                 /*
-                    don't go higher than 7, otherwise each click after 7 will re-activate dialog
+                    don't go higher than 7, otherwise each click after 7 will re-show confirmation dialog. Start back at 0
                 */
 
-                int i_DebugRemains = 7 - i_DebugClicks;
-                if ( i_DebugRemains > 7 )
+                int i_DebugRemains = Cfg.Default.app_debug_clicks_activate - i_DebugClicks;
+                if ( i_DebugClicks > Cfg.Default.app_debug_clicks_activate )
+                {
+                    i_DebugClicks = 0;
                     return;
+                }
 
                 /*
                     timer > remaining
                 */
 
-                int remains         = 7 - Convert.ToInt32( SW_DebugRemains.Elapsed.TotalSeconds );
+                int remains         = Cfg.Default.app_debug_clicks_activate - Convert.ToInt32( SW_DebugRemains.Elapsed.TotalSeconds );
 
 
                 /*
                     prompt to enable / disable debug
                 */
 
-                if ( Cfg.Default.app_bDevmode )
+                if ( Settings.app_bDevmode )
                     Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Debug ] Trigger", String.Format( "Disable debug with {0} more clicks -- {1} seconds remain", i_DebugRemains, remains ) );
                 else
                     Log.Send( log_file, new System.Diagnostics.StackTrace( true ).GetFrame( 0 ).GetFileLineNumber( ), "[ App.Debug ] Trigger", String.Format( "Enable debug with {0} more clicks -- {1} seconds remain", i_DebugRemains, remains ) );
@@ -1186,10 +1213,10 @@ namespace MobaXtermKG
                     wait until 7 clicks are done in X seconds
                 */
 
-                if ( i_DebugClicks >= 7 )
+                if ( i_DebugClicks >= Cfg.Default.app_debug_clicks_activate )
                 {
 
-                    if ( Cfg.Default.app_bDevmode )
+                    if ( Settings.app_bDevmode )
                     {
 
                         /*
@@ -1206,7 +1233,7 @@ namespace MobaXtermKG
 
                         if ( resp_input.ToString( ).ToLower( ) == "yes" )
                         {
-                            Cfg.Default.app_bDevmode = false;
+                            Settings.app_bDevmode = false;
                             Program.DisableDebugConsole( );
                         }
 
@@ -1229,14 +1256,16 @@ namespace MobaXtermKG
 
                         if ( resp_input.ToString( ).ToLower( ) == "yes" )
                         {
-                            Cfg.Default.app_bDevmode = true;
+                            Settings.app_bDevmode = true;
                             Program.EnableDebugConsole( );
                         }
 
                     }
                 }
             }
+
         #endregion
+
 
     }
 }

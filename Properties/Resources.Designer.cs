@@ -136,6 +136,96 @@ namespace MobaXtermKG.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Generate.
+        /// </summary>
+        internal static string btn_generate {
+            get {
+                return ResourceManager.GetString("btn_generate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Copy.
+        /// </summary>
+        internal static string btn_generate_copy {
+            get {
+                return ResourceManager.GetString("btn_generate_copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Save Keyfile.
+        /// </summary>
+        internal static string btn_savekeyfile {
+            get {
+                return ResourceManager.GetString("btn_savekeyfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Abort.
+        /// </summary>
+        internal static string btn_template_abort {
+            get {
+                return ResourceManager.GetString("btn_template_abort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Cancel.
+        /// </summary>
+        internal static string btn_template_cancel {
+            get {
+                return ResourceManager.GetString("btn_template_cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Ignore.
+        /// </summary>
+        internal static string btn_template_ignore {
+            get {
+                return ResourceManager.GetString("btn_template_ignore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;No.
+        /// </summary>
+        internal static string btn_template_no {
+            get {
+                return ResourceManager.GetString("btn_template_no", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;OK.
+        /// </summary>
+        internal static string btn_template_ok {
+            get {
+                return ResourceManager.GetString("btn_template_ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Retry.
+        /// </summary>
+        internal static string btn_template_retry {
+            get {
+                return ResourceManager.GetString("btn_template_retry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Yes.
+        /// </summary>
+        internal static string btn_template_yes {
+            get {
+                return ResourceManager.GetString("btn_template_yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap chat {

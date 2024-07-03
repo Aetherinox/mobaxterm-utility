@@ -118,7 +118,7 @@ namespace MobaXtermKG
                 /*
                     run powershell query for mobaxterm cli exe
                     query   =   "& \"" + mobaxtgen_cli.exe + "\"" + " -s " + Your Name + " " + Version + " " + Users
-                                "mobaxtgen_cli.exe -s Aetherx 23.6 4"
+                                "mobaxtgen_cli.exe -s Aetherx 24.2 4"
                 */
 
                 using ( PowerShell ps = PowerShell.Create( ) )
@@ -170,7 +170,7 @@ namespace MobaXtermKG
                 @arg    : str users         (optional)
             */
 
-            public string SaveKey_Dialog( String name, String ver = "23.6", String users = "1" )
+            public string SaveKey_Dialog( String name, String ver = "24.2", String users = "1" )
             {
 
                 if ( AppInfo.bIsDebug( ) )
@@ -259,7 +259,7 @@ namespace MobaXtermKG
                 @arg    : str users         (optional)
             */
 
-            public string SaveKey( String path, String name, String ver = "23.6", String users = "1" )
+            public string SaveKey( String path, String name, String ver = "24.2", String users = "1" )
             {
 
                 if ( AppInfo.bIsDebug( ) )

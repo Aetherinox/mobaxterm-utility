@@ -318,6 +318,5 @@ namespace MobaXtermKG.Forms
             }
 
         #endregion
-
     }
 }

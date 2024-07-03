@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="app_def_version" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">23.6</Value>
+      <Value Profile="(Default)">24.2</Value>
     </Setting>
     <Setting Name="app_def_users" Type="System.String" Scope="Application">
       <Value Profile="(Default)">1</Value>
@@ -15,7 +15,7 @@
       <Value Profile="(Default)">Custom.mxtpro</Value>
     </Setting>
     <Setting Name="app_url_github" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://github.com/Aetherinox/MobaXtermKeygen</Value>
+      <Value Profile="(Default)">https://github.com/Aetherinox/mobaxterm-utility</Value>
     </Setting>
     <Setting Name="app_url_tpb" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://thepiratebay.org/search.php?q=user:Aetherinox</Value>
@@ -30,28 +30,25 @@
       <Value Profile="(Default)">CB5C4C30CD0D4028</Value>
     </Setting>
     <Setting Name="app_url_manifest" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://raw.githubusercontent.com/Aetherinox/MobaXtermKeygen/master/Manifest/manifest.json</Value>
-    </Setting>
-    <Setting Name="bShowedUpdates" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="app_bDevmode" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">https://raw.githubusercontent.com/Aetherinox/mobaxterm-utility/master/Manifest/manifest.json</Value>
     </Setting>
     <Setting Name="app_res_file_dmp_original" Type="System.String" Scope="Application">
       <Value Profile="(Default)">hex_original.dmp</Value>
     </Setting>
     <Setting Name="app_res_file_dmp_patched" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">hex_original.dmp</Value>
+      <Value Profile="(Default)">hex_patched.dmp</Value>
     </Setting>
     <Setting Name="app_argid_debug" Type="System.String" Scope="Application">
       <Value Profile="(Default)">--debug</Value>
     </Setting>
-    <Setting Name="NeedsUpgrade" Type="System.Boolean" Scope="User">
+    <Setting Name="NeedsUpgrade" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="app_name" Type="System.String" Scope="User">
+    <Setting Name="app_name" Type="System.String" Scope="Application">
       <Value Profile="(Default)">MobaXterm</Value>
+    </Setting>
+    <Setting Name="app_debug_clicks_activate" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">7</Value>
     </Setting>
   </Settings>
 </SettingsFile>

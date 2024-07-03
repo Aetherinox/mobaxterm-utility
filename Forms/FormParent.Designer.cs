@@ -396,7 +396,7 @@ namespace MobaXtermKG
             this.txt_Version.Padding = new System.Windows.Forms.Padding(6);
             this.txt_Version.PasswordChar = false;
             this.txt_Version.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.txt_Version.PlaceholderText = "Version";
+            this.txt_Version.PlaceholderText = "24.2";
             this.txt_Version.ReadOnly = false;
             this.txt_Version.Selectable = true;
             this.txt_Version.Size = new System.Drawing.Size(77, 32);
