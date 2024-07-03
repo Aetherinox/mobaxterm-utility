@@ -20,7 +20,7 @@ MobaXterm provides all the important remote network tools (SSH, X11, RDP, VNC, F
 <br />
 
 This utility has been developed to work on the following versions:
-- MobaXterm v23.x
+- MobaXterm v24.x
 
 <br />
 
