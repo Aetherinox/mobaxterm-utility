@@ -3,7 +3,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/github/v/tag/Aetherinox/MobaXtermKeygen?logo=GitHub&label=version&color=ba5225) ![Downloads](https://img.shields.io/github/downloads/Aetherinox/MobaXtermKeygen/total) ![Repo Size](https://img.shields.io/github/repo-size/Aetherinox/MobaXtermKeygen?label=size&color=59702a) ![Last Commit)](https://img.shields.io/github/last-commit/Aetherinox/MobaXtermKeygen?color=b43bcc)
+![Version](https://img.shields.io/github/v/tag/Aetherinox/mobaxterm-utility?logo=GitHub&label=version&color=ba5225) ![Downloads](https://img.shields.io/github/downloads/Aetherinox/mobaxterm-utility/total) ![Repo Size](https://img.shields.io/github/repo-size/Aetherinox/mobaxterm-utility?label=size&color=59702a) ![Last Commit)](https://img.shields.io/github/last-commit/Aetherinox/mobaxterm-utility?color=b43bcc)
 
 </div>
 
@@ -45,7 +45,7 @@ Developed under the following conditions:
 
 # Usage
 
-If you wish to simply use this utility, head over to the [Releases](https://github.com/Aetherinox/MobaXtermKeygen/releases) section and download the latest binary as a `zip` or `rar`. The download is a single `exe`.
+If you wish to simply use this utility, head over to the [Releases](https://github.com/Aetherinox/mobaxterm-utility/releases) section and download the latest binary as a `zip` or `rar`. The download is a single `exe`.
 
 - `MobaXtermKG.exe`
 
